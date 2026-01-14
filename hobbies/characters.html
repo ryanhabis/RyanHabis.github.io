@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheets | Game Night Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="/hobbies/" class="nav-home"><i class="fas fa-arrow-left"></i> Back to Hub</a>
+            <div class="nav-links">
+                <a href="/hobbies/#dice" class="nav-link"><i class="fas fa-dice"></i> Dice</a>
+                <a href="/hobbies/maps.html" class="nav-link"><i class="fas fa-map"></i> Maps</a>
+                <a href="/hobbies/characters.html" class="nav-link active"><i class="fas fa-users"></i> Characters</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-scroll"></i> Character Sheet Manager</h1>
+            <p>Manage your D&D, Warhammer, or custom RPG characters</p>
+        </header>
+
+        <!-- Character Creation Form -->
+        <section class="character-creator">
+            <h2><i class="fas fa-plus-circle"></i> Create New Character</h2>
+            <div class="creation-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Character Name</label>
+                        <input type="text" id="charName" placeholder="Aragorn, Magnus, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Game System</label>
+                        <select id="gameSystem">
+                            <option value="dnd5e">D&D 5th Edition</option>
+                            <option value="warhammer40k">Warhammer 40k RPG</option>
+                            <option value="pathfinder">Pathfinder 2e</option>
+                            <option value="custom">Custom System</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Class / Role</label>
+                        <input type="text" id="charClass" placeholder="Paladin, Tech-Priest, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label>Level / Rank</label>
+                        <input type="number" id="charLevel" min="1" max="20" value="1">
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <h3>Core Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <label>STR <span class="stat-mod" id="strMod">+0</span></label>
+                            <input type="number" id="strScore" min="1" max="30" value="10" onchange="updateMod('str')">
+                        </div>
+                        <div class="stat-box">
+                            <label>DEX <span class="stat-mod" id="dexMod">+0</span></label>
+                            <input type="number" id="dexScore" min="1" max="30" value="10" onchange="updateMod('dex')">
+                        </div>
+                        <div class="stat-box">
+                            <label>CON <span class="stat-mod" id="conMod">+0</span></label>
+                            <input type="number" id="conScore" min="1" max="30" value="10" onchange="updateMod('con')">
+                        </div>
+                        <div class="stat-box">
+                            <label>INT <span class="stat-mod" id="intMod">+0</span></label>
+                            <input type="number" id="intScore" min="1" max="30" value="10" onchange="updateMod('int')">
+                        </div>
+                        <div class="stat-box">
+                            <label>WIS <span class="stat-mod" id="wisMod">+0</span></label>
+                            <input type="number" id="wisScore" min="1" max="30" value="10" onchange="updateMod('wis')">
+                        </div>
+                        <div class="stat-box">
+                            <label>CHA <span class="stat-mod" id="chaMod">+0</span></label>
+                            <input type="number" id="chaScore" min="1" max="30" value="10" onchange="updateMod('cha')">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="createCharacter()">
+                    <i class="fas fa-save"></i> Save Character
+                </button>
+            </div>
+        </section>
+
+        <!-- Character Gallery -->
+        <section class="character-gallery">
+            <h2><i class="fas fa-book-open"></i> Your Characters</h2>
+            <div class="gallery-grid" id="characterList">
+                <!-- Characters will appear here -->
+                <div class="empty-state">
+                    <i class="fas fa-user-plus fa-3x"></i>
+                    <p>No characters yet. Create your first one!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Reference -->
+        <section class="quick-reference">
+            <h2><i class="fas fa-book"></i> Quick Rules Reference</h2>
+            <div class="reference-cards">
+                <div class="ref-card">
+                    <h4><i class="fas fa-shield-alt"></i> Armor Class</h4>
+                    <p><strong>AC = 10 + DEX modifier</strong> (unless wearing armor)</p>
+                    <p>Heavy armor ignores DEX bonus</p>
+                </div>
+                <div class="ref-card">
+                    <h4><i class="fas fa-heart"></i> Hit Points</h4>
+                    <p><strong>HP = Hit Die + CON modifier</strong> per level</p>
+                    <p>Max at 1st level, roll or take average after</p>
+                </div>
+                <div class="ref-card">
+                    <h4><i class="fas fa-running"></i> Movement</h4>
+                    <p>Most characters: <strong>30 feet</strong> per turn</p>
+                    <p>Dwarves: 25 ft • Elves: 35 ft</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Character Detail Modal (Hidden by default) -->
+    <div class="modal" id="characterModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Character details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p><a href="/hobbies/"><i class="fas fa-home"></i> Return to Game Hub</a></p>
+        </div>
+    </footer>
+
+    <script src="characters.js"></script>
+</body>
+</html>

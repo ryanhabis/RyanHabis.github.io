@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Manager | Game Night Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="campaigns.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="/hobbies/" class="nav-home"><i class="fas fa-arrow-left"></i> Back to Hub</a>
+            <div class="nav-links">
+                <a href="/hobbies/#dice" class="nav-link"><i class="fas fa-dice"></i> Dice</a>
+                <a href="/hobbies/maps.html" class="nav-link"><i class="fas fa-map"></i> Maps</a>
+                <a href="/hobbies/campaigns.html" class="nav-link active"><i class="fas fa-book"></i> Campaigns</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-dragon"></i> Campaign Manager</h1>
+            <p>Track your adventures, sessions, and campaign lore</p>
+        </header>
+
+        <!-- Active Campaigns -->
+        <section class="active-campaigns">
+            <h2><i class="fas fa-play-circle"></i> Active Campaigns</h2>
+            <div class="campaign-tabs">
+                <button class="tab-btn active" data-campaign="strahd">Curse of Strahd</button>
+                <button class="tab-btn" data-campaign="imperium">Shadows of the Imperium</button>
+                <button class="tab-btn" data-campaign="homebrew">Homebrew World</button>
+                <button class="tab-btn" id="newCampaignBtn"><i class="fas fa-plus"></i> New</button>
+            </div>
+
+            <!-- Campaign Content -->
+            <div class="campaign-content">
+                <!-- Curse of Strahd Tab -->
+                <div class="tab-content active" id="strahd">
+                    <div class="campaign-header">
+                        <div class="campaign-info">
+                            <h3>Curse of Strahd <span class="campaign-status active">Active</span></h3>
+                            <p><strong>System:</strong> D&D 5e • <strong>GM:</strong> Ryan • <strong>Players:</strong> 4</p>
+                            <p><strong>Next Session:</strong> Saturday, 7 PM EST</p>
+                        </div>
+                        <div class="campaign-stats">
+                            <div class="stat">
+                                <h4>6</h4>
+                                <p>Sessions</p>
+                            </div>
+                            <div class="stat">
+                                <h4>5</h4>
+                                <p>Player Level</p>
+                            </div>
+                            <div class="stat">
+                                <h4>3</h4>
+                                <p>Major NPCs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Session Logs -->
+                    <div class="session-logs">
+                        <h4><i class="fas fa-scroll"></i> Session Logs</h4>
+                        <div class="log-entry">
+                            <div class="log-header">
+                                <h5>Session 6: Dinner with the Devil</h5>
+                                <span class="log-date">Nov 15, 2024</span>
+                            </div>
+                            <p>The party accepted Strahd's invitation to Castle Ravenloft. Tense dinner conversation revealed his interest in Ireena. Escaped with minor wounds but learned about the three artifacts.</p>
+                            <div class="log-tags">
+                                <span class="tag">Castle Ravenloft</span>
+                                <span class="tag">Strahd</span>
+                                <span class="tag">Ireena</span>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addSession('strahd')">
+                            <i class="fas fa-plus"></i> Add Session Log
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Other tabs would have similar structure -->
+            </div>
+        </section>
+
+        <!-- Session Notes Editor -->
+        <section class="notes-editor">
+            <h2><i class="fas fa-edit"></i> Session Notes</h2>
+            <div class="editor-container">
+                <div class="editor-toolbar">
+                    <button class="tool-btn" data-format="bold"><i class="fas fa-bold"></i></button>
+                    <button class="tool-btn" data-format="italic"><i class="fas fa-italic"></i></button>
+                    <button class="tool-btn" data-format="list"><i class="fas fa-list"></i></button>
+                    <button class="tool-btn" data-format="link"><i class="fas fa-link"></i></button>
+                    <button class="tool-btn" data-format="image"><i class="fas fa-image"></i></button>
+                </div>
+                <div class="editor-content" id="notesEditor" contenteditable="true">
+                    <h3>Session Notes Template</h3>
+                    <p><strong>Date:</strong> [Enter session date]</p>
+                    <p><strong>Players Present:</strong> [List players]</p>
+                    <hr>
+                    <h4>What Happened:</h4>
+                    <ul>
+                        <li>Key event 1</li>
+                        <li>Key event 2</li>
+                        <li>Key event 3</li>
+                    </ul>
+                    <h4>NPCs Met:</h4>
+                    <h4>Loot Gained:</h4>
+                    <h4>Plot Hooks:</h4>
+                </div>
+                <div class="editor-actions">
+                    <button class="btn-save" onclick="saveNotes()">
+                        <i class="fas fa-save"></i> Save Notes
+                    </button>
+                    <button class="btn-export" onclick="exportNotes()">
+                        <i class="fas fa-download"></i> Export as PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NPC Tracker -->
+        <section class="npc-tracker">
+            <h2><i class="fas fa-user-friends"></i> NPC Directory</h2>
+            <div class="npc-grid" id="npcGrid">
+                <div class="npc-card">
+                    <div class="npc-header">
+                        <h4>Strahd von Zarovich</h4>
+                        <span class="npc-role">Villain</span>
+                    </div>
+                    <p><strong>Location:</strong> Castle Ravenloft</p>
+                    <p><strong>Alignment:</strong> Lawful Evil</p>
+                    <p class="npc-description">The ancient vampire lord of Barovia. Seeks to escape his prison and claim Ireena.</p>
+                    <div class="npc-actions">
+                        <button class="btn-small"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-small"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <!-- More NPCs can be added -->
+            </div>
+            <button class="btn-add" onclick="addNPC()">
+                <i class="fas fa-user-plus"></i> Add New NPC
+            </button>
+        </section>
+
+        <!-- Quest Log -->
+        <section class="quest-log">
+            <h2><i class="fas fa-quest"></i> Quest Log</h2>
+            <div class="quest-list">
+                <div class="quest-item active">
+                    <div class="quest-checkbox">
+                        <input type="checkbox" id="quest1">
+                    </div>
+                    <div class="quest-content">
+                        <h4>Find the Sunsword</h4>
+                        <p>Legendary weapon hidden somewhere in Barovia. Clues point to the Amber Temple.</p>
+                        <div class="quest-meta">
+                            <span class="quest-status active">Active</span>
+                            <span class="quest-reward">Artifact Reward</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- More quests -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>All campaign data is saved locally in your browser</p>
+            <p><a href="/hobbies/"><i class="fas fa-home"></i> Return to Game Hub</a></p>
+        </div>
+    </footer>
+
+    <script src="campaigns.js"></script>
+</body>
+</html>
