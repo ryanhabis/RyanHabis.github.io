@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Night Hub | Ryan's Board Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-home"><i class="fas fa-user"></i> Portfolio</a>
+            <div class="nav-links">
+                <a href="#dice" class="nav-link"><i class="fas fa-dice"></i> Dice</a>
+                <a href="#maps" class="nav-link"><i class="fas fa-map"></i> Maps</a>
+                <a href="#characters" class="nav-link"><i class="fas fa-users"></i> Characters</a>
+                <a href="#schedule" class="nav-link"><i class="fas fa-calendar"></i> Schedule</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-dragon"></i> Game Night Hub</h1>
+            <p class="tagline">Your virtual tabletop for D&D, Warhammer & more</p>
+            <div class="game-badges">
+                <span class="badge">🎲 D&D 5e</span>
+                <span class="badge">⚔️ Warhammer</span>
+                <span class="badge">📜 Pathfinder</span>
+                <span class="badge">🧙 Homebrew</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Quick Tools Section -->
+        <section class="quick-tools">
+            <h2><i class="fas fa-bolt"></i> Quick Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card" id="dice-roller">
+                    <h3><i class="fas fa-dice-d20"></i> Dice Roller</h3>
+                    <div class="dice-buttons">
+                        <button onclick="rollDice(4)">D4</button>
+                        <button onclick="rollDice(6)">D6</button>
+                        <button onclick="rollDice(8)">D8</button>
+                        <button onclick="rollDice(10)">D10</button>
+                        <button onclick="rollDice(12)">D12</button>
+                        <button onclick="rollDice(20)">D20</button>
+                        <button onclick="rollDice(100)">D100</button>
+                    </div>
+                    <div class="roll-result">
+                        <p id="diceResult">Click a die to roll!</p>
+                        <p id="rollHistory">Previous rolls: </p>
+                    </div>
+                </div>
+
+                <div class="tool-card" id="initiative-tracker">
+                    <h3><i class="fas fa-swords"></i> Initiative Tracker</h3>
+                    <div class="tracker-controls">
+                        <input type="text" id="charName" placeholder="Character Name">
+                        <input type="number" id="charInit" placeholder="Initiative" min="1" max="50">
+                        <button onclick="addCharacter()">Add to Combat</button>
+                    </div>
+                    <div class="initiative-list">
+                        <h4>Combat Order</h4>
+                        <ul id="combatList">
+                            <!-- Characters will appear here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaign Section -->
+        <section class="campaign-section">
+            <h2><i class="fas fa-scroll"></i> Active Campaigns</h2>
+            <div class="campaign-grid">
+                <div class="campaign-card">
+                    <h3>Warhammer: Shadows of the Imperium</h3>
+                    <p><strong>GM:</strong> Alex • <strong>Next Session:</strong> Friday</p>
+                    <p>Space Marines vs Chaos cultists on Forge World Hephaestus</p>
+                    <a href="#" class="campaign-link">View Campaign Notes →</a>
+                </div>
+                <div class="campaign-card">
+                    <h3>D&D: Curse of Strahd</h3>
+                    <p><strong>GM:</strong> Ryan • <strong>Next Session:</strong> Saturday</p>
+                    <p>Level 5 party exploring the mists of Barovia</p>
+                    <a href="#" class="campaign-link">Character Sheets →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Resources -->
+        <section class="resources">
+            <h2><i class="fas fa-treasure-chest"></i> Game Resources</h2>
+            <div class="resource-grid">
+                <a href="#" class="resource-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <h4>Rule References</h4>
+                    <p>Quick PDF rules & cheat sheets</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h4>Battle Maps</h4>
+                    <p>Grid maps for virtual tabletop</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <i class="fas fa-calculator"></i>
+                    <h4>Encounter Builder</h4>
+                    <p>CR calculator & monster stats</p>
+                </a>
+                <a href="#" class="resource-card">
+                    <i class="fas fa-book"></i>
+                    <h4>Campaign Wiki</h4>
+                    <p>Shared lore & session notes</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>🔒 This site is for our gaming group only. Please don't share the link publicly.</p>
+            <p class="footer-links">
+                <a href="/"><i class="fas fa-external-link-alt"></i> Back to Portfolio</a> • 
+                <a href="mailto:your-email@example.com"><i class="fas fa-envelope"></i> Contact Group</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
