@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller - Warhammer 40k</title>
+    <!-- Main Warhammer Theme -->
+    <link rel="stylesheet" href="../warhammer.css">
+    <!-- Shared Navigation -->
+    <link rel="stylesheet" href="shared-nav.css">
+    <!-- Page Specific -->
+    <link rel="stylesheet" href="dice-roller.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturMaguntia&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">GRIMDARK ARCHIVES</h1>
+                <div class="aquila-right"></div>
+            </div>
+            <div class="page-indicator">Dice of Fate</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../warhammer.html#home">Main Page</a></li>
+                    <li><a href="../warhammer.html#armies">Armies</a></li>
+                    <li><a href="../warhammer.html#lore">Lore</a></li>
+                    <li><a href="army-builder.html">Army Builder</a></li>
+                    <li><a href="dice-roller.html" class="active">Dice Roller</a></li>
+                    <li><a href="collection-tracker.html">Collection</a></li>
+                    <li><a href="tactics.html">Tactics</a></li>
+                    <li><a href="campaign-tracker.html">Campaign</a></li>
+                    <li><a href="rules-reference.html">Rules</a></li>
+                    <li><a href="painting-guide.html">Painting Guide</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="breadcrumbs">
+            <a href="../../../index.html">Home</a> > 
+            <a href="../../hobbies.html">Hobbies</a> > 
+            <a href="../warhammer.html">Warhammer</a> > 
+            <span class="current">Dice Roller</span>
+        </div>
+
+        <main>
+            <section class="content-section">
+                <h2 class="section-title">DICE OF FATE</h2>
+                
+                <div class="dice-roller-container">
+                    <!-- Dice Selection -->
+                    <div class="dice-controls">
+                        <h3>Select Your Dice</h3>
+                        <div class="dice-selection">
+                            <button class="dice-btn" data-dice="1d6">D6</button>
+                            <button class="dice-btn" data-dice="2d6">2D6</button>
+                            <button class="dice-btn" data-dice="3d6">3D6</button>
+                            <button class="dice-btn" data-dice="1d10">D10</button>
+                            <button class="dice-btn" data-dice="1d20">D20</button>
+                            <button class="dice-btn" data-dice="1d100">D100</button>
+                        </div>
+                        
+                        <div class="custom-roll">
+                            <h3>Custom Roll</h3>
+                            <div class="custom-controls">
+                                <input type="number" id="dice-count" min="1" max="100" value="1">
+                                <span>D</span>
+                                <input type="number" id="dice-sides" min="2" max="100" value="6">
+                                <button id="custom-roll-btn" class="roll-btn">Roll Custom</button>
+                            </div>
+                        </div>
+                        
+                        <div class="modifiers">
+                            <h3>Modifiers</h3>
+                            <div class="modifier-controls">
+                                <label>Modifier: 
+                                    <input type="number" id="modifier" value="0" min="-10" max="20">
+                                </label>
+                                <label>Advantage: 
+                                    <input type="checkbox" id="advantage">
+                                </label>
+                                <label>Disadvantage: 
+                                    <input type="checkbox" id="disadvantage">
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="roll-actions">
+                            <button id="roll-all" class="roll-btn imperial">Roll Dice</button>
+                            <button id="clear-results" class="clear-btn">Clear History</button>
+                            <button id="battle-scenario" class="scenario-btn">Battle Scenario</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Display -->
+                    <div class="results-container">
+                        <div class="current-roll">
+                            <h3>Current Roll</h3>
+                            <div class="roll-total">
+                                <span id="total-result">-</span>
+                                <small>Total</small>
+                            </div>
+                            <div class="dice-display" id="dice-display">
+                                <!-- Dice will appear here -->
+                            </div>
+                            <div class="roll-details">
+                                <div class="detail-item">
+                                    <span>Dice:</span>
+                                    <span id="dice-used">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Modifier:</span>
+                                    <span id="modifier-used">0</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>Individual:</span>
+                                    <span id="individual-rolls">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Roll History -->
+                        <div class="roll-history">
+                            <h3>Roll History <span id="history-count">(0)</span></h3>
+                            <div class="history-list" id="history-list">
+                                <!-- History items will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Battle Scenario Generator -->
+                    <div class="scenario-generator">
+                        <h3>Battle Scenario Generator</h3>
+                        <div class="scenario-controls">
+                            <button class="scenario-type" data-type="deployment">Deployment</button>
+                            <button class="scenario-type" data-type="mission">Mission</button>
+                            <button class="scenario-type" data-type="objective">Objectives</button>
+                            <button class="scenario-type" data-type="twist">Battle Twists</button>
+                        </div>
+                        <div class="scenario-result">
+                            <div class="scenario-card" id="scenario-card">
+                                <div class="scenario-icon">🎲</div>
+                                <h4>No Scenario Generated</h4>
+                                <p>Click a scenario type above to generate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <p class="footer-text">"The dice of fate are cast."</p>
+                <p class="footer-subtext">Thought for the Gambler</p>
+            </div>
+            <div class="copyright">
+                <p>© 999.M41 Imperial Archives</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+
+    <script src="../warhammer.js"></script>
+    <script src="dice-roller.js"></script>
+</body>
+</html>

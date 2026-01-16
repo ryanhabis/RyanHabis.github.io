@@ -1,0 +1,821 @@
+/* Shared Navigation Styles for Warhammer Pages */
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 3px double #8b0000;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.aquila-left, .aquila-right {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(45deg, #d4af37, #8b0000);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    opacity: 0.7;
+}
+
+.aquila-right {
+    transform: scaleX(-1);
+}
+
+.title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0 #8b0000, 6px 6px 0 #000;
+    letter-spacing: 3px;
+    color: #d4af37;
+}
+
+.page-indicator {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.page-indicator::before,
+.page-indicator::after {
+    content: '✠';
+    margin: 0 1rem;
+    color: #d4af37;
+    opacity: 0.5;
+}
+
+/* Navigation Styles */
+.main-nav {
+    margin: 2rem 0;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: rgba(20, 20, 20, 0.95);
+    border: 2px solid #5d4037;
+    border-radius: 4px;
+    position: relative;
+}
+
+.main-nav ul::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, #8b0000, transparent);
+}
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-link:hover {
+    border: 1px solid #8b0000;
+    background: rgba(139, 0, 0, 0.2);
+    color: #fff;
+}
+
+.nav-link.active {
+    border: 2px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 0, 0, 0.2));
+    color: #fff;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '†';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #d4af37;
+    font-size: 0.8rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 1rem 2rem;
+    margin: 1rem 0 2rem 0;
+    border: 1px solid #444;
+    border-left: 4px solid #8b0000;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumbs a {
+    color: #d4af37;
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 0.25rem 0.5rem;
+}
+
+.breadcrumbs a:hover {
+    color: #fff;
+    background: rgba(139, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.breadcrumbs .current {
+    color: #8b0000;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    background: rgba(139, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.breadcrumbs .separator {
+    color: #666;
+    margin: 0 0.25rem;
+}
+
+/* Section Title */
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #d4af37;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #8b0000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::before {
+    content: '⚔';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8b0000;
+    opacity: 0.5;
+}
+
+.section-title::after {
+    content: '⚔';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8b0000;
+    opacity: 0.5;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(20, 20, 20, 0.8);
+    border: 2px solid #5d4037;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+
+.content-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8b0000, transparent);
+}
+
+/* Footer */
+.imperial-footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    margin-top: 4rem;
+    border-top: 3px double #8b0000;
+    position: relative;
+}
+
+.footer-content {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.footer-content::before {
+    content: '✠';
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    color: #8b0000;
+    font-size: 2rem;
+}
+
+.footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.footer-subtext {
+    color: #8b0000;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+/* Warhammer Theme Elements */
+.grimdark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 0, 0, 0.05) 2px,
+            rgba(139, 0, 0, 0.05) 4px
+        ),
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(20, 20, 20, 0.8) 0%,
+            transparent 50%
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(212, 175, 55, 0.3),
+        transparent
+    );
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes scan {
+    0% { top: -4px; }
+    100% { top: 100%; }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #8b0000, #b71c1c);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive Navigation */
+@media (max-width: 1200px) {
+    .main-nav ul {
+        max-height: 300px;
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .aquila-left, .aquila-right {
+        width: 40px;
+        height: 30px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .nav-link {
+        width: 90%;
+        text-align: center;
+        padding: 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .breadcrumbs {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .footer-text {
+        font-size: 1.5rem;
+    }
+}/* Shared Navigation Styles for Warhammer Pages */
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 3px double #8b0000;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.aquila-left, .aquila-right {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(45deg, #d4af37, #8b0000);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    opacity: 0.7;
+}
+
+.aquila-right {
+    transform: scaleX(-1);
+}
+
+.title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0 #8b0000, 6px 6px 0 #000;
+    letter-spacing: 3px;
+    color: #d4af37;
+}
+
+.page-indicator {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.page-indicator::before,
+.page-indicator::after {
+    content: '✠';
+    margin: 0 1rem;
+    color: #d4af37;
+    opacity: 0.5;
+}
+
+/* Navigation Styles */
+.main-nav {
+    margin: 2rem 0;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+    background: rgba(20, 20, 20, 0.95);
+    border: 2px solid #5d4037;
+    border-radius: 4px;
+    position: relative;
+}
+
+.main-nav ul::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, #8b0000, transparent);
+}
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-link:hover {
+    border: 1px solid #8b0000;
+    background: rgba(139, 0, 0, 0.2);
+    color: #fff;
+}
+
+.nav-link.active {
+    border: 2px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 0, 0, 0.2));
+    color: #fff;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '†';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #d4af37;
+    font-size: 0.8rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 1rem 2rem;
+    margin: 1rem 0 2rem 0;
+    border: 1px solid #444;
+    border-left: 4px solid #8b0000;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumbs a {
+    color: #d4af37;
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 0.25rem 0.5rem;
+}
+
+.breadcrumbs a:hover {
+    color: #fff;
+    background: rgba(139, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.breadcrumbs .current {
+    color: #8b0000;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    background: rgba(139, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.breadcrumbs .separator {
+    color: #666;
+    margin: 0 0.25rem;
+}
+
+/* Section Title */
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #d4af37;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #8b0000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::before {
+    content: '⚔';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8b0000;
+    opacity: 0.5;
+}
+
+.section-title::after {
+    content: '⚔';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8b0000;
+    opacity: 0.5;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(20, 20, 20, 0.8);
+    border: 2px solid #5d4037;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+
+.content-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8b0000, transparent);
+}
+
+/* Footer */
+.imperial-footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    margin-top: 4rem;
+    border-top: 3px double #8b0000;
+    position: relative;
+}
+
+.footer-content {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.footer-content::before {
+    content: '✠';
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    color: #8b0000;
+    font-size: 2rem;
+}
+
+.footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.footer-subtext {
+    color: #8b0000;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+}
+
+/* Warhammer Theme Elements */
+.grimdark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 0, 0, 0.05) 2px,
+            rgba(139, 0, 0, 0.05) 4px
+        ),
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(20, 20, 20, 0.8) 0%,
+            transparent 50%
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(212, 175, 55, 0.3),
+        transparent
+    );
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes scan {
+    0% { top: -4px; }
+    100% { top: 100%; }
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(90deg, #8b0000, #b71c1c);
+    color: #d4af37;
+    border: 2px solid #d4af37;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive Navigation */
+@media (max-width: 1200px) {
+    .main-nav ul {
+        max-height: 300px;
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .aquila-left, .aquila-right {
+        width: 40px;
+        height: 30px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    
+    .nav-link {
+        width: 90%;
+        text-align: center;
+        padding: 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        display: none;
+    }
+    
+    .breadcrumbs {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .footer-text {
+        font-size: 1.5rem;
+    }
+}

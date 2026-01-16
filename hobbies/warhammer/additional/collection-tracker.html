@@ -1,0 +1,50 @@
+<section id="collection" class="content-section">
+    <h2 class="section-title">FORGE WORLD COLLECTION</h2>
+    <div class="collection-tracker">
+        <div class="collection-stats">
+            <div class="stat-card">
+                <h4>Total Miniatures</h4>
+                <span class="stat-value" id="total-minis">0</span>
+            </div>
+            <div class="stat-card">
+                <h4>Painted</h4>
+                <span class="stat-value" id="painted-minis">0</span>
+            </div>
+            <div class="stat-card">
+                <h4>Armies</h4>
+                <span class="stat-value" id="total-armies">0</span>
+            </div>
+            <div class="stat-card">
+                <h4>Points Value</h4>
+                <span class="stat-value" id="total-points">0</span>
+            </div>
+        </div>
+        
+        <div class="add-miniature">
+            <h3>Add to Collection</h3>
+            <form id="miniature-form">
+                <input type="text" placeholder="Unit Name" required>
+                <select id="mini-faction" required>
+                    <option value="">Select Faction</option>
+                    <!-- Options -->
+                </select>
+                <input type="number" placeholder="Points Value" min="0">
+                <select id="paint-status">
+                    <option value="unpainted">Unpainted</option>
+                    <option value="wip">WIP</option>
+                    <option value="painted">Painted</option>
+                </select>
+                <button type="submit">Add Miniature</button>
+            </form>
+        </div>
+        
+        <div class="collection-view">
+            <div class="collection-filters">
+                <!-- Filter options -->
+            </div>
+            <div class="miniature-grid" id="miniature-grid">
+                <!-- Collection items -->
+            </div>
+        </div>
+    </div>
+</section>

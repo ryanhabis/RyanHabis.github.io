@@ -1,0 +1,452 @@
+/* Warhammer 40k Theme CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #0a0a0a;
+    color: #d4af37;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 20%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header Styles */
+.main-header {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 3px double #8b0000;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.aquila-left, .aquila-right {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(45deg, #d4af37, #8b0000);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    opacity: 0.7;
+}
+
+.aquila-right {
+    transform: scaleX(-1);
+}
+
+.title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0 #8b0000, 6px 6px 0 #000;
+    letter-spacing: 3px;
+    color: #d4af37;
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    border: 1px solid #8b0000;
+    background: rgba(139, 0, 0, 0.2);
+}
+
+.nav-link.active {
+    border: 1px solid #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+/* Hero Section */
+.hero-section {
+    background: rgba(10, 10, 10, 0.9);
+    border: 2px solid #8b0000;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.parchment-bg {
+    background: 
+        linear-gradient(to bottom, rgba(222, 184, 135, 0.05) 0%, transparent 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8"/></filter><rect width="100" height="100" filter="url(%23noise)"/></svg>');
+    padding: 2rem;
+    border: 1px solid #5d4037;
+}
+
+.hero-section h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 0 #8b0000;
+}
+
+.quote {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    text-align: center;
+    font-style: italic;
+    color: #8b0000;
+    margin-bottom: 2rem;
+}
+
+.skull-divider {
+    width: 100px;
+    height: 40px;
+    margin: 2rem auto;
+    background: 
+        radial-gradient(circle at 20px 15px, #d4af37 5px, transparent 5px),
+        radial-gradient(circle at 80px 15px, #d4af37 5px, transparent 5px),
+        radial-gradient(circle at 50px 25px, #8b0000 8px, transparent 8px);
+    position: relative;
+}
+
+.skull-divider::before,
+.skull-divider::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 40px;
+    height: 1px;
+    background: #8b0000;
+}
+
+.skull-divider::before {
+    left: 0;
+}
+
+.skull-divider::after {
+    right: 0;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #e0e0e0;
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(20, 20, 20, 0.8);
+    border-left: 4px solid #8b0000;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #8b0000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Armies Grid */
+.armies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.army-card {
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid #444;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.army-card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+}
+
+.card-header {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    padding: 0.5rem;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.astartes { background: linear-gradient(90deg, #0d47a1, #1565c0); }
+.imperial { background: linear-gradient(90deg, #37474f, #546e7a); }
+.chaos { background: linear-gradient(90deg, #b71c1c, #c62828); }
+.xenos { background: linear-gradient(90deg, #1b5e20, #2e7d32); }
+
+.army-card p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.faction-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #8b0000;
+    color: #fff;
+    font-size: 0.8rem;
+    border-radius: 2px;
+}
+
+/* Lore Section */
+.lore-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.lore-item {
+    padding: 1.5rem;
+    background: rgba(40, 40, 40, 0.9);
+    border: 1px solid #5d4037;
+}
+
+.lore-item h3 {
+    color: #d4af37;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.lore-item p {
+    color: #b0b0b0;
+    line-height: 1.6;
+}
+
+/* Painting Forge */
+.paint-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.paint-item {
+    text-align: center;
+}
+
+.miniature-preview {
+    width: 150px;
+    height: 200px;
+    margin: 0 auto 1rem;
+    border: 3px solid #5d4037;
+    background: #2d2d2d;
+    position: relative;
+    overflow: hidden;
+}
+
+.marine::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0d47a1 0%, #0d47a1 50%, #ffd700 50%, #ffd700 100%);
+}
+
+.guard::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #37474f 0%, #546e7a 50%, #8b4513 50%, #8b4513 100%);
+}
+
+.necron::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1b5e20 0%, #2e7d32 50%, #4caf50 50%, #4caf50 100%);
+}
+
+/* Battle Reports */
+.battle-log {
+    margin-top: 2rem;
+}
+
+.battle-entry {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #d4af37;
+    position: relative;
+}
+
+.battle-entry h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Cinzel', serif;
+}
+
+.battle-entry p {
+    color: #b0b0b0;
+    margin-bottom: 0.5rem;
+}
+
+.battle-date {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    color: #8b0000;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.imperial-footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    margin-top: 4rem;
+    border-top: 3px double #8b0000;
+    position: relative;
+}
+
+.footer-content {
+    margin-bottom: 2rem;
+}
+
+.footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+}
+
+.footer-subtext {
+    color: #8b0000;
+    font-style: italic;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 2rem;
+}
+
+/* Grimdark Overlay */
+.grimdark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(139, 0, 0, 0.05) 2px,
+            rgba(139, 0, 0, 0.05) 4px
+        ),
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(20, 20, 20, 0.8) 0%,
+            transparent 50%
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Scan Line Effect */
+.scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(212, 175, 55, 0.3),
+        transparent
+    );
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes scan {
+    0% { top: -4px; }
+    100% { top: 100%; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .armies-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-section {
+        padding: 1.5rem;
+    }
+    
+    .hero-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .quote {
+        font-size: 1.5rem;
+    }
+}

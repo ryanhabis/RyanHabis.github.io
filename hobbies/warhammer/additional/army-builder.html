@@ -1,0 +1,34 @@
+<section id="army-builder" class="content-section">
+    <h2 class="section-title">ARMORY OF THE EMPEROR</h2>
+    <div class="army-builder">
+        <div class="builder-controls">
+            <select id="faction-select">
+                <option value="space_marines">Space Marines</option>
+                <option value="imperial_guard">Imperial Guard</option>
+                <option value="chaos">Chaos Space Marines</option>
+                <option value="necrons">Necrons</option>
+                <option value="orks">Orks</option>
+                <option value="tyranids">Tyranids</option>
+            </select>
+            <input type="number" id="points-limit" min="500" max="3000" step="250" value="2000">
+            <button id="add-unit" class="imperial-btn">Add Unit</button>
+        </div>
+        
+        <div class="builder-interface">
+            <div class="unit-selection">
+                <h3>Available Units</h3>
+                <div class="unit-list" id="unit-list"></div>
+            </div>
+            
+            <div class="army-list">
+                <h3>Your Army <span id="total-points">0/2000</span></h3>
+                <div class="army-units" id="army-units"></div>
+                <div class="army-actions">
+                    <button id="save-army" class="imperial-btn">Save Army List</button>
+                    <button id="export-army" class="imperial-btn">Export to PDF</button>
+                    <button id="clear-army" class="imperial-btn-clear">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
