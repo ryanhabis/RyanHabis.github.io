@@ -1,34 +1,280 @@
-<section id="army-builder" class="content-section">
-    <h2 class="section-title">ARMORY OF THE EMPEROR</h2>
-    <div class="army-builder">
-        <div class="builder-controls">
-            <select id="faction-select">
-                <option value="space_marines">Space Marines</option>
-                <option value="imperial_guard">Imperial Guard</option>
-                <option value="chaos">Chaos Space Marines</option>
-                <option value="necrons">Necrons</option>
-                <option value="orks">Orks</option>
-                <option value="tyranids">Tyranids</option>
-            </select>
-            <input type="number" id="points-limit" min="500" max="3000" step="250" value="2000">
-            <button id="add-unit" class="imperial-btn">Add Unit</button>
-        </div>
-        
-        <div class="builder-interface">
-            <div class="unit-selection">
-                <h3>Available Units</h3>
-                <div class="unit-list" id="unit-list"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Army Builder - Warhammer 40k</title>
+    <link rel="stylesheet" href="../warhammer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturMaguntia&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">GRIMDARK ARCHIVES</h1>
+                <div class="aquila-right"></div>
             </div>
-            
-            <div class="army-list">
-                <h3>Your Army <span id="total-points">0/2000</span></h3>
-                <div class="army-units" id="army-units"></div>
-                <div class="army-actions">
-                    <button id="save-army" class="imperial-btn">Save Army List</button>
-                    <button id="export-army" class="imperial-btn">Export to PDF</button>
-                    <button id="clear-army" class="imperial-btn-clear">Clear All</button>
+            <div class="page-indicator">ARMORY OF THE EMPEROR</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../warhammer.html#home" class="nav-link">Main Archives</a></li>
+                    <li><a href="../warhammer.html#armies" class="nav-link">Armies</a></li>
+                    <li><a href="../warhammer.html#lore" class="nav-link">Lore</a></li>
+                    <li><a href="army-builder.html" class="nav-link active">Army Builder</a></li>
+                    <li><a href="dice-roller.html" class="nav-link">Dice Roller</a></li>
+                    <li><a href="collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="tactics.html" class="nav-link">Tactics</a></li>
+                    <li><a href="campaign-tracker.html" class="nav-link">Campaign</a></li>
+                    <li><a href="rules-reference.html" class="nav-link">Rules</a></li>
+                    <li><a href="painting-guide.html" class="nav-link">Painting Guide</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="breadcrumbs">
+            <a href="../../../index.html">Home</a>
+            <span class="separator">></span>
+            <a href="../../hobbies.html">Hobbies</a>
+            <span class="separator">></span>
+            <a href="../warhammer.html">Warhammer</a>
+            <span class="separator">></span>
+            <span class="current">Army Builder</span>
+        </div>
+
+        <main>
+            <section class="content-section">
+                <h2 class="section-title">ARMORY OF THE EMPEROR</h2>
+                
+                <div class="army-builder">
+                    <!-- Quick Start -->
+                    <div class="quick-start">
+                        <h3>Quick Start Templates</h3>
+                        <div class="template-grid">
+                            <div class="template-card" data-template="space_marines_2000">
+                                <h4>Space Marines (2000pts)</h4>
+                                <p>Balanced strike force with HQ, troops, and elites</p>
+                                <button class="template-btn">Load Template</button>
+                            </div>
+                            <div class="template-card" data-template="imperial_guard_1500">
+                                <h4>Imperial Guard (1500pts)</h4>
+                                <p>Horde army with artillery support</p>
+                                <button class="template-btn">Load Template</button>
+                            </div>
+                            <div class="template-card" data-template="chaos_2000">
+                                <h4>Chaos Space Marines (2000pts)</h4>
+                                <p>Daemon engines and cultists</p>
+                                <button class="template-btn">Load Template</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Builder Controls -->
+                    <div class="builder-controls">
+                        <div class="control-group">
+                            <label for="faction-select">Select Faction:</label>
+                            <select id="faction-select">
+                                <option value="space_marines">Space Marines</option>
+                                <option value="imperial_guard">Imperial Guard</option>
+                                <option value="chaos">Chaos Space Marines</option>
+                                <option value="necrons">Necrons</option>
+                                <option value="orks">Orks</option>
+                                <option value="tyranids">Tyranids</option>
+                                <option value="aeldari">Aeldari (Eldar)</option>
+                                <option value="tau">T'au Empire</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="points-limit">Points Limit:</label>
+                            <input type="number" id="points-limit" min="500" max="3000" step="250" value="2000">
+                            <span class="points-label">pts</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="detachment-select">Detachment Type:</label>
+                            <select id="detachment-select">
+                                <option value="battle-forged">Battle-Forged</option>
+                                <option value="patrol">Patrol Detachment</option>
+                                <option value="battalion">Battalion Detachment</option>
+                                <option value="brigade">Brigade Detachment</option>
+                                <option value="vanguard">Vanguard Detachment</option>
+                                <option value="spearhead">Spearhead Detachment</option>
+                                <option value="outrider">Outrider Detachment</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <button id="new-army" class="imperial-btn">New Army</button>
+                            <button id="save-army-btn" class="imperial-btn">Save List</button>
+                            <button id="load-army-btn" class="imperial-btn">Load List</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Builder Interface -->
+                    <div class="builder-interface">
+                        <!-- Unit Selection -->
+                        <div class="unit-selection">
+                            <div class="selection-header">
+                                <h3>Available Units</h3>
+                                <div class="search-box">
+                                    <input type="text" id="unit-search" placeholder="Search units...">
+                                    <button id="clear-search">×</button>
+                                </div>
+                            </div>
+                            
+                            <div class="unit-filters">
+                                <button class="filter-btn active" data-role="all">All</button>
+                                <button class="filter-btn" data-role="hq">HQ</button>
+                                <button class="filter-btn" data-role="troops">Troops</button>
+                                <button class="filter-btn" data-role="elites">Elites</button>
+                                <button class="filter-btn" data-role="fast-attack">Fast Attack</button>
+                                <button class="filter-btn" data-role="heavy-support">Heavy Support</button>
+                                <button class="filter-btn" data-role="flyer">Flyer</button>
+                                <button class="filter-btn" data-role="transport">Transport</button>
+                            </div>
+                            
+                            <div class="unit-list" id="unit-list">
+                                <!-- Units will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="unit-info" id="unit-info">
+                                <h4>Unit Information</h4>
+                                <div class="info-content">
+                                    <p>Select a unit to view details</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Army List -->
+                        <div class="army-list">
+                            <div class="army-header">
+                                <h3>Your Army <span id="total-points">0/2000</span></h3>
+                                <div class="army-stats">
+                                    <span id="units-count">0 Units</span>
+                                    <span id="cp-count">0 CP</span>
+                                    <span id="detachment-count">0 Detachments</span>
+                                </div>
+                            </div>
+                            
+                            <div class="detachment-container">
+                                <!-- Detachments will be added here -->
+                                <div class="detachment" id="main-detachment">
+                                    <div class="detachment-header">
+                                        <h4>Main Detachment</h4>
+                                        <span class="detachment-type">Battle-Forged</span>
+                                    </div>
+                                    <div class="detachment-slots">
+                                        <div class="slot-category">
+                                            <h5>HQ <span class="slot-count">0/2</span></h5>
+                                            <div class="slot-list" data-role="hq"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Troops <span class="slot-count">0/3</span></h5>
+                                            <div class="slot-list" data-role="troops"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Elites <span class="slot-count">0/3</span></h5>
+                                            <div class="slot-list" data-role="elites"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Fast Attack <span class="slot-count">0/3</span></h5>
+                                            <div class="slot-list" data-role="fast-attack"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Heavy Support <span class="slot-count">0/3</span></h5>
+                                            <div class="slot-list" data-role="heavy-support"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Flyer <span class="slot-count">0/2</span></h5>
+                                            <div class="slot-list" data-role="flyer"></div>
+                                        </div>
+                                        <div class="slot-category">
+                                            <h5>Transport <span class="slot-count">0/3</span></h5>
+                                            <div class="slot-list" data-role="transport"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="army-actions">
+                                <button id="validate-army" class="imperial-btn">Validate List</button>
+                                <button id="export-army" class="imperial-btn">Export List</button>
+                                <button id="clear-army" class="imperial-btn-clear">Clear All</button>
+                                <button id="print-army" class="imperial-btn">Print List</button>
+                            </div>
+                            
+                            <div class="army-summary">
+                                <h4>Army Summary</h4>
+                                <div class="summary-content">
+                                    <div class="summary-item">
+                                        <span>Total Points:</span>
+                                        <span id="summary-points">0</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Command Points:</span>
+                                        <span id="summary-cp">0</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Power Level:</span>
+                                        <span id="summary-pl">0</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Units:</span>
+                                        <span id="summary-units">0</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Detachments:</span>
+                                        <span id="summary-detachments">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Army Notes -->
+                    <div class="army-notes">
+                        <h3>Army Notes & Strategy</h3>
+                        <textarea id="army-notes" placeholder="Add your battle strategy, special rules, or notes here..."></textarea>
+                        <div class="notes-actions">
+                            <button id="save-notes" class="imperial-btn">Save Notes</button>
+                            <button id="clear-notes" class="imperial-btn-clear">Clear Notes</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Saved Lists -->
+                    <div class="saved-lists">
+                        <h3>Saved Army Lists</h3>
+                        <div class="lists-container" id="saved-lists">
+                            <!-- Saved lists will appear here -->
+                            <div class="empty-state">
+                                <p>No saved army lists yet</p>
+                                <p>Create and save your first list!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </section>
+        </main>
+
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <p class="footer-text">"An army marches on its list."</p>
+                <p class="footer-subtext">Thought for the Strategium</p>
             </div>
-        </div>
+            <div class="copyright">
+                <p>© 999.M41 Imperial Archives</p>
+            </div>
+        </footer>
     </div>
-</section>
+
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+
+    <!-- JavaScript -->
+    <script src="../warhammer.js"></script>
+    <script src="army-builder.js"></script>
+</body>
+</html>
