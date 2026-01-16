@@ -4,13 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dice Roller - Warhammer 40k</title>
-    <!-- Main Warhammer Theme -->
     <link rel="stylesheet" href="../warhammer.css">
-    <!-- Shared Navigation -->
-    <link rel="stylesheet" href="shared-nav.css">
-    <!-- Page Specific -->
-    <link rel="stylesheet" href="dice-roller.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturMaguntia&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -23,27 +17,30 @@
                 <h1 class="title">GRIMDARK ARCHIVES</h1>
                 <div class="aquila-right"></div>
             </div>
-            <div class="page-indicator">Dice of Fate</div>
+            <div class="page-indicator">DICE OF FATE</div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="../warhammer.html#home">Main Page</a></li>
-                    <li><a href="../warhammer.html#armies">Armies</a></li>
-                    <li><a href="../warhammer.html#lore">Lore</a></li>
-                    <li><a href="army-builder.html">Army Builder</a></li>
-                    <li><a href="dice-roller.html" class="active">Dice Roller</a></li>
-                    <li><a href="collection-tracker.html">Collection</a></li>
-                    <li><a href="tactics.html">Tactics</a></li>
-                    <li><a href="campaign-tracker.html">Campaign</a></li>
-                    <li><a href="rules-reference.html">Rules</a></li>
-                    <li><a href="painting-guide.html">Painting Guide</a></li>
+                    <li><a href="../warhammer.html#home" class="nav-link">Main Archives</a></li>
+                    <li><a href="../warhammer.html#armies" class="nav-link">Armies</a></li>
+                    <li><a href="../warhammer.html#lore" class="nav-link">Lore</a></li>
+                    <li><a href="army-builder.html" class="nav-link">Army Builder</a></li>
+                    <li><a href="dice-roller.html" class="nav-link active">Dice Roller</a></li>
+                    <li><a href="collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="tactics.html" class="nav-link">Tactics</a></li>
+                    <li><a href="campaign-tracker.html" class="nav-link">Campaign</a></li>
+                    <li><a href="rules-reference.html" class="nav-link">Rules</a></li>
+                    <li><a href="painting-guide.html" class="nav-link">Painting Guide</a></li>
                 </ul>
             </nav>
         </header>
 
         <div class="breadcrumbs">
-            <a href="../../../index.html">Home</a> > 
-            <a href="../../hobbies.html">Hobbies</a> > 
-            <a href="../warhammer.html">Warhammer</a> > 
+            <a href="../../../index.html">Home</a>
+            <span class="separator">></span>
+            <a href="../../hobbies.html">Hobbies</a>
+            <span class="separator">></span>
+            <a href="../warhammer.html">Warhammer</a>
+            <span class="separator">></span>
             <span class="current">Dice Roller</span>
         </div>
 
@@ -167,7 +164,35 @@
     <div class="grimdark-overlay"></div>
     <div class="scan-line"></div>
 
-    <script src="../warhammer.js"></script>
+    <!-- DEBUG SCRIPT -->
+    <script>
+        // Debug script
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DICE ROLLER DEBUG ===');
+            console.log('Current page:', window.location.pathname);
+            console.log('Dice buttons found:', document.querySelectorAll('.dice-btn').length);
+            console.log('Dice display found:', document.getElementById('dice-display'));
+            console.log('Roll all button:', document.getElementById('roll-all'));
+            console.log('Custom roll button:', document.getElementById('custom-roll-btn'));
+            console.log('Clear button:', document.getElementById('clear-results'));
+            console.log('Scenario button:', document.getElementById('battle-scenario'));
+            console.log('========================');
+            
+            // Test if dice buttons work with simple function
+            document.querySelectorAll('.dice-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Dice button clicked:', this.dataset.dice);
+                    // Simple test - change button color
+                    this.style.backgroundColor = '#8b0000';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                    }, 300);
+                });
+            });
+        });
+    </script>
+    
+    <!-- MAIN JAVASCRIPT FILE -->
     <script src="dice-roller.js"></script>
 </body>
 </html>
