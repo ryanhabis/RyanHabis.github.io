@@ -1,27 +1,615 @@
-<section id="rules" class="content-section">
-    <h2 class="section-title">CODEX QUICK REFERENCE</h2>
-    <div class="rules-reference">
-        <div class="rules-search">
-            <input type="text" id="rule-search" placeholder="Search rules...">
-            <select id="rule-category">
-                <option value="all">All Categories</option>
-                <option value="phases">Battle Phases</option>
-                <option value="combat">Combat</option>
-                <option value="shooting">Shooting</option>
-                <option value="psychic">Psychic Phase</option>
-                <option value="stratagems">Stratagems</option>
-            </select>
-        </div>
-        
-        <div class="rules-accordion">
-            <!-- Expandable rule sections -->
-        </div>
-        
-        <div class="quick-charts">
-            <h3>Quick Reference Charts</h3>
-            <div class="charts-grid">
-                <!-- To-hit, to-wound, AP charts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer 40k - Rules Reference</title>
+    <link rel="stylesheet" href="../warhammer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">IMPERIAL ARCHIVES</h1>
+                <div class="aquila-right"></div>
             </div>
+            <div class="page-indicator">Rules Reference</div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../factions/index.html" class="nav-link">Factions</a></li>
+                    <li><a href="../army-builder/index.html" class="nav-link">Army Builder</a></li>
+                    <li><a href="../dice-roller/index.html" class="nav-link">Dice Roller</a></li>
+                    <li><a href="../additional/collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="../campaign-tracker/index.html" class="nav-link">Campaigns</a></li>
+                    <li><a href="../tactics/index.html" class="nav-link">Tactics</a></li>
+                    <li><a href="../painting/index.html" class="nav-link">Painting</a></li>
+                    <li><a href="../additional/rules-reference.html" class="nav-link active">Rules</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="../additional/index.html">Additional Tools</a>
+            <span class="separator">/</span>
+            <span class="current">Rules Reference</span>
         </div>
+        
+        <!-- Hero Section -->
+        <section class="hero-section parchment-bg">
+            <h2>IMPERIAL CODEX COMPENDIUM</h2>
+            <div class="quote">"Knowledge is power, guard it well."</div>
+            <div class="skull-divider"></div>
+            <p class="intro-text">
+                A comprehensive reference for Warhammer 40k rules, stratagems, and quick reference charts. 
+                Search, filter, and find the rules you need quickly during your games.
+            </p>
+        </section>
+        
+        <!-- Rules Reference Section -->
+        <section id="rules" class="content-section">
+            <h2 class="section-title">CODEX QUICK REFERENCE</h2>
+            
+            <!-- Search and Filter -->
+            <div class="rules-controls">
+                <div class="rules-search">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="rule-search" placeholder="Search rules, keywords, or phrases...">
+                        <button id="clear-search-btn" class="clear-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="rule-category">
+                            <option value="all">All Categories</option>
+                            <option value="phases">Battle Phases</option>
+                            <option value="combat">Combat</option>
+                            <option value="shooting">Shooting</option>
+                            <option value="psychic">Psychic Phase</option>
+                            <option value="movement">Movement</option>
+                            <option value="morale">Morale Phase</option>
+                            <option value="stratagems">Stratagems</option>
+                            <option value="core_rules">Core Rules</option>
+                            <option value="weapons">Weapons & Wargear</option>
+                            <option value="abilities">Abilities</option>
+                            <option value="terrain">Terrain Rules</option>
+                        </select>
+                        
+                        <select id="rule-faction">
+                            <option value="all">All Factions</option>
+                            <option value="core">Core Rules</option>
+                            <option value="space_marines">Space Marines</option>
+                            <option value="imperial_guard">Imperial Guard</option>
+                            <option value="chaos">Chaos Space Marines</option>
+                            <option value="aeldari">Aeldari</option>
+                            <option value="ork">Orks</option>
+                            <option value="necron">Necrons</option>
+                            <option value="tyranid">Tyranids</option>
+                            <option value="tau">T'au Empire</option>
+                        </select>
+                        
+                        <select id="rule-difficulty">
+                            <option value="all">All Difficulty</option>
+                            <option value="basic">Basic Rules</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="faq">FAQ/Errata</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="search-info">
+                    <span id="search-results">0 rules found</span>
+                    <button id="expand-all" class="imperial-btn-small">
+                        <i class="fas fa-expand-alt"></i> Expand All
+                    </button>
+                    <button id="collapse-all" class="imperial-btn-small">
+                        <i class="fas fa-compress-alt"></i> Collapse All
+                    </button>
+                    <button id="print-rules" class="imperial-btn-small">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Rules Accordion -->
+            <div class="rules-accordion" id="rules-accordion">
+                <!-- Rules will be populated by JavaScript -->
+            </div>
+            
+            <!-- Quick Reference Charts -->
+            <div class="quick-charts-section">
+                <h3 class="charts-title">Quick Reference Charts</h3>
+                
+                <div class="charts-grid">
+                    <!-- To-Hit Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>To-Hit Chart</h4>
+                            <span class="chart-subtitle">Roll Required to Hit</span>
+                        </div>
+                        <table class="reference-table">
+                            <thead>
+                                <tr>
+                                    <th>Ballistic/Weapon Skill</th>
+                                    <th>Roll Needed</th>
+                                    <th>% Chance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>BS/WS 2+</td>
+                                    <td><span class="dice">2+</span></td>
+                                    <td>83%</td>
+                                </tr>
+                                <tr>
+                                    <td>BS/WS 3+</td>
+                                    <td><span class="dice">3+</span></td>
+                                    <td>67%</td>
+                                </tr>
+                                <tr>
+                                    <td>BS/WS 4+</td>
+                                    <td><span class="dice">4+</span></td>
+                                    <td>50%</td>
+                                </tr>
+                                <tr>
+                                    <td>BS/WS 5+</td>
+                                    <td><span class="dice">5+</span></td>
+                                    <td>33%</td>
+                                </tr>
+                                <tr>
+                                    <td>BS/WS 6+</td>
+                                    <td><span class="dice">6+</span></td>
+                                    <td>17%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="chart-note">
+                            Note: Unmodified roll of 1 always fails. Unmodified 6 always hits.
+                        </div>
+                    </div>
+                    
+                    <!-- To-Wound Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>To-Wound Chart</h4>
+                            <span class="chart-subtitle">Strength vs Toughness</span>
+                        </div>
+                        <table class="reference-table">
+                            <thead>
+                                <tr>
+                                    <th>S vs T</th>
+                                    <th>Roll Needed</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>S ≥ 2×T</td>
+                                    <td><span class="dice">2+</span></td>
+                                    <td>S8 vs T4</td>
+                                </tr>
+                                <tr>
+                                    <td>S > T</td>
+                                    <td><span class="dice">3+</span></td>
+                                    <td>S5 vs T4</td>
+                                </tr>
+                                <tr>
+                                    <td>S = T</td>
+                                    <td><span class="dice">4+</span></td>
+                                    <td>S4 vs T4</td>
+                                </tr>
+                                <tr>
+                                    <td>S < T</td>
+                                    <td><span class="dice">5+</span></td>
+                                    <td>S3 vs T4</td>
+                                </tr>
+                                <tr>
+                                    <td>S ≤ ½×T</td>
+                                    <td><span class="dice">6+</span></td>
+                                    <td>S2 vs T5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="chart-note">
+                            Note: Unmodified roll of 1 always fails. Unmodified 6 always wounds.
+                        </div>
+                    </div>
+                    
+                    <!-- AP Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Armor Penetration</h4>
+                            <span class="chart-subtitle">Save Modification</span>
+                        </div>
+                        <table class="reference-table">
+                            <thead>
+                                <tr>
+                                    <th>AP Value</th>
+                                    <th>Save Penalty</th>
+                                    <th>Effect</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AP 0</td>
+                                    <td>No modifier</td>
+                                    <td>No effect on save</td>
+                                </tr>
+                                <tr>
+                                    <td>AP -1</td>
+                                    <td>Save +1</td>
+                                    <td>3+ becomes 4+</td>
+                                </tr>
+                                <tr>
+                                    <td>AP -2</td>
+                                    <td>Save +2</td>
+                                    <td>3+ becomes 5+</td>
+                                </tr>
+                                <tr>
+                                    <td>AP -3</td>
+                                    <td>Save +3</td>
+                                    <td>3+ becomes 6+</td>
+                                </tr>
+                                <tr>
+                                    <td>AP -4</td>
+                                    <td>Save +4</td>
+                                    <td>3+ becomes 7+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="chart-note">
+                            Note: Invulnerable saves are unaffected by AP. Armor saves cannot be modified below 6+.
+                        </div>
+                    </div>
+                    
+                    <!-- Damage Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h4>Damage Allocation</h4>
+                            <span class="chart-subtitle">Damage & Wounds</span>
+                        </div>
+                        <table class="reference-table">
+                            <thead>
+                                <tr>
+                                    <th>Damage (D)</th>
+                                    <th>Wounds Removed</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>D1</td>
+                                    <td>1 wound</td>
+                                    <td>Bolter</td>
+                                </tr>
+                                <tr>
+                                    <td>D2</td>
+                                    <td>2 wounds</td>
+                                    <td>Melta Gun</td>
+                                </tr>
+                                <tr>
+                                    <td>D3</td>
+                                    <td>1-3 wounds</td>
+                                    <td>D6 roll ÷ 2</td>
+                                </tr>
+                                <tr>
+                                    <td>D6</td>
+                                    <td>1-6 wounds</td>
+                                    <td>Lascannon</td>
+                                </tr>
+                                <tr>
+                                    <td>D3+3</td>
+                                    <td>4-6 wounds</td>
+                                    <td>Heavy weapon</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="chart-note">
+                            Note: Damage spills over to remaining wounds of a model, but not to other models.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Charts -->
+                <div class="advanced-charts">
+                    <h4>Advanced Reference Tables</h4>
+                    
+                    <div class="advanced-charts-grid">
+                        <!-- Morale Chart -->
+                        <div class="advanced-chart">
+                            <h5>Morale Test Modifiers</h5>
+                            <table class="reference-table small">
+                                <thead>
+                                    <tr>
+                                        <th>Condition</th>
+                                        <th>LD Modifier</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Within 6" of Character</td>
+                                        <td>Use Character's LD</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Insane Bravery Stratagem</td>
+                                        <td>Auto-pass test</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Combat Attrition</td>
+                                        <td>Each model flees on 1-2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Cover Chart -->
+                        <div class="advanced-chart">
+                            <h5>Cover Benefits</h5>
+                            <table class="reference-table small">
+                                <thead>
+                                    <tr>
+                                        <th>Cover Type</th>
+                                        <th>Save Bonus</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Light Cover</td>
+                                        <td>+1 to armor save</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heavy Cover</td>
+                                        <td>+1 to armor save</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dense Cover</td>
+                                        <td>-1 to hit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Obscuring</td>
+                                        <td>Cannot be seen through</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Movement Chart -->
+                        <div class="advanced-chart">
+                            <h5>Movement Types</h5>
+                            <table class="reference-table small">
+                                <thead>
+                                    <tr>
+                                        <th>Unit Type</th>
+                                        <th>Movement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Infantry</td>
+                                        <td>6" (usually)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cavalry/Bikes</td>
+                                        <td>12"-14"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vehicles</td>
+                                        <td>10"-12"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monsters</td>
+                                        <td>8"-10"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fly</td>
+                                        <td>12"-20"</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Command Points -->
+                        <div class="advanced-chart">
+                            <h5>Command Points</h5>
+                            <table class="reference-table small">
+                                <thead>
+                                    <tr>
+                                        <th>Game Size</th>
+                                        <th>Starting CP</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Combat Patrol</td>
+                                        <td>3 CP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Incursion (1000pts)</td>
+                                        <td>6 CP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Strike Force (2000pts)</td>
+                                        <td>12 CP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Onslaught (3000pts)</td>
+                                        <td>18 CP</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Faction Specific Rules -->
+            <div class="faction-rules-section">
+                <h3 class="faction-title">Faction-Specific Rules</h3>
+                
+                <div class="faction-tabs">
+                    <button class="faction-tab active" data-faction="space_marines">
+                        <i class="fas fa-shield-alt"></i> Space Marines
+                    </button>
+                    <button class="faction-tab" data-faction="imperial_guard">
+                        <i class="fas fa-flag"></i> Imperial Guard
+                    </button>
+                    <button class="faction-tab" data-faction="chaos">
+                        <i class="fas fa-skull-crossbones"></i> Chaos
+                    </button>
+                    <button class="faction-tab" data-faction="aeldari">
+                        <i class="fas fa-moon"></i> Aeldari
+                    </button>
+                    <button class="faction-tab" data-faction="ork">
+                        <i class="fas fa-fist-raised"></i> Orks
+                    </button>
+                </div>
+                
+                <div class="faction-content" id="faction-content">
+                    <!-- Faction rules will be loaded here -->
+                    <div class="faction-rules" id="space_marines-rules">
+                        <h4>Space Marines Core Rules</h4>
+                        <div class="faction-rule">
+                            <h5>Angels of Death</h5>
+                            <p>Space Marines have the following abilities:</p>
+                            <ul>
+                                <li><strong>And They Shall Know No Fear:</strong> Each time a unit fails a Combat Attrition test, subtract 1 from the result.</li>
+                                <li><strong>Bolter Discipline:</strong> Models armed with Bolt weapons count as remaining stationary in your Shooting phase.</li>
+                                <li><strong>Shock Assault:</strong> Add 1 to the Attacks characteristic of models in the Fight phase.</li>
+                                <li><strong>Combat Doctrines:</strong> Devastator, Tactical, and Assault doctrines.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Common Stratagems -->
+            <div class="stratagems-section">
+                <h3>Common Stratagems</h3>
+                
+                <div class="stratagems-grid">
+                    <div class="stratagem-card">
+                        <div class="stratagem-header">
+                            <h4>Command Re-Roll</h4>
+                            <span class="stratagem-cp">1 CP</span>
+                        </div>
+                        <p class="stratagem-timing"><strong>Timing:</strong> Any phase</p>
+                        <p class="stratagem-effect">
+                            Use this Stratagem after you have made a hit roll, wound roll, damage roll, advance roll, charge roll, Psychic test, Deny the Witch test, or saving throw for a model. Re-roll that roll.
+                        </p>
+                        <div class="stratagem-tags">
+                            <span class="tag core">Core</span>
+                            <span class="tag any-phase">Any Phase</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stratagem-card">
+                        <div class="stratagem-header">
+                            <h4>Insane Bravery</h4>
+                            <span class="stratagem-cp">2 CP</span>
+                        </div>
+                        <p class="stratagem-timing"><strong>Timing:</strong> Morale phase</p>
+                        <p class="stratagem-effect">
+                            Use this Stratagem when a unit from your army fails a Morale test. That unit automatically passes that Morale test.
+                        </p>
+                        <div class="stratagem-tags">
+                            <span class="tag core">Core</span>
+                            <span class="tag morale">Morale</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stratagem-card">
+                        <div class="stratagem-header">
+                            <h4>Counter-Offensive</h4>
+                            <span class="stratagem-cp">2 CP</span>
+                        </div>
+                        <p class="stratagem-timing"><strong>Timing:</strong> Fight phase</p>
+                        <p class="stratagem-effect">
+                            Use this Stratagem after an enemy unit has fought in the Fight phase. Select one of your own eligible units and fight with it next.
+                        </p>
+                        <div class="stratagem-tags">
+                            <span class="tag core">Core</span>
+                            <span class="tag fight">Fight</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    "IN THE GRIM DARKNESS OF THE FAR FUTURE"
+                </div>
+                <div class="footer-subtext">
+                    Rules Reference v1.0 - Based on Warhammer 40k 10th Edition
+                </div>
+            </div>
+            <div class="copyright">
+                © 2024 Games Workshop. Warhammer 40k is a trademark of Games Workshop Limited.
+            </div>
+        </footer>
     </div>
-</section>
+    
+    <!-- JavaScript -->
+    <script src="rules-reference.js"></script>
+    <script>
+        // Back to top button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.className = 'back-to-top';
+        backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i> Back to Top';
+        backToTopBtn.id = 'backToTop';
+        document.body.appendChild(backToTopBtn);
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        
+        // Initialize with default rules
+        document.addEventListener('DOMContentLoaded', () => {
+            const rulesReference = new RulesReference();
+            window.rulesReference = rulesReference;
+            
+            // Set up faction tabs
+            document.querySelectorAll('.faction-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.faction-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding faction content
+                    const faction = this.dataset.faction;
+                    rulesReference.loadFactionRules(faction);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

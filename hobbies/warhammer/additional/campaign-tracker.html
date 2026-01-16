@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaign Tracker - Warhammer 40k</title>
+    <title>Collection Tracker - Warhammer 40k</title>
     <link rel="stylesheet" href="../warhammer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
                 <h1 class="title">GRIMDARK ARCHIVES</h1>
                 <div class="aquila-right"></div>
             </div>
-            <div class="page-indicator">CRUSADE CAMPAIGNS</div>
+            <div class="page-indicator">FORGE WORLD COLLECTION</div>
             <nav class="main-nav">
                 <ul>
                     <li><a href="../warhammer.html#home" class="nav-link">Main Archives</a></li>
@@ -25,9 +25,9 @@
                     <li><a href="../warhammer.html#lore" class="nav-link">Lore</a></li>
                     <li><a href="army-builder.html" class="nav-link">Army Builder</a></li>
                     <li><a href="dice-roller.html" class="nav-link">Dice Roller</a></li>
-                    <li><a href="collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="collection-tracker.html" class="nav-link active">Collection</a></li>
                     <li><a href="tactics.html" class="nav-link">Tactics</a></li>
-                    <li><a href="campaign-tracker.html" class="nav-link active">Campaign</a></li>
+                    <li><a href="campaign-tracker.html" class="nav-link">Campaign</a></li>
                     <li><a href="rules-reference.html" class="nav-link">Rules</a></li>
                     <li><a href="painting-guide.html" class="nav-link">Painting Guide</a></li>
                 </ul>
@@ -41,53 +41,110 @@
             <span class="separator">></span>
             <a href="../warhammer.html">Warhammer</a>
             <span class="separator">></span>
-            <span class="current">Campaign Tracker</span>
+            <span class="current">Collection Tracker</span>
         </div>
 
         <main>
             <section class="content-section">
-                <h2 class="section-title">CRUSADE CAMPAIGNS</h2>
+                <h2 class="section-title">FORGE WORLD COLLECTION</h2>
                 
-                <div class="campaign-tracker">
-                    <!-- Campaign Overview -->
-                    <div class="campaign-overview">
+                <div class="collection-tracker">
+                    <!-- Collection Overview -->
+                    <div class="collection-overview">
                         <div class="overview-stats">
                             <div class="stat-card">
-                                <h4>Active Campaigns</h4>
-                                <span class="stat-value" id="active-campaigns-count">0</span>
+                                <div class="stat-icon">⚔️</div>
+                                <h4>Total Miniatures</h4>
+                                <span class="stat-value" id="total-minis">0</span>
                             </div>
                             <div class="stat-card">
-                                <h4>Total Battles</h4>
-                                <span class="stat-value" id="total-battles-count">0</span>
+                                <div class="stat-icon">🎨</div>
+                                <h4>Painted</h4>
+                                <span class="stat-value" id="painted-minis">0</span>
+                                <div class="stat-progress">
+                                    <div class="progress-fill" id="painted-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="stat-percentage" id="painted-percentage">0%</span>
                             </div>
                             <div class="stat-card">
-                                <h4>Units Leveled</h4>
-                                <span class="stat-value" id="units-leveled-count">0</span>
+                                <div class="stat-icon">🏆</div>
+                                <h4>Armies</h4>
+                                <span class="stat-value" id="total-armies">0</span>
                             </div>
                             <div class="stat-card">
-                                <h4>Total XP</h4>
-                                <span class="stat-value" id="total-xp-count">0</span>
+                                <div class="stat-icon">💰</div>
+                                <h4>Points Value</h4>
+                                <span class="stat-value" id="total-points">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <h4>Power Level</h4>
+                                <span class="stat-value" id="total-pl">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⏱️</div>
+                                <h4>Painting Hours</h4>
+                                <span class="stat-value" id="total-hours">0</span>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Campaign Creation -->
-                    <div class="campaign-creator">
-                        <div class="creator-header">
-                            <h3>Start New Crusade</h3>
-                            <button class="info-btn" title="Crusade Campaigns are narrative campaigns where your units gain experience, battle honors, and scars over multiple battles.">?</button>
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <div class="actions-header">
+                            <h3>Quick Actions</h3>
+                            <button id="import-collection" class="imperial-btn-secondary">Import</button>
+                        </div>
+                        <div class="actions-grid">
+                            <button id="add-miniature-btn" class="action-btn">
+                                <span class="action-icon">➕</span>
+                                <span class="action-text">Add Miniature</span>
+                            </button>
+                            <button id="add-unit-btn" class="action-btn">
+                                <span class="action-icon">⚔️</span>
+                                <span class="action-text">Add Unit</span>
+                            </button>
+                            <button id="bulk-add-btn" class="action-btn">
+                                <span class="action-icon">📦</span>
+                                <span class="action-text">Bulk Add</span>
+                            </button>
+                            <button id="generate-report-btn" class="action-btn">
+                                <span class="action-icon">📊</span>
+                                <span class="action-text">Generate Report</span>
+                            </button>
+                            <button id="export-collection-btn" class="action-btn">
+                                <span class="action-icon">📤</span>
+                                <span class="action-text">Export Collection</span>
+                            </button>
+                            <button id="backup-collection-btn" class="action-btn">
+                                <span class="action-icon">💾</span>
+                                <span class="action-text">Backup</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Collection Controls -->
+                    <div class="collection-controls">
+                        <div class="controls-header">
+                            <h3>Filter & Sort</h3>
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid">
+                                    <span>🟦</span> Grid
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <span>📋</span> List
+                                </button>
+                                <button class="view-btn" data-view="table">
+                                    <span>📊</span> Table
+                                </button>
+                            </div>
                         </div>
                         
-                        <form id="campaign-form" class="campaign-form">
-                            <div class="form-group">
-                                <label for="campaign-name">Campaign Name:</label>
-                                <input type="text" id="campaign-name" placeholder="The Macharian Crusade" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="campaign-faction">Your Faction:</label>
-                                <select id="campaign-faction" required>
-                                    <option value="">Select Faction</option>
+                        <div class="controls-content">
+                            <div class="filter-group">
+                                <label for="faction-filter">Faction:</label>
+                                <select id="faction-filter" multiple>
+                                    <option value="all" selected>All Factions</option>
                                     <option value="space_marines">Space Marines</option>
                                     <option value="imperial_guard">Imperial Guard</option>
                                     <option value="chaos">Chaos Space Marines</option>
@@ -96,273 +153,413 @@
                                     <option value="tyranids">Tyranids</option>
                                     <option value="aeldari">Aeldari</option>
                                     <option value="tau">T'au Empire</option>
+                                    <option value="custodes">Adeptus Custodes</option>
+                                    <option value="sisters">Adepta Sororitas</option>
+                                    <option value="knights">Imperial Knights</option>
+                                    <option value="chaos_knights">Chaos Knights</option>
                                 </select>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="campaign-narrative">Campaign Narrative:</label>
-                                <textarea id="campaign-narrative" placeholder="Describe the story of your crusade, its objectives, and the enemies you face..." rows="3"></textarea>
+                            <div class="filter-group">
+                                <label for="status-filter">Paint Status:</label>
+                                <select id="status-filter">
+                                    <option value="all">All Status</option>
+                                    <option value="unpainted">Unpainted</option>
+                                    <option value="primed">Primed</option>
+                                    <option value="wip">Work in Progress</option>
+                                    <option value="painted">Painted</option>
+                                    <option value="based">Based</option>
+                                    <option value="display">Display Quality</option>
+                                </select>
                             </div>
                             
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="supply-limit">Starting Supply Limit:</label>
-                                    <input type="number" id="supply-limit" min="500" max="5000" value="1000">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="starting-cp">Starting Command Points:</label>
-                                    <input type="number" id="starting-cp" min="0" max="50" value="5">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="campaign-type">Campaign Type:</label>
-                                    <select id="campaign-type">
-                                        <option value="crusade">Crusade</option>
-                                        <option value="narrative">Narrative Play</option>
-                                        <option value="tournament">Tournament Practice</option>
-                                        <option value="escalation">Escalation League</option>
-                                    </select>
+                            <div class="filter-group">
+                                <label for="type-filter">Model Type:</label>
+                                <select id="type-filter">
+                                    <option value="all">All Types</option>
+                                    <option value="infantry">Infantry</option>
+                                    <option value="vehicle">Vehicle</option>
+                                    <option value="monster">Monster</option>
+                                    <option value="character">Character</option>
+                                    <option value="flyer">Flyer</option>
+                                    <option value="fortification">Fortification</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="sort-by">Sort By:</label>
+                                <select id="sort-by">
+                                    <option value="date_added">Date Added</option>
+                                    <option value="name">Name</option>
+                                    <option value="faction">Faction</option>
+                                    <option value="points">Points</option>
+                                    <option value="pl">Power Level</option>
+                                    <option value="status">Paint Status</option>
+                                </select>
+                                <select id="sort-order">
+                                    <option value="desc">Descending</option>
+                                    <option value="asc">Ascending</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group search-group">
+                                <label for="collection-search">Search:</label>
+                                <div class="search-box">
+                                    <input type="text" id="collection-search" placeholder="Search collection...">
+                                    <button id="clear-search">×</button>
                                 </div>
                             </div>
                             
-                            <div class="form-actions">
-                                <button type="submit" class="imperial-btn">Begin Crusade</button>
-                                <button type="button" id="load-template" class="imperial-btn-secondary">Load Template</button>
+                            <div class="filter-actions">
+                                <button id="apply-filters" class="imperial-btn">Apply Filters</button>
+                                <button id="reset-filters" class="imperial-btn-secondary">Reset</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     
-                    <!-- Active Campaigns -->
-                    <div class="active-campaigns">
-                        <div class="section-header">
-                            <h3>Active Crusades</h3>
-                            <div class="campaign-filters">
-                                <button class="filter-btn active" data-filter="all">All</button>
-                                <button class="filter-btn" data-filter="active">Active</button>
-                                <button class="filter-btn" data-filter="completed">Completed</button>
-                                <button class="filter-btn" data-filter="paused">Paused</button>
+                    <!-- Collection Display -->
+                    <div class="collection-display">
+                        <div class="display-header">
+                            <h3>Your Collection <span class="item-count" id="display-count">(0 items)</span></h3>
+                            <div class="display-actions">
+                                <button id="select-all" class="action-btn-small">Select All</button>
+                                <button id="deselect-all" class="action-btn-small">Deselect All</button>
+                                <button id="batch-update" class="action-btn-small">Batch Update</button>
+                                <button id="delete-selected" class="action-btn-small danger">Delete Selected</button>
                             </div>
                         </div>
                         
-                        <div class="campaigns-grid" id="campaigns-grid">
-                            <!-- Campaign cards will be populated by JavaScript -->
-                            <div class="empty-state">
-                                <div class="empty-icon">⚔️</div>
-                                <h4>No Active Campaigns</h4>
-                                <p>Start your first crusade to begin tracking your narrative battles!</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Campaign Details Modal (hidden by default) -->
-                    <div class="modal-overlay" id="campaign-modal-overlay" style="display: none;">
-                        <div class="modal" id="campaign-modal">
-                            <div class="modal-header">
-                                <h3 id="modal-campaign-name">Campaign Details</h3>
-                                <button class="close-modal">&times;</button>
-                            </div>
-                            <div class="modal-content" id="campaign-details">
-                                <!-- Campaign details will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Current Campaign Focus -->
-                    <div class="current-campaign" id="current-campaign-section" style="display: none;">
-                        <div class="focus-header">
-                            <h3>Current Campaign Focus</h3>
-                            <div class="focus-actions">
-                                <button id="add-battle-btn" class="imperial-btn">Record Battle</button>
-                                <button id="add-unit-btn" class="imperial-btn">Add Unit</button>
-                                <button id="edit-campaign-btn" class="imperial-btn-secondary">Edit Campaign</button>
+                        <!-- Grid View -->
+                        <div class="collection-grid active" id="grid-view">
+                            <div class="grid-container" id="miniature-grid">
+                                <!-- Miniatures will be populated here -->
+                                <div class="empty-state">
+                                    <div class="empty-icon">🎨</div>
+                                    <h4>Your Collection is Empty</h4>
+                                    <p>Start by adding your first miniature!</p>
+                                    <button id="add-first-mini" class="imperial-btn">Add Your First Miniature</button>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="focus-content">
-                            <div class="campaign-info-card">
-                                <div class="info-header">
-                                    <h4 id="current-campaign-name">Campaign Name</h4>
-                                    <span class="campaign-status active">Active</span>
+                        <!-- List View -->
+                        <div class="collection-list" id="list-view" style="display: none;">
+                            <table class="collection-table" id="list-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="select-all-checkbox"></th>
+                                        <th>Name</th>
+                                        <th>Faction</th>
+                                        <th>Type</th>
+                                        <th>Points</th>
+                                        <th>PL</th>
+                                        <th>Status</th>
+                                        <th>Date Added</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list-table-body">
+                                    <!-- List items will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Table View -->
+                        <div class="collection-table-view" id="table-view" style="display: none;">
+                            <div class="table-container" id="table-container">
+                                <!-- Detailed table will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wishlist -->
+                    <div class="wishlist-section">
+                        <div class="wishlist-header">
+                            <h3>Wishlist & Backlog</h3>
+                            <button id="add-to-wishlist" class="imperial-btn">Add to Wishlist</button>
+                        </div>
+                        
+                        <div class="wishlist-content">
+                            <div class="wishlist-stats">
+                                <div class="wishlist-stat">
+                                    <span>Wishlist Items:</span>
+                                    <strong id="wishlist-count">0</strong>
                                 </div>
-                                <div class="info-body">
-                                    <p id="current-campaign-narrative">No narrative set.</p>
-                                    <div class="info-stats">
-                                        <div class="info-stat">
-                                            <span>Supply Limit:</span>
-                                            <strong id="current-supply-limit">1000</strong>
-                                        </div>
-                                        <div class="info-stat">
-                                            <span>Command Points:</span>
-                                            <strong id="current-command-points">5</strong>
-                                        </div>
-                                        <div class="info-stat">
-                                            <span>Battles:</span>
-                                            <strong id="current-battles-count">0</strong>
-                                        </div>
-                                        <div class="info-stat">
-                                            <span>Total XP:</span>
-                                            <strong id="current-total-xp">0</strong>
-                                        </div>
-                                    </div>
+                                <div class="wishlist-stat">
+                                    <span>Estimated Cost:</span>
+                                    <strong id="wishlist-cost">$0</strong>
+                                </div>
+                                <div class="wishlist-stat">
+                                    <span>Priority Items:</span>
+                                    <strong id="priority-count">0</strong>
                                 </div>
                             </div>
                             
-                            <!-- Units Roster -->
-                            <div class="units-roster">
-                                <div class="roster-header">
-                                    <h4>Order of Battle</h4>
-                                    <div class="roster-actions">
-                                        <button id="level-up-btn" class="imperial-btn-small">Level Up Unit</button>
-                                        <button id="add-battle-honor-btn" class="imperial-btn-small">Add Battle Honor</button>
-                                        <button id="add-battle-scar-btn" class="imperial-btn-small">Add Battle Scar</button>
-                                    </div>
-                                </div>
-                                
-                                <div class="roster-table-container">
-                                    <table class="roster-table" id="units-roster-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Unit</th>
-                                                <th>Type</th>
-                                                <th>XP</th>
-                                                <th>Level</th>
-                                                <th>Battle Honors</th>
-                                                <th>Battle Scars</th>
-                                                <th>Crusade Points</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="units-roster-body">
-                                            <!-- Units will be populated here -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                
-                                <div class="roster-summary">
-                                    <div class="summary-item">
-                                        <span>Total Units:</span>
-                                        <strong id="total-units-count">0</strong>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Total Crusade Points:</span>
-                                        <strong id="total-crusade-points">0</strong>
-                                    </div>
-                                    <div class="summary-item">
-                                        <span>Average Level:</span>
-                                        <strong id="average-unit-level">0</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Battle Log -->
-                            <div class="battle-log-section">
-                                <div class="battle-log-header">
-                                    <h4>Battle Log</h4>
-                                    <button id="view-all-battles-btn" class="imperial-btn-small">View All Battles</button>
-                                </div>
-                                
-                                <div class="battle-log-entries" id="battle-log-entries">
-                                    <!-- Battle entries will be populated here -->
-                                    <div class="empty-battles">
-                                        <p>No battles recorded yet.</p>
-                                        <p>Click "Record Battle" to add your first battle report!</p>
-                                    </div>
+                            <div class="wishlist-items" id="wishlist-items">
+                                <!-- Wishlist items will be populated here -->
+                                <div class="empty-wishlist">
+                                    <p>No items in wishlist yet.</p>
+                                    <p>Add models you plan to purchase in the future!</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Battle Recorder Modal -->
-                    <div class="modal-overlay" id="battle-modal-overlay" style="display: none;">
-                        <div class="modal battle-modal">
+                    <!-- Painting Progress -->
+                    <div class="painting-progress-section">
+                        <div class="progress-header">
+                            <h3>Painting Progress</h3>
+                            <div class="progress-timeframe">
+                                <button class="timeframe-btn active" data-timeframe="all">All Time</button>
+                                <button class="timeframe-btn" data-timeframe="month">This Month</button>
+                                <button class="timeframe-btn" data-timeframe="week">This Week</button>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-content">
+                            <div class="progress-charts">
+                                <div class="chart-container">
+                                    <h4>Paint Status Distribution</h4>
+                                    <div class="chart" id="status-chart">
+                                        <!-- Chart will be generated by JavaScript -->
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-container">
+                                    <h4>Faction Breakdown</h4>
+                                    <div class="chart" id="faction-chart">
+                                        <!-- Chart will be generated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-goals">
+                                <h4>Painting Goals</h4>
+                                <div class="goals-list" id="goals-list">
+                                    <div class="goal-item">
+                                        <div class="goal-info">
+                                            <h5>Paint 10 Miniatures</h5>
+                                            <p>Complete painting 10 miniatures to a tabletop standard</p>
+                                        </div>
+                                        <div class="goal-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 30%"></div>
+                                            </div>
+                                            <span class="goal-percentage">3/10 (30%)</span>
+                                        </div>
+                                        <button class="goal-action">Update</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="add-goal">
+                                    <input type="text" id="new-goal" placeholder="Add a new painting goal...">
+                                    <button id="add-goal-btn" class="imperial-btn-small">Add Goal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modals -->
+                    <div class="modal-overlay" id="add-mini-modal" style="display: none;">
+                        <div class="modal">
                             <div class="modal-header">
-                                <h3>Record Battle</h3>
+                                <h3>Add Miniature to Collection</h3>
                                 <button class="close-modal">&times;</button>
                             </div>
                             <div class="modal-content">
-                                <form id="battle-form">
-                                    <div class="form-group">
-                                        <label for="battle-name">Battle Name:</label>
-                                        <input type="text" id="battle-name" placeholder="Battle of Macragge" required>
+                                <form id="add-mini-form">
+                                    <div class="form-tabs">
+                                        <button type="button" class="tab-btn active" data-tab="basic">Basic Info</button>
+                                        <button type="button" class="tab-btn" data-tab="game">Game Stats</button>
+                                        <button type="button" class="tab-btn" data-tab="painting">Painting Info</button>
+                                        <button type="button" class="tab-btn" data-tab="advanced">Advanced</button>
                                     </div>
                                     
-                                    <div class="form-row">
+                                    <div class="tab-content active" id="basic-tab">
                                         <div class="form-group">
-                                            <label for="battle-date">Date:</label>
-                                            <input type="date" id="battle-date" required>
+                                            <label for="mini-name">Model Name *</label>
+                                            <input type="text" id="mini-name" placeholder="e.g., Intercessor Squad, Carnifex" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="battle-opponent">Opponent:</label>
-                                            <input type="text" id="battle-opponent" placeholder="Opponent's Name/Army" required>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-faction">Faction *</label>
+                                                <select id="mini-faction" required>
+                                                    <option value="">Select Faction</option>
+                                                    <option value="space_marines">Space Marines</option>
+                                                    <option value="imperial_guard">Imperial Guard</option>
+                                                    <option value="chaos">Chaos Space Marines</option>
+                                                    <option value="necrons">Necrons</option>
+                                                    <option value="orks">Orks</option>
+                                                    <option value="tyranids">Tyranids</option>
+                                                    <option value="aeldari">Aeldari</option>
+                                                    <option value="tau">T'au Empire</option>
+                                                    <option value="custodes">Adeptus Custodes</option>
+                                                    <option value="sisters">Adepta Sororitas</option>
+                                                    <option value="knights">Imperial Knights</option>
+                                                    <option value="chaos_knights">Chaos Knights</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-subfaction">Subfaction</label>
+                                                <input type="text" id="mini-subfaction" placeholder="e.g., Ultramarines, Cadians">
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="form-row">
+                                        
                                         <div class="form-group">
-                                            <label for="battle-type">Battle Type:</label>
-                                            <select id="battle-type" required>
-                                                <option value="incursion">Incursion (1000pts)</option>
-                                                <option value="strike_force">Strike Force (2000pts)</option>
-                                                <option value="onslaught">Onslaught (3000pts)</option>
-                                                <option value="patrol">Patrol (500pts)</option>
-                                                <option value="narrative">Narrative Mission</option>
+                                            <label for="mini-type">Model Type *</label>
+                                            <select id="mini-type" required>
+                                                <option value="">Select Type</option>
+                                                <option value="infantry">Infantry</option>
+                                                <option value="vehicle">Vehicle</option>
+                                                <option value="monster">Monster</option>
+                                                <option value="character">Character</option>
+                                                <option value="flyer">Flyer</option>
+                                                <option value="fortification">Fortification</option>
+                                                <option value="terrain">Terrain</option>
                                             </select>
                                         </div>
+                                        
                                         <div class="form-group">
-                                            <label for="battle-result">Result:</label>
-                                            <select id="battle-result" required>
-                                                <option value="victory">Victory</option>
-                                                <option value="defeat">Defeat</option>
-                                                <option value="draw">Draw</option>
+                                            <label for="mini-description">Description</label>
+                                            <textarea id="mini-description" placeholder="Add notes about this model..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="game-tab" style="display: none;">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-points">Points Value</label>
+                                                <input type="number" id="mini-points" min="0" step="5" placeholder="e.g., 100">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-pl">Power Level</label>
+                                                <input type="number" id="mini-pl" min="0" step="1" placeholder="e.g., 5">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-role">Battlefield Role</label>
+                                            <select id="mini-role">
+                                                <option value="">Select Role</option>
+                                                <option value="hq">HQ</option>
+                                                <option value="troops">Troops</option>
+                                                <option value="elites">Elites</option>
+                                                <option value="fast-attack">Fast Attack</option>
+                                                <option value="heavy-support">Heavy Support</option>
+                                                <option value="flyer">Flyer</option>
+                                                <option value="transport">Transport</option>
+                                                <option value="fortification">Fortification</option>
                                             </select>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="battle-details">Battle Details:</label>
-                                        <textarea id="battle-details" placeholder="Describe the battle, key moments, heroic acts, etc..." rows="3"></textarea>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label>XP Awards:</label>
-                                        <div class="xp-awards">
-                                            <div class="xp-award">
-                                                <label>
-                                                    <input type="checkbox" name="xp-awards" value="5" checked>
-                                                    <span>Participation (5 XP)</span>
-                                                </label>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-unit-size">Unit Size</label>
+                                            <div class="unit-size-controls">
+                                                <input type="number" id="mini-unit-count" min="1" value="1" placeholder="Count">
+                                                <span>models in unit</span>
                                             </div>
-                                            <div class="xp-award">
-                                                <label>
-                                                    <input type="checkbox" name="xp-awards" value="1">
-                                                    <span>Slay the Warlord (1 XP)</span>
-                                                </label>
-                                            </div>
-                                            <div class="xp-award">
-                                                <label>
-                                                    <input type="checkbox" name="xp-awards" value="1">
-                                                    <span>First Blood (1 XP)</span>
-                                                </label>
-                                            </div>
-                                            <div class="xp-award">
-                                                <label>
-                                                    <input type="checkbox" name="xp-awards" value="1">
-                                                    <span>Linebreaker (1 XP)</span>
-                                                </label>
-                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" id="mini-warlord">
+                                                Can be Warlord
+                                            </label>
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group">
-                                        <label>Units Participated:</label>
-                                        <div class="units-participated" id="units-participated-list">
-                                            <!-- Units will be populated by JavaScript -->
+                                    <div class="tab-content" id="painting-tab" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="mini-status">Paint Status *</label>
+                                            <select id="mini-status" required>
+                                                <option value="unpainted">Unpainted</option>
+                                                <option value="primed">Primed</option>
+                                                <option value="wip">Work in Progress</option>
+                                                <option value="painted">Painted</option>
+                                                <option value="based">Based</option>
+                                                <option value="display">Display Quality</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-paint-scheme">Paint Scheme</label>
+                                                <input type="text" id="mini-paint-scheme" placeholder="e.g., Ultramarines Blue">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-paint-hours">Painting Hours</label>
+                                                <input type="number" id="mini-paint-hours" min="0" step="0.5" placeholder="Hours spent">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-paint-notes">Painting Notes</label>
+                                            <textarea id="mini-paint-notes" placeholder="Techniques used, colors, challenges..." rows="3"></textarea>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-paint-date">Date Painted</label>
+                                            <input type="date" id="mini-paint-date">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" id="mini-favorite">
+                                                Mark as Favorite
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="advanced-tab" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="mini-source">Source/Retailer</label>
+                                            <input type="text" id="mini-source" placeholder="e.g., Games Workshop, eBay">
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-cost">Cost</label>
+                                                <div class="currency-input">
+                                                    <span>$</span>
+                                                    <input type="number" id="mini-cost" min="0" step="0.01" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-purchase-date">Purchase Date</label>
+                                                <input type="date" id="mini-purchase-date">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-storage">Storage Location</label>
+                                            <input type="text" id="mini-storage" placeholder="e.g., Display Case, Box #3">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-condition">Condition</label>
+                                            <select id="mini-condition">
+                                                <option value="new">New in Box</option>
+                                                <option value="built">Built</option>
+                                                <option value="painted">Painted</option>
+                                                <option value="damaged">Damaged</option>
+                                                <option value="restored">Restored</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-tags">Tags</label>
+                                            <input type="text" id="mini-tags" placeholder="Comma-separated tags">
                                         </div>
                                     </div>
                                     
                                     <div class="form-actions">
-                                        <button type="submit" class="imperial-btn">Record Battle</button>
+                                        <button type="submit" class="imperial-btn">Add to Collection</button>
                                         <button type="button" class="imperial-btn-secondary close-modal">Cancel</button>
                                     </div>
                                 </form>
@@ -370,15 +567,50 @@
                         </div>
                     </div>
                     
-                    <!-- Unit Details Modal -->
-                    <div class="modal-overlay" id="unit-modal-overlay" style="display: none;">
-                        <div class="modal unit-modal">
+                    <!-- Edit Miniature Modal -->
+                    <div class="modal-overlay" id="edit-mini-modal" style="display: none;">
+                        <div class="modal">
                             <div class="modal-header">
-                                <h3 id="unit-modal-title">Unit Details</h3>
+                                <h3>Edit Miniature</h3>
                                 <button class="close-modal">&times;</button>
                             </div>
-                            <div class="modal-content" id="unit-details-content">
-                                <!-- Unit details will be loaded here -->
+                            <div class="modal-content">
+                                <form id="edit-mini-form">
+                                    <!-- Form will be populated by JavaScript -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bulk Add Modal -->
+                    <div class="modal-overlay" id="bulk-add-modal" style="display: none;">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h3>Bulk Add Miniatures</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-content">
+                                <div class="bulk-add-options">
+                                    <div class="option-card" data-method="csv">
+                                        <h4>Import CSV</h4>
+                                        <p>Upload a CSV file with your collection data</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                    <div class="option-card" data-method="template">
+                                        <h4>Use Template</h4>
+                                        <p>Add multiple models using a pre-defined template</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                    <div class="option-card" data-method="quick">
+                                        <h4>Quick Add</h4>
+                                        <p>Add multiple similar models quickly</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bulk-add-content" id="bulk-add-content" style="display: none;">
+                                    <!-- Content will be loaded based on selection -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -388,8 +620,8 @@
 
         <footer class="imperial-footer">
             <div class="footer-content">
-                <p class="footer-text">"In the Emperor's name, let none survive."</p>
-                <p class="footer-subtext">Oath of the Crusader</p>
+                <p class="footer-text">"A warrior's worth is measured in deeds and steel."</p>
+                <p class="footer-subtext">Forge World Maxim</p>
             </div>
             <div class="copyright">
                 <p>© 999.M41 Imperial Archives</p>
@@ -402,6 +634,644 @@
 
     <!-- JavaScript -->
     <script src="../warhammer.js"></script>
-    <script src="campaign-tracker.js"></script>
+    <script src="collection-tracker.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Tracker - Warhammer 40k</title>
+    <link rel="stylesheet" href="../warhammer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=UnifrakturMaguntia&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">GRIMDARK ARCHIVES</h1>
+                <div class="aquila-right"></div>
+            </div>
+            <div class="page-indicator">FORGE WORLD COLLECTION</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../warhammer.html#home" class="nav-link">Main Archives</a></li>
+                    <li><a href="../warhammer.html#armies" class="nav-link">Armies</a></li>
+                    <li><a href="../warhammer.html#lore" class="nav-link">Lore</a></li>
+                    <li><a href="army-builder.html" class="nav-link">Army Builder</a></li>
+                    <li><a href="dice-roller.html" class="nav-link">Dice Roller</a></li>
+                    <li><a href="collection-tracker.html" class="nav-link active">Collection</a></li>
+                    <li><a href="tactics.html" class="nav-link">Tactics</a></li>
+                    <li><a href="campaign-tracker.html" class="nav-link">Campaign</a></li>
+                    <li><a href="rules-reference.html" class="nav-link">Rules</a></li>
+                    <li><a href="painting-guide.html" class="nav-link">Painting Guide</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="breadcrumbs">
+            <a href="../../../index.html">Home</a>
+            <span class="separator">></span>
+            <a href="../../hobbies.html">Hobbies</a>
+            <span class="separator">></span>
+            <a href="../warhammer.html">Warhammer</a>
+            <span class="separator">></span>
+            <span class="current">Collection Tracker</span>
+        </div>
+
+        <main>
+            <section class="content-section">
+                <h2 class="section-title">FORGE WORLD COLLECTION</h2>
+                
+                <div class="collection-tracker">
+                    <!-- Collection Overview -->
+                    <div class="collection-overview">
+                        <div class="overview-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">⚔️</div>
+                                <h4>Total Miniatures</h4>
+                                <span class="stat-value" id="total-minis">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🎨</div>
+                                <h4>Painted</h4>
+                                <span class="stat-value" id="painted-minis">0</span>
+                                <div class="stat-progress">
+                                    <div class="progress-fill" id="painted-progress" style="width: 0%"></div>
+                                </div>
+                                <span class="stat-percentage" id="painted-percentage">0%</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🏆</div>
+                                <h4>Armies</h4>
+                                <span class="stat-value" id="total-armies">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">💰</div>
+                                <h4>Points Value</h4>
+                                <span class="stat-value" id="total-points">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <h4>Power Level</h4>
+                                <span class="stat-value" id="total-pl">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⏱️</div>
+                                <h4>Painting Hours</h4>
+                                <span class="stat-value" id="total-hours">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <div class="actions-header">
+                            <h3>Quick Actions</h3>
+                            <button id="import-collection" class="imperial-btn-secondary">Import</button>
+                        </div>
+                        <div class="actions-grid">
+                            <button id="add-miniature-btn" class="action-btn">
+                                <span class="action-icon">➕</span>
+                                <span class="action-text">Add Miniature</span>
+                            </button>
+                            <button id="add-unit-btn" class="action-btn">
+                                <span class="action-icon">⚔️</span>
+                                <span class="action-text">Add Unit</span>
+                            </button>
+                            <button id="bulk-add-btn" class="action-btn">
+                                <span class="action-icon">📦</span>
+                                <span class="action-text">Bulk Add</span>
+                            </button>
+                            <button id="generate-report-btn" class="action-btn">
+                                <span class="action-icon">📊</span>
+                                <span class="action-text">Generate Report</span>
+                            </button>
+                            <button id="export-collection-btn" class="action-btn">
+                                <span class="action-icon">📤</span>
+                                <span class="action-text">Export Collection</span>
+                            </button>
+                            <button id="backup-collection-btn" class="action-btn">
+                                <span class="action-icon">💾</span>
+                                <span class="action-text">Backup</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Collection Controls -->
+                    <div class="collection-controls">
+                        <div class="controls-header">
+                            <h3>Filter & Sort</h3>
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid">
+                                    <span>🟦</span> Grid
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <span>📋</span> List
+                                </button>
+                                <button class="view-btn" data-view="table">
+                                    <span>📊</span> Table
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="controls-content">
+                            <div class="filter-group">
+                                <label for="faction-filter">Faction:</label>
+                                <select id="faction-filter" multiple>
+                                    <option value="all" selected>All Factions</option>
+                                    <option value="space_marines">Space Marines</option>
+                                    <option value="imperial_guard">Imperial Guard</option>
+                                    <option value="chaos">Chaos Space Marines</option>
+                                    <option value="necrons">Necrons</option>
+                                    <option value="orks">Orks</option>
+                                    <option value="tyranids">Tyranids</option>
+                                    <option value="aeldari">Aeldari</option>
+                                    <option value="tau">T'au Empire</option>
+                                    <option value="custodes">Adeptus Custodes</option>
+                                    <option value="sisters">Adepta Sororitas</option>
+                                    <option value="knights">Imperial Knights</option>
+                                    <option value="chaos_knights">Chaos Knights</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="status-filter">Paint Status:</label>
+                                <select id="status-filter">
+                                    <option value="all">All Status</option>
+                                    <option value="unpainted">Unpainted</option>
+                                    <option value="primed">Primed</option>
+                                    <option value="wip">Work in Progress</option>
+                                    <option value="painted">Painted</option>
+                                    <option value="based">Based</option>
+                                    <option value="display">Display Quality</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="type-filter">Model Type:</label>
+                                <select id="type-filter">
+                                    <option value="all">All Types</option>
+                                    <option value="infantry">Infantry</option>
+                                    <option value="vehicle">Vehicle</option>
+                                    <option value="monster">Monster</option>
+                                    <option value="character">Character</option>
+                                    <option value="flyer">Flyer</option>
+                                    <option value="fortification">Fortification</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="sort-by">Sort By:</label>
+                                <select id="sort-by">
+                                    <option value="date_added">Date Added</option>
+                                    <option value="name">Name</option>
+                                    <option value="faction">Faction</option>
+                                    <option value="points">Points</option>
+                                    <option value="pl">Power Level</option>
+                                    <option value="status">Paint Status</option>
+                                </select>
+                                <select id="sort-order">
+                                    <option value="desc">Descending</option>
+                                    <option value="asc">Ascending</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group search-group">
+                                <label for="collection-search">Search:</label>
+                                <div class="search-box">
+                                    <input type="text" id="collection-search" placeholder="Search collection...">
+                                    <button id="clear-search">×</button>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button id="apply-filters" class="imperial-btn">Apply Filters</button>
+                                <button id="reset-filters" class="imperial-btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Collection Display -->
+                    <div class="collection-display">
+                        <div class="display-header">
+                            <h3>Your Collection <span class="item-count" id="display-count">(0 items)</span></h3>
+                            <div class="display-actions">
+                                <button id="select-all" class="action-btn-small">Select All</button>
+                                <button id="deselect-all" class="action-btn-small">Deselect All</button>
+                                <button id="batch-update" class="action-btn-small">Batch Update</button>
+                                <button id="delete-selected" class="action-btn-small danger">Delete Selected</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Grid View -->
+                        <div class="collection-grid active" id="grid-view">
+                            <div class="grid-container" id="miniature-grid">
+                                <!-- Miniatures will be populated here -->
+                                <div class="empty-state">
+                                    <div class="empty-icon">🎨</div>
+                                    <h4>Your Collection is Empty</h4>
+                                    <p>Start by adding your first miniature!</p>
+                                    <button id="add-first-mini" class="imperial-btn">Add Your First Miniature</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- List View -->
+                        <div class="collection-list" id="list-view" style="display: none;">
+                            <table class="collection-table" id="list-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="select-all-checkbox"></th>
+                                        <th>Name</th>
+                                        <th>Faction</th>
+                                        <th>Type</th>
+                                        <th>Points</th>
+                                        <th>PL</th>
+                                        <th>Status</th>
+                                        <th>Date Added</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list-table-body">
+                                    <!-- List items will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Table View -->
+                        <div class="collection-table-view" id="table-view" style="display: none;">
+                            <div class="table-container" id="table-container">
+                                <!-- Detailed table will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wishlist -->
+                    <div class="wishlist-section">
+                        <div class="wishlist-header">
+                            <h3>Wishlist & Backlog</h3>
+                            <button id="add-to-wishlist" class="imperial-btn">Add to Wishlist</button>
+                        </div>
+                        
+                        <div class="wishlist-content">
+                            <div class="wishlist-stats">
+                                <div class="wishlist-stat">
+                                    <span>Wishlist Items:</span>
+                                    <strong id="wishlist-count">0</strong>
+                                </div>
+                                <div class="wishlist-stat">
+                                    <span>Estimated Cost:</span>
+                                    <strong id="wishlist-cost">$0</strong>
+                                </div>
+                                <div class="wishlist-stat">
+                                    <span>Priority Items:</span>
+                                    <strong id="priority-count">0</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="wishlist-items" id="wishlist-items">
+                                <!-- Wishlist items will be populated here -->
+                                <div class="empty-wishlist">
+                                    <p>No items in wishlist yet.</p>
+                                    <p>Add models you plan to purchase in the future!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Painting Progress -->
+                    <div class="painting-progress-section">
+                        <div class="progress-header">
+                            <h3>Painting Progress</h3>
+                            <div class="progress-timeframe">
+                                <button class="timeframe-btn active" data-timeframe="all">All Time</button>
+                                <button class="timeframe-btn" data-timeframe="month">This Month</button>
+                                <button class="timeframe-btn" data-timeframe="week">This Week</button>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-content">
+                            <div class="progress-charts">
+                                <div class="chart-container">
+                                    <h4>Paint Status Distribution</h4>
+                                    <div class="chart" id="status-chart">
+                                        <!-- Chart will be generated by JavaScript -->
+                                    </div>
+                                </div>
+                                
+                                <div class="chart-container">
+                                    <h4>Faction Breakdown</h4>
+                                    <div class="chart" id="faction-chart">
+                                        <!-- Chart will be generated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="progress-goals">
+                                <h4>Painting Goals</h4>
+                                <div class="goals-list" id="goals-list">
+                                    <div class="goal-item">
+                                        <div class="goal-info">
+                                            <h5>Paint 10 Miniatures</h5>
+                                            <p>Complete painting 10 miniatures to a tabletop standard</p>
+                                        </div>
+                                        <div class="goal-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 30%"></div>
+                                            </div>
+                                            <span class="goal-percentage">3/10 (30%)</span>
+                                        </div>
+                                        <button class="goal-action">Update</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="add-goal">
+                                    <input type="text" id="new-goal" placeholder="Add a new painting goal...">
+                                    <button id="add-goal-btn" class="imperial-btn-small">Add Goal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modals -->
+                    <div class="modal-overlay" id="add-mini-modal" style="display: none;">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h3>Add Miniature to Collection</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-content">
+                                <form id="add-mini-form">
+                                    <div class="form-tabs">
+                                        <button type="button" class="tab-btn active" data-tab="basic">Basic Info</button>
+                                        <button type="button" class="tab-btn" data-tab="game">Game Stats</button>
+                                        <button type="button" class="tab-btn" data-tab="painting">Painting Info</button>
+                                        <button type="button" class="tab-btn" data-tab="advanced">Advanced</button>
+                                    </div>
+                                    
+                                    <div class="tab-content active" id="basic-tab">
+                                        <div class="form-group">
+                                            <label for="mini-name">Model Name *</label>
+                                            <input type="text" id="mini-name" placeholder="e.g., Intercessor Squad, Carnifex" required>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-faction">Faction *</label>
+                                                <select id="mini-faction" required>
+                                                    <option value="">Select Faction</option>
+                                                    <option value="space_marines">Space Marines</option>
+                                                    <option value="imperial_guard">Imperial Guard</option>
+                                                    <option value="chaos">Chaos Space Marines</option>
+                                                    <option value="necrons">Necrons</option>
+                                                    <option value="orks">Orks</option>
+                                                    <option value="tyranids">Tyranids</option>
+                                                    <option value="aeldari">Aeldari</option>
+                                                    <option value="tau">T'au Empire</option>
+                                                    <option value="custodes">Adeptus Custodes</option>
+                                                    <option value="sisters">Adepta Sororitas</option>
+                                                    <option value="knights">Imperial Knights</option>
+                                                    <option value="chaos_knights">Chaos Knights</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-subfaction">Subfaction</label>
+                                                <input type="text" id="mini-subfaction" placeholder="e.g., Ultramarines, Cadians">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-type">Model Type *</label>
+                                            <select id="mini-type" required>
+                                                <option value="">Select Type</option>
+                                                <option value="infantry">Infantry</option>
+                                                <option value="vehicle">Vehicle</option>
+                                                <option value="monster">Monster</option>
+                                                <option value="character">Character</option>
+                                                <option value="flyer">Flyer</option>
+                                                <option value="fortification">Fortification</option>
+                                                <option value="terrain">Terrain</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-description">Description</label>
+                                            <textarea id="mini-description" placeholder="Add notes about this model..." rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="game-tab" style="display: none;">
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-points">Points Value</label>
+                                                <input type="number" id="mini-points" min="0" step="5" placeholder="e.g., 100">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-pl">Power Level</label>
+                                                <input type="number" id="mini-pl" min="0" step="1" placeholder="e.g., 5">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-role">Battlefield Role</label>
+                                            <select id="mini-role">
+                                                <option value="">Select Role</option>
+                                                <option value="hq">HQ</option>
+                                                <option value="troops">Troops</option>
+                                                <option value="elites">Elites</option>
+                                                <option value="fast-attack">Fast Attack</option>
+                                                <option value="heavy-support">Heavy Support</option>
+                                                <option value="flyer">Flyer</option>
+                                                <option value="transport">Transport</option>
+                                                <option value="fortification">Fortification</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-unit-size">Unit Size</label>
+                                            <div class="unit-size-controls">
+                                                <input type="number" id="mini-unit-count" min="1" value="1" placeholder="Count">
+                                                <span>models in unit</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" id="mini-warlord">
+                                                Can be Warlord
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="painting-tab" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="mini-status">Paint Status *</label>
+                                            <select id="mini-status" required>
+                                                <option value="unpainted">Unpainted</option>
+                                                <option value="primed">Primed</option>
+                                                <option value="wip">Work in Progress</option>
+                                                <option value="painted">Painted</option>
+                                                <option value="based">Based</option>
+                                                <option value="display">Display Quality</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-paint-scheme">Paint Scheme</label>
+                                                <input type="text" id="mini-paint-scheme" placeholder="e.g., Ultramarines Blue">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-paint-hours">Painting Hours</label>
+                                                <input type="number" id="mini-paint-hours" min="0" step="0.5" placeholder="Hours spent">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-paint-notes">Painting Notes</label>
+                                            <textarea id="mini-paint-notes" placeholder="Techniques used, colors, challenges..." rows="3"></textarea>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-paint-date">Date Painted</label>
+                                            <input type="date" id="mini-paint-date">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" id="mini-favorite">
+                                                Mark as Favorite
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="advanced-tab" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="mini-source">Source/Retailer</label>
+                                            <input type="text" id="mini-source" placeholder="e.g., Games Workshop, eBay">
+                                        </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="mini-cost">Cost</label>
+                                                <div class="currency-input">
+                                                    <span>$</span>
+                                                    <input type="number" id="mini-cost" min="0" step="0.01" placeholder="0.00">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="mini-purchase-date">Purchase Date</label>
+                                                <input type="date" id="mini-purchase-date">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-storage">Storage Location</label>
+                                            <input type="text" id="mini-storage" placeholder="e.g., Display Case, Box #3">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-condition">Condition</label>
+                                            <select id="mini-condition">
+                                                <option value="new">New in Box</option>
+                                                <option value="built">Built</option>
+                                                <option value="painted">Painted</option>
+                                                <option value="damaged">Damaged</option>
+                                                <option value="restored">Restored</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="mini-tags">Tags</label>
+                                            <input type="text" id="mini-tags" placeholder="Comma-separated tags">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="imperial-btn">Add to Collection</button>
+                                        <button type="button" class="imperial-btn-secondary close-modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Edit Miniature Modal -->
+                    <div class="modal-overlay" id="edit-mini-modal" style="display: none;">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h3>Edit Miniature</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-content">
+                                <form id="edit-mini-form">
+                                    <!-- Form will be populated by JavaScript -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bulk Add Modal -->
+                    <div class="modal-overlay" id="bulk-add-modal" style="display: none;">
+                        <div class="modal">
+                            <div class="modal-header">
+                                <h3>Bulk Add Miniatures</h3>
+                                <button class="close-modal">&times;</button>
+                            </div>
+                            <div class="modal-content">
+                                <div class="bulk-add-options">
+                                    <div class="option-card" data-method="csv">
+                                        <h4>Import CSV</h4>
+                                        <p>Upload a CSV file with your collection data</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                    <div class="option-card" data-method="template">
+                                        <h4>Use Template</h4>
+                                        <p>Add multiple models using a pre-defined template</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                    <div class="option-card" data-method="quick">
+                                        <h4>Quick Add</h4>
+                                        <p>Add multiple similar models quickly</p>
+                                        <button class="select-method">Select</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bulk-add-content" id="bulk-add-content" style="display: none;">
+                                    <!-- Content will be loaded based on selection -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <p class="footer-text">"A warrior's worth is measured in deeds and steel."</p>
+                <p class="footer-subtext">Forge World Maxim</p>
+            </div>
+            <div class="copyright">
+                <p>© 999.M41 Imperial Archives</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+
+    <!-- JavaScript -->
+    <script src="../warhammer.js"></script>
+    <script src="collection-tracker.js"></script>
 </body>
 </html>

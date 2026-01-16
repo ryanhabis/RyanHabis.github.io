@@ -1,51 +1,914 @@
-<section id="painting-guide" class="content-section">
-    <h2 class="section-title">ARTISAN'S PAINTING GUIDE</h2>
-    <div class="painting-guide">
-        <div class="color-picker">
-            <h3>Citadel Paint Selector</h3>
-            <div class="color-grid" id="color-grid">
-                <!-- Paint colors -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer 40k - Painting Guide</title>
+    <link rel="stylesheet" href="../warhammer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">ARTISAN'S FORGE</h1>
+                <div class="aquila-right"></div>
             </div>
-            <div class="selected-colors">
-                <h4>Your Palette</h4>
-                <div id="palette"></div>
-            </div>
+            <div class="page-indicator">Painting Guide</div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../factions/index.html" class="nav-link">Factions</a></li>
+                    <li><a href="../army-builder/index.html" class="nav-link">Army Builder</a></li>
+                    <li><a href="../dice-roller/index.html" class="nav-link">Dice Roller</a></li>
+                    <li><a href="../additional/collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="../campaign-tracker/index.html" class="nav-link">Campaigns</a></li>
+                    <li><a href="../tactics/index.html" class="nav-link">Tactics</a></li>
+                    <li><a href="../painting/index.html" class="nav-link active">Painting</a></li>
+                    <li><a href="../additional/rules-reference.html" class="nav-link">Rules</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="../additional/index.html">Additional Tools</a>
+            <span class="separator">/</span>
+            <span class="current">Painting Guide</span>
         </div>
         
-        <div class="painting-tutorials">
-            <h3>Technique Tutorials</h3>
-            <div class="tutorials-grid">
-                <div class="tutorial-card">
-                    <div class="tutorial-thumbnail basecoating"></div>
-                    <h4>Basecoating</h4>
-                    <p>Learn proper base coat application</p>
+        <!-- Hero Section -->
+        <section class="hero-section parchment-bg">
+            <h2>MASTER OF THE ARTISAN'S FORGE</h2>
+            <div class="quote">"A painted miniature is a prayer to the Emperor"</div>
+            <div class="skull-divider"></div>
+            <p class="intro-text">
+                Master the art of miniature painting with our comprehensive guide. Explore paint colors, 
+                learn techniques, generate paint recipes, and track your painting progress.
+            </p>
+        </section>
+        
+        <!-- Painting Guide Section -->
+        <section id="painting-guide" class="content-section">
+            <h2 class="section-title">ARTISAN'S PAINTING GUIDE</h2>
+            
+            <!-- Quick Tools -->
+            <div class="painting-tools">
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h4>Paint Calculator</h4>
+                    <p>Calculate paint needed for your army</p>
+                    <button class="imperial-btn-small" id="open-calculator">Open</button>
                 </div>
-                <div class="tutorial-card">
-                    <div class="tutorial-thumbnail layering"></div>
-                    <h4>Layering</h4>
-                    <p>Smooth color transitions</p>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Painting Timer</h4>
+                    <p>Track your painting sessions</p>
+                    <button class="imperial-btn-small" id="open-timer">Start Timer</button>
                 </div>
-                <div class="tutorial-card">
-                    <div class="tutorial-thumbnail washing"></div>
-                    <h4>Washing</h4>
-                    <p>Adding depth with washes</p>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-list-check"></i>
+                    </div>
+                    <h4>Progress Tracker</h4>
+                    <p>Track your painting projects</p>
+                    <button class="imperial-btn-small" id="open-progress">View</button>
                 </div>
-                <div class="tutorial-card">
-                    <div class="tutorial-thumbnail highlighting"></div>
-                    <h4>Highlighting</h4>
-                    <p>Edge highlighting techniques</p>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h4>Download Guides</h4>
+                    <p>PDF painting tutorials</p>
+                    <button class="imperial-btn-small" id="download-guides">Download</button>
                 </div>
             </div>
-        </div>
+            
+            <!-- Color Picker Section -->
+            <div class="color-picker-section">
+                <div class="section-header">
+                    <h3>Citadel Paint Selector</h3>
+                    <div class="paint-brands">
+                        <button class="brand-btn active" data-brand="citadel">Citadel</button>
+                        <button class="brand-btn" data-brand="vallejo">Vallejo</button>
+                        <button class="brand-btn" data-brand="army-painter">Army Painter</button>
+                        <button class="brand-btn" data-brand="scale75">Scale75</button>
+                    </div>
+                </div>
+                
+                <div class="color-controls">
+                    <div class="search-colors">
+                        <input type="text" id="paint-search" placeholder="Search paints...">
+                        <select id="color-type">
+                            <option value="all">All Types</option>
+                            <option value="base">Base Paints</option>
+                            <option value="layer">Layer Paints</option>
+                            <option value="shade">Shade Paints</option>
+                            <option value="contrast">Contrast Paints</option>
+                            <option value="dry">Dry Paints</option>
+                            <option value="technical">Technical Paints</option>
+                            <option value="air">Air Paints</option>
+                        </select>
+                        <select id="color-group">
+                            <option value="all">All Colors</option>
+                            <option value="reds">Reds</option>
+                            <option value="blues">Blues</option>
+                            <option value="greens">Greens</option>
+                            <option value="yellows">Yellows</option>
+                            <option value="purples">Purples</option>
+                            <option value="browns">Browns</option>
+                            <option value="metals">Metals</option>
+                            <option value="skins">Skin Tones</option>
+                            <option value="neutrals">Neutrals</option>
+                        </select>
+                    </div>
+                    
+                    <div class="color-actions">
+                        <button id="clear-palette" class="imperial-btn-small">
+                            <i class="fas fa-trash"></i> Clear Palette
+                        </button>
+                        <button id="save-palette" class="imperial-btn-small">
+                            <i class="fas fa-save"></i> Save Palette
+                        </button>
+                        <button id="load-palette" class="imperial-btn-small">
+                            <i class="fas fa-folder-open"></i> Load Palette
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-selector">
+                    <div class="color-grid" id="color-grid">
+                        <!-- Paint colors will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="selected-colors">
+                        <div class="palette-header">
+                            <h4>Your Palette</h4>
+                            <span id="palette-count">0 colors</span>
+                        </div>
+                        <div class="palette-container">
+                            <div id="palette" class="palette">
+                                <!-- Selected colors will appear here -->
+                                <div class="empty-palette">
+                                    <i class="fas fa-palette"></i>
+                                    <p>No colors selected</p>
+                                    <p>Click paint swatches to add them to your palette</p>
+                                </div>
+                            </div>
+                            <div class="palette-actions">
+                                <button id="generate-recipe" class="imperial-btn" disabled>
+                                    <i class="fas fa-magic"></i> Generate Recipe
+                                </button>
+                                <button id="export-palette" class="imperial-btn-secondary" disabled>
+                                    <i class="fas fa-share"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="color-info" id="color-info" style="display: none;">
+                    <!-- Color details will appear here -->
+                </div>
+            </div>
+            
+            <!-- Painting Tutorials -->
+            <div class="painting-tutorials">
+                <div class="section-header">
+                    <h3>Technique Tutorials</h3>
+                    <div class="tutorial-filters">
+                        <button class="filter-btn active" data-difficulty="all">All Levels</button>
+                        <button class="filter-btn" data-difficulty="beginner">Beginner</button>
+                        <button class="filter-btn" data-difficulty="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-difficulty="advanced">Advanced</button>
+                    </div>
+                </div>
+                
+                <div class="tutorials-grid">
+                    <!-- Basecoating -->
+                    <div class="tutorial-card" data-difficulty="beginner">
+                        <div class="tutorial-thumbnail basecoating">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge beginner">Beginner</span>
+                                <span class="duration">15 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Basecoating</h4>
+                            <p class="tutorial-description">Learn proper base coat application for smooth, even coverage</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Quick
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Basic Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="basecoating">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Layering -->
+                    <div class="tutorial-card" data-difficulty="intermediate">
+                        <div class="tutorial-thumbnail layering">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge intermediate">Intermediate</span>
+                                <span class="duration">25 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Layering</h4>
+                            <p class="tutorial-description">Master smooth color transitions and blending techniques</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Medium
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Detail Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="layering">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Washing -->
+                    <div class="tutorial-card" data-difficulty="beginner">
+                        <div class="tutorial-thumbnail washing">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge beginner">Beginner</span>
+                                <span class="duration">10 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Washing</h4>
+                            <p class="tutorial-description">Add depth and shadows with shade paints and washes</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Quick
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Wash Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="washing">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Highlighting -->
+                    <div class="tutorial-card" data-difficulty="intermediate">
+                        <div class="tutorial-thumbnail highlighting">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge intermediate">Intermediate</span>
+                                <span class="duration">30 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Highlighting</h4>
+                            <p class="tutorial-description">Edge highlighting and volumetric highlighting techniques</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Long
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Fine Detail
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="highlighting">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Dry Brushing -->
+                    <div class="tutorial-card" data-difficulty="beginner">
+                        <div class="tutorial-thumbnail drybrushing">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge beginner">Beginner</span>
+                                <span class="duration">12 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Dry Brushing</h4>
+                            <p class="tutorial-description">Quick highlighting and texture techniques</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Quick
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Dry Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="drybrushing">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Glazing -->
+                    <div class="tutorial-card" data-difficulty="advanced">
+                        <div class="tutorial-thumbnail glazing">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge advanced">Advanced</span>
+                                <span class="duration">45 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Glazing</h4>
+                            <p class="tutorial-description">Smooth transitions and color modulation</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Long
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Soft Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="glazing">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Weathering -->
+                    <div class="tutorial-card" data-difficulty="intermediate">
+                        <div class="tutorial-thumbnail weathering">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge intermediate">Intermediate</span>
+                                <span class="duration">35 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>Weathering</h4>
+                            <p class="tutorial-description">Battle damage, rust, and wear effects</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Medium
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Sponge & Brush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="weathering">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Object Source Lighting -->
+                    <div class="tutorial-card" data-difficulty="advanced">
+                        <div class="tutorial-thumbnail osl">
+                            <div class="tutorial-overlay">
+                                <span class="difficulty-badge advanced">Advanced</span>
+                                <span class="duration">60 min</span>
+                            </div>
+                        </div>
+                        <div class="tutorial-content">
+                            <h4>OSL (Object Source Lighting)</h4>
+                            <p class="tutorial-description">Create realistic light effects on miniatures</p>
+                            <div class="tutorial-meta">
+                                <span class="meta-item">
+                                    <i class="fas fa-clock"></i> Expert
+                                </span>
+                                <span class="meta-item">
+                                    <i class="fas fa-tools"></i> Airbrush
+                                </span>
+                            </div>
+                            <button class="tutorial-btn" data-tutorial="osl">
+                                <i class="fas fa-play"></i> Watch Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recipe Generator -->
+            <div class="recipe-generator-section">
+                <div class="section-header">
+                    <h3>Paint Recipe Generator</h3>
+                    <div class="recipe-actions">
+                        <button id="random-recipe" class="imperial-btn-small">
+                            <i class="fas fa-random"></i> Random Recipe
+                        </button>
+                        <button id="save-recipe" class="imperial-btn-small">
+                            <i class="fas fa-bookmark"></i> Save Recipe
+                        </button>
+                        <button id="share-recipe" class="imperial-btn-small">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="recipe-controls">
+                    <div class="recipe-selector">
+                        <select id="recipe-faction">
+                            <option value="">Select Faction Scheme</option>
+                            <option value="ultramarines">Ultramarines (Blue)</option>
+                            <option value="blood_angels">Blood Angels (Red)</option>
+                            <option value="dark_angels">Dark Angels (Green)</option>
+                            <option value="imperial_fists">Imperial Fists (Yellow)</option>
+                            <option value="black_templars">Black Templars (Black/White)</option>
+                            <option value="space_wolves">Space Wolves (Grey/Blue)</option>
+                            <option value="cadian">Cadian Imperial Guard</option>
+                            <option value="catachan">Catachan Jungle Fighters</option>
+                            <option value="death_guard">Death Guard (Nurgle)</option>
+                            <option value="thousand_sons">Thousand Sons (Blue/Gold)</option>
+                            <option value="necron">Necron Warriors</option>
+                            <option value="ork_green">Ork Skin (Green)</option>
+                            <option value="tau">T'au Sept</option>
+                            <option value="tyranid">Tyranid Carapace</option>
+                            <option value="aeldari">Aeldari Armor</option>
+                        </select>
+                        
+                        <select id="recipe-quality">
+                            <option value="tabletop">Tabletop Standard</option>
+                            <option value="parade">Parade Ready</option>
+                            <option value="display">Display Quality</option>
+                        </select>
+                        
+                        <select id="recipe-speed">
+                            <option value="fast">Fast Painting</option>
+                            <option value="balanced">Balanced</option>
+                            <option value="detailed">Detailed</option>
+                        </select>
+                        
+                        <button id="generate-faction-recipe" class="imperial-btn">
+                            <i class="fas fa-cogs"></i> Generate Recipe
+                        </button>
+                    </div>
+                    
+                    <div class="custom-recipe">
+                        <h4>Custom Recipe Builder</h4>
+                        <div class="custom-controls">
+                            <input type="text" id="recipe-name" placeholder="Recipe Name">
+                            <button id="add-step" class="imperial-btn-small">
+                                <i class="fas fa-plus"></i> Add Step
+                            </button>
+                            <button id="clear-recipe" class="imperial-btn-small">
+                                <i class="fas fa-trash"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-result" id="recipe-result">
+                    <!-- Generated recipe will appear here -->
+                    <div class="empty-recipe">
+                        <i class="fas fa-flask"></i>
+                        <h4>No Recipe Generated</h4>
+                        <p>Select a faction or build a custom recipe to get started</p>
+                    </div>
+                </div>
+                
+                <div class="saved-recipes">
+                    <h4>Saved Recipes</h4>
+                    <div class="recipes-list" id="saved-recipes-list">
+                        <!-- Saved recipes will appear here -->
+                        <div class="empty-saved">
+                            <p>No saved recipes yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Painting Progress Tracker -->
+            <div class="progress-tracker">
+                <div class="section-header">
+                    <h3>Painting Progress Tracker</h3>
+                    <button id="add-project" class="imperial-btn">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
+                </div>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Painting projects will appear here -->
+                    <div class="empty-projects">
+                        <i class="fas fa-paint-brush"></i>
+                        <h4>No Painting Projects</h4>
+                        <p>Start by adding your first painting project</p>
+                        <button class="imperial-btn-small" id="add-first-project">Add First Project</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reference Images -->
+            <div class="reference-gallery">
+                <h3>Reference Gallery</h3>
+                <div class="gallery-filters">
+                    <button class="gallery-filter active" data-category="all">All</button>
+                    <button class="gallery-filter" data-category="space_marines">Space Marines</button>
+                    <button class="gallery-filter" data-category="imperial_guard">Imperial Guard</button>
+                    <button class="gallery-filter" data-category="chaos">Chaos</button>
+                    <button class="gallery-filter" data-category="xenos">Xenos</button>
+                    <button class="gallery-filter" data-category="vehicles">Vehicles</button>
+                    <button class="gallery-filter" data-category="bases">Bases</button>
+                </div>
+                
+                <div class="gallery-grid" id="reference-gallery">
+                    <!-- Reference images will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
         
-        <div class="recipe-generator">
-            <h3>Paint Recipe Generator</h3>
-            <select id="recipe-faction">
-                <option value="">Select Faction Scheme</option>
-            </select>
-            <div class="recipe-result" id="recipe-result">
-                <!-- Generated paint steps -->
+        <!-- Footer -->
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    "THE ART OF WAR IS PAINTED IN BLOOD AND GOLD"
+                </div>
+                <div class="footer-subtext">
+                    Artisan's Painting Guide v1.0
+                </div>
+            </div>
+            <div class="copyright">
+                © 2024 Games Workshop. Citadel, Games Workshop, and Warhammer are trademarks of Games Workshop Limited.
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    
+    <!-- Paint Calculator Modal -->
+    <div id="calculator-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Paint Calculator</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="army-size">Army Size (points)</label>
+                        <input type="number" id="army-size" min="500" max="10000" value="2000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="miniature-count">Number of Miniatures</label>
+                        <input type="number" id="miniature-count" min="1" max="500" value="50">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paint-type">Primary Paint Type</label>
+                        <select id="paint-type">
+                            <option value="base">Base Paints</option>
+                            <option value="contrast">Contrast Paints</option>
+                            <option value="air">Air Paints</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="coverage">Desired Coverage</label>
+                        <select id="coverage">
+                            <option value="thin">Thin Coats (3+ coats)</option>
+                            <option value="standard">Standard (2 coats)</option>
+                            <option value="thick">Thick Coats (1 coat)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calculator-result">
+                        <h4>Estimated Paint Needed:</h4>
+                        <div class="result-item">
+                            <span>Base Paints:</span>
+                            <strong id="base-paint">5-7 pots</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>Layer Paints:</span>
+                            <strong id="layer-paint">3-5 pots</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>Shade Paints:</span>
+                            <strong id="shade-paint">2-3 pots</strong>
+                        </div>
+                        <div class="result-item">
+                            <span>Estimated Cost:</span>
+                            <strong id="paint-cost">$75-$125</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button id="calculate-paint" class="imperial-btn">Calculate</button>
+                        <button class="imperial-btn-secondary close-modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+    
+    <!-- Painting Timer Modal -->
+    <div id="timer-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Painting Session Timer</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="timer-display">
+                    <div class="time" id="timer-display">00:00:00</div>
+                    <div class="timer-controls">
+                        <button id="start-timer" class="imperial-btn">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button id="pause-timer" class="imperial-btn-secondary" disabled>
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button id="reset-timer" class="imperial-btn-clear">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="session-info">
+                    <div class="form-group">
+                        <label for="session-project">Project Name</label>
+                        <input type="text" id="session-project" placeholder="e.g., Ultramarines Intercessors">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="session-goal">Session Goal</label>
+                        <input type="text" id="session-goal" placeholder="e.g., Base coat 5 models">
+                    </div>
+                </div>
+                
+                <div class="session-history">
+                    <h4>Session History</h4>
+                    <div class="history-list" id="session-history">
+                        <!-- Session history will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tutorial Modal -->
+    <div id="tutorial-modal" class="modal-overlay" style="display: none;">
+        <div class="modal wide-modal">
+            <div class="modal-header">
+                <h3 id="tutorial-title">Painting Tutorial</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="tutorial-player">
+                    <div class="video-placeholder" id="tutorial-video">
+                        <!-- Video or tutorial content -->
+                        <div class="video-overlay">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Tutorial Video Player</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-info">
+                        <div class="tutorial-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-clock"></i> <span id="tutorial-duration">15 minutes</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-signal"></i> <span id="tutorial-difficulty">Beginner</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-tools"></i> <span id="tutorial-tools">Basic Brush</span>
+                            </span>
+                        </div>
+                        
+                        <div class="tutorial-description-full">
+                            <p id="tutorial-description">Full tutorial description will appear here...</p>
+                        </div>
+                        
+                        <div class="tutorial-materials">
+                            <h5>Required Materials</h5>
+                            <ul id="tutorial-materials">
+                                <!-- Materials list -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-steps">
+                    <h4>Step by Step Guide</h4>
+                    <div class="steps-container" id="tutorial-steps">
+                        <!-- Steps will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Project Modal -->
+    <div id="project-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Painting Project</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <form id="project-form">
+                    <div class="form-group">
+                        <label for="project-name">Project Name *</label>
+                        <input type="text" id="project-name" required placeholder="e.g., Blood Angels Army">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-faction">Faction</label>
+                            <select id="project-faction">
+                                <option value="">Select Faction</option>
+                                <option value="space_marines">Space Marines</option>
+                                <option value="imperial_guard">Imperial Guard</option>
+                                <option value="chaos">Chaos Space Marines</option>
+                                <option value="aeldari">Aeldari</option>
+                                <option value="ork">Orks</option>
+                                <option value="necron">Necrons</option>
+                                <option value="tyranid">Tyranids</option>
+                                <option value="tau">T'au Empire</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project-status">Status</label>
+                            <select id="project-status">
+                                <option value="planning">Planning</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="paused">Paused</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-minis">Number of Miniatures</label>
+                            <input type="number" id="project-minis" min="1" value="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="project-points">Points Value</label>
+                            <input type="number" id="project-points" min="0" placeholder="Optional">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-deadline">Target Completion Date</label>
+                        <input type="date" id="project-deadline">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-notes">Notes</label>
+                        <textarea id="project-notes" rows="3" placeholder="Project notes, color scheme, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="imperial-btn">Save Project</button>
+                        <button type="button" class="imperial-btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i> Back to Top
+    </button>
+    
+    <!-- JavaScript -->
+    <script src="painting-guide.js"></script>
+    <script>
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        
+        // Initialize painting guide
+        document.addEventListener('DOMContentLoaded', () => {
+            const paintingGuide = new PaintingGuide();
+            window.paintingGuide = paintingGuide;
+            
+            // Open calculator modal
+            document.getElementById('open-calculator').addEventListener('click', () => {
+                document.getElementById('calculator-modal').style.display = 'flex';
+            });
+            
+            // Open timer modal
+            document.getElementById('open-timer').addEventListener('click', () => {
+                document.getElementById('timer-modal').style.display = 'flex';
+            });
+            
+            // Add project modal
+            document.getElementById('add-project').addEventListener('click', () => {
+                document.getElementById('project-modal').style.display = 'flex';
+            });
+            
+            document.getElementById('add-first-project').addEventListener('click', () => {
+                document.getElementById('project-modal').style.display = 'flex';
+            });
+            
+            // Close all modals
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal-overlay');
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Modal overlay click to close
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Tutorial buttons
+            document.querySelectorAll('.tutorial-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tutorial = this.dataset.tutorial;
+                    paintingGuide.openTutorial(tutorial);
+                });
+            });
+            
+            // Tutorial filters
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter tutorials
+                    const difficulty = this.dataset.difficulty;
+                    paintingGuide.filterTutorials(difficulty);
+                });
+            });
+            
+            // Gallery filters
+            document.querySelectorAll('.gallery-filter').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.gallery-filter').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Filter gallery
+                    const category = this.dataset.category;
+                    paintingGuide.filterGallery(category);
+                });
+            });
+            
+            // Paint brands
+            document.querySelectorAll('.brand-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.brand-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Load paints for selected brand
+                    const brand = this.dataset.brand;
+                    paintingGuide.loadPaintBrand(brand);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,50 +1,646 @@
-<section id="collection" class="content-section">
-    <h2 class="section-title">FORGE WORLD COLLECTION</h2>
-    <div class="collection-tracker">
-        <div class="collection-stats">
-            <div class="stat-card">
-                <h4>Total Miniatures</h4>
-                <span class="stat-value" id="total-minis">0</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warhammer 40k Collection Tracker</title>
+    <link rel="stylesheet" href="../warhammer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;500;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="grimdark-overlay"></div>
+    <div class="scan-line"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="aquila-left"></div>
+                <h1 class="title">FORGE WORLD</h1>
+                <div class="aquila-right"></div>
             </div>
-            <div class="stat-card">
-                <h4>Painted</h4>
-                <span class="stat-value" id="painted-minis">0</span>
-            </div>
-            <div class="stat-card">
-                <h4>Armies</h4>
-                <span class="stat-value" id="total-armies">0</span>
-            </div>
-            <div class="stat-card">
-                <h4>Points Value</h4>
-                <span class="stat-value" id="total-points">0</span>
-            </div>
+            <div class="page-indicator">Collection Tracker</div>
+            
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../warhammer.html#home" class="nav-link">Main Archives</a></li>
+                    <li><a href="../warhammer.html#armies" class="nav-link">Armies</a></li>
+                    <li><a href="../warhammer.html#lore" class="nav-link">Lore</a></li>
+                    <li><a href="army-builder.html" class="nav-link active">Army Builder</a></li>
+                    <li><a href="dice-roller.html" class="nav-link">Dice Roller</a></li>
+                    <li><a href="collection-tracker.html" class="nav-link">Collection</a></li>
+                    <li><a href="tactics.html" class="nav-link">Tactics</a></li>
+                    <li><a href="campaign-tracker.html" class="nav-link">Campaign</a></li>
+                    <li><a href="rules-reference.html" class="nav-link">Rules</a></li>
+                    <li><a href="painting-guide.html" class="nav-link">Painting Guide</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="../additional/index.html">Additional Tools</a>
+            <span class="separator">/</span>
+            <span class="current">Collection Tracker</span>
         </div>
         
-        <div class="add-miniature">
-            <h3>Add to Collection</h3>
-            <form id="miniature-form">
-                <input type="text" placeholder="Unit Name" required>
-                <select id="mini-faction" required>
-                    <option value="">Select Faction</option>
-                    <!-- Options -->
-                </select>
-                <input type="number" placeholder="Points Value" min="0">
-                <select id="paint-status">
-                    <option value="unpainted">Unpainted</option>
-                    <option value="wip">WIP</option>
-                    <option value="painted">Painted</option>
-                </select>
-                <button type="submit">Add Miniature</button>
-            </form>
-        </div>
+        <!-- Hero Section -->
+        <section class="hero-section parchment-bg">
+            <h2>FORGE OF THE OMNISSIAH</h2>
+            <div class="quote">"A painted miniature is a prayer to the Emperor"</div>
+            <div class="skull-divider"></div>
+            <p class="intro-text">
+                Track your entire Warhammer 40k collection, from freshly spruced miniatures to fully painted armies. 
+                Monitor your progress, set painting goals, and manage your wishlist of future acquisitions.
+            </p>
+        </section>
         
-        <div class="collection-view">
-            <div class="collection-filters">
-                <!-- Filter options -->
+        <!-- Collection Tracker Section -->
+        <section id="collection" class="content-section">
+            <h2 class="section-title">FORGE WORLD COLLECTION</h2>
+            
+            <!-- Quick Stats -->
+            <div class="collection-stats">
+                <div class="stat-card">
+                    <h4>Total Miniatures</h4>
+                    <span class="stat-value" id="total-minis">0</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Painted</h4>
+                    <span class="stat-value" id="painted-minis">0</span>
+                    <div class="paint-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="painted-progress"></div>
+                        </div>
+                        <span id="painted-percentage">0%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Armies</h4>
+                    <span class="stat-value" id="total-armies">0</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Points Value</h4>
+                    <span class="stat-value" id="total-points">0</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Power Level</h4>
+                    <span class="stat-value" id="total-pl">0</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Painting Hours</h4>
+                    <span class="stat-value" id="total-hours">0</span>
+                </div>
             </div>
-            <div class="miniature-grid" id="miniature-grid">
-                <!-- Collection items -->
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <button id="add-miniature-btn" class="imperial-btn">
+                    <i class="fas fa-plus"></i> Add Miniature
+                </button>
+                <button id="add-unit-btn" class="imperial-btn-secondary">
+                    <i class="fas fa-users"></i> Add Unit
+                </button>
+                <button id="bulk-add-btn" class="imperial-btn-secondary">
+                    <i class="fas fa-layer-group"></i> Bulk Add
+                </button>
+                <button id="generate-report-btn" class="imperial-btn-secondary">
+                    <i class="fas fa-chart-bar"></i> Generate Report
+                </button>
+            </div>
+            
+            <!-- Main Collection Interface -->
+            <div class="collection-interface">
+                <!-- View Controls -->
+                <div class="view-controls">
+                    <div class="view-buttons">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th"></i> Grid
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i> List
+                        </button>
+                        <button class="view-btn" data-view="table">
+                            <i class="fas fa-table"></i> Table
+                        </button>
+                    </div>
+                    
+                    <div class="display-actions">
+                        <span id="display-count">(0 items)</span>
+                        <button id="select-all" class="action-btn">
+                            <i class="fas fa-check-square"></i> Select All
+                        </button>
+                        <button id="deselect-all" class="action-btn">
+                            <i class="far fa-square"></i> Deselect All
+                        </button>
+                        <button id="delete-selected" class="action-btn danger">
+                            <i class="fas fa-trash"></i> Delete Selected
+                        </button>
+                        <button id="batch-update" class="action-btn">
+                            <i class="fas fa-edit"></i> Batch Update
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <input type="text" id="collection-search" placeholder="Search collection...">
+                        <button id="clear-search"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <select id="faction-filter">
+                            <option value="all">All Factions</option>
+                            <option value="space_marines">Space Marines</option>
+                            <option value="imperial_guard">Imperial Guard</option>
+                            <option value="chaos">Chaos Space Marines</option>
+                            <option value="aeldari">Aeldari</option>
+                            <option value="ork">Orks</option>
+                            <option value="necron">Necrons</option>
+                            <option value="tyranid">Tyranids</option>
+                            <option value="tau">T'au Empire</option>
+                        </select>
+                        
+                        <select id="status-filter">
+                            <option value="all">All Status</option>
+                            <option value="unpainted">Unpainted</option>
+                            <option value="primed">Primed</option>
+                            <option value="wip">Work in Progress</option>
+                            <option value="painted">Painted</option>
+                            <option value="based">Based</option>
+                            <option value="display">Display Quality</option>
+                        </select>
+                        
+                        <select id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="infantry">Infantry</option>
+                            <option value="vehicle">Vehicle</option>
+                            <option value="monster">Monster</option>
+                            <option value="character">Character</option>
+                            <option value="beast">Beast</option>
+                            <option value="flyer">Flyer</option>
+                            <option value="fortification">Fortification</option>
+                        </select>
+                        
+                        <select id="sort-by">
+                            <option value="date_added">Date Added</option>
+                            <option value="name">Name</option>
+                            <option value="faction">Faction</option>
+                            <option value="points">Points</option>
+                            <option value="pl">Power Level</option>
+                            <option value="status">Status</option>
+                        </select>
+                        
+                        <select id="sort-order">
+                            <option value="desc">Descending</option>
+                            <option value="asc">Ascending</option>
+                        </select>
+                        
+                        <button id="apply-filters" class="imperial-btn-small">
+                            <i class="fas fa-filter"></i> Apply
+                        </button>
+                        
+                        <button id="reset-filters" class="imperial-btn-clear">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Collection Views -->
+                <div class="collection-views">
+                    <!-- Grid View (Default) -->
+                    <div id="grid-view" class="collection-view active">
+                        <div class="miniature-grid" id="miniature-grid">
+                            <!-- Miniature cards will be inserted here by JavaScript -->
+                            <div class="empty-state" id="add-first-mini">
+                                <div class="empty-icon">🎨</div>
+                                <h4>Your Collection is Empty</h4>
+                                <p>Start by adding your first miniature!</p>
+                                <button class="imperial-btn-small">Add First Miniature</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- List View -->
+                    <div id="list-view" class="collection-view" style="display: none;">
+                        <table class="list-table">
+                            <thead>
+                                <tr>
+                                    <th width="50">
+                                        <input type="checkbox" id="select-all-checkbox">
+                                    </th>
+                                    <th>Name</th>
+                                    <th>Faction</th>
+                                    <th>Type</th>
+                                    <th>Points</th>
+                                    <th>PL</th>
+                                    <th>Status</th>
+                                    <th>Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-table-body">
+                                <!-- List rows will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Table View -->
+                    <div id="table-view" class="collection-view" style="display: none;">
+                        <div id="table-container">
+                            <!-- Detailed table will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts and Analytics -->
+            <div class="analytics-section">
+                <h3 class="analytics-title">Collection Analytics</h3>
+                
+                <div class="timeframe-controls">
+                    <button class="timeframe-btn active" data-timeframe="all">All Time</button>
+                    <button class="timeframe-btn" data-timeframe="year">This Year</button>
+                    <button class="timeframe-btn" data-timeframe="month">This Month</button>
+                    <button class="timeframe-btn" data-timeframe="week">This Week</button>
+                </div>
+                
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h4>Paint Status Distribution</h4>
+                        <div class="chart" id="status-chart"></div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h4>Faction Breakdown</h4>
+                        <div class="chart" id="faction-chart"></div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h4>Monthly Additions</h4>
+                        <div class="chart" id="monthly-chart"></div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h4>Points by Type</h4>
+                        <div class="chart" id="type-chart"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wishlist Section -->
+            <div class="wishlist-section">
+                <div class="section-header">
+                    <h3>Acquisition Wishlist</h3>
+                    <div class="wishlist-stats">
+                        <span id="wishlist-count">0 items</span>
+                        <span id="wishlist-cost">$0.00</span>
+                        <span id="priority-count">0 priority</span>
+                    </div>
+                </div>
+                
+                <div class="wishlist-actions">
+                    <button id="add-to-wishlist" class="imperial-btn-small">
+                        <i class="fas fa-plus"></i> Add to Wishlist
+                    </button>
+                    <button id="import-wishlist" class="imperial-btn-small">
+                        <i class="fas fa-upload"></i> Import Wishlist
+                    </button>
+                </div>
+                
+                <div class="wishlist-container" id="wishlist-items">
+                    <!-- Wishlist items will be inserted here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Goals Section -->
+            <div class="goals-section">
+                <div class="section-header">
+                    <h3>Painting Goals</h3>
+                    <button id="add-goal-btn" class="imperial-btn-small">
+                        <i class="fas fa-bullseye"></i> Add Goal
+                    </button>
+                </div>
+                
+                <div class="goals-container" id="goals-container">
+                    <!-- Goals will be inserted here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Data Management -->
+            <div class="data-management">
+                <h3>Data Management</h3>
+                <div class="data-actions">
+                    <button id="export-collection-btn" class="imperial-btn-secondary">
+                        <i class="fas fa-download"></i> Export Collection
+                    </button>
+                    <button id="backup-collection-btn" class="imperial-btn-secondary">
+                        <i class="fas fa-save"></i> Backup Collection
+                    </button>
+                    <button id="import-collection" class="imperial-btn-secondary">
+                        <i class="fas fa-upload"></i> Import Collection
+                    </button>
+                    <button id="clear-collection" class="imperial-btn-clear danger">
+                        <i class="fas fa-trash"></i> Clear All Data
+                    </button>
+                </div>
+                
+                <div class="data-info">
+                    <p>
+                        <i class="fas fa-info-circle"></i> Your collection is stored locally in your browser. 
+                        Use the export/backup functions to save your data.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="imperial-footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    "THE EMPEROR PROTECTS"
+                </div>
+                <div class="footer-subtext">
+                    Forge World Collection Tracker v1.0
+                </div>
+            </div>
+            <div class="copyright">
+                © 2024 Adeptus Administratum. All data belongs to Games Workshop.
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Add Miniature Modal -->
+    <div id="add-mini-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add New Miniature</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="form-tabs">
+                    <button class="tab-btn active" data-tab="basic">Basic Info</button>
+                    <button class="tab-btn" data-tab="painting">Painting</button>
+                    <button class="tab-btn" data-tab="purchase">Purchase</button>
+                    <button class="tab-btn" data-tab="advanced">Advanced</button>
+                </div>
+                
+                <form id="add-mini-form">
+                    <!-- Basic Info Tab -->
+                    <div id="basic-tab" class="tab-content active">
+                        <div class="form-group">
+                            <label for="mini-name">Model Name *</label>
+                            <input type="text" id="mini-name" required placeholder="e.g., Intercessor Squad">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mini-faction">Faction *</label>
+                                <select id="mini-faction" required>
+                                    <option value="">Select Faction</option>
+                                    <option value="space_marines">Space Marines</option>
+                                    <option value="imperial_guard">Imperial Guard</option>
+                                    <option value="chaos">Chaos Space Marines</option>
+                                    <option value="aeldari">Aeldari</option>
+                                    <option value="ork">Orks</option>
+                                    <option value="necron">Necrons</option>
+                                    <option value="tyranid">Tyranids</option>
+                                    <option value="tau">T'au Empire</option>
+                                    <option value="dark_eldar">Drukhari</option>
+                                    <option value="sisters">Adepta Sororitas</option>
+                                    <option value="custodes">Adeptus Custodes</option>
+                                    <option value="knights">Imperial Knights</option>
+                                    <option value="chaos_knights">Chaos Knights</option>
+                                    <option value="genestealer_cult">Genestealer Cults</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mini-subfaction">Subfaction</label>
+                                <input type="text" id="mini-subfaction" placeholder="e.g., Ultramarines">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mini-type">Type *</label>
+                                <select id="mini-type" required>
+                                    <option value="infantry">Infantry</option>
+                                    <option value="vehicle">Vehicle</option>
+                                    <option value="monster">Monster</option>
+                                    <option value="character">Character</option>
+                                    <option value="beast">Beast</option>
+                                    <option value="flyer">Flyer</option>
+                                    <option value="fortification">Fortification</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mini-role">Role</label>
+                                <select id="mini-role">
+                                    <option value="">Select Role</option>
+                                    <option value="hq">HQ</option>
+                                    <option value="troops">Troops</option>
+                                    <option value="elites">Elites</option>
+                                    <option value="fast_attack">Fast Attack</option>
+                                    <option value="heavy_support">Heavy Support</option>
+                                    <option value="flyer">Flyer</option>
+                                    <option value="dedicated_transport">Dedicated Transport</option>
+                                    <option value="lord_of_war">Lord of War</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mini-points">Points Value</label>
+                                <input type="number" id="mini-points" min="0" step="5" placeholder="e.g., 100">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mini-pl">Power Level</label>
+                                <input type="number" id="mini-pl" min="0" placeholder="e.g., 5">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-unit-count">Number of Models</label>
+                            <input type="number" id="mini-unit-count" min="1" value="1">
+                        </div>
+                    </div>
+                    
+                    <!-- Painting Tab -->
+                    <div id="painting-tab" class="tab-content" style="display: none;">
+                        <div class="form-group">
+                            <label for="mini-status">Paint Status *</label>
+                            <select id="mini-status" required>
+                                <option value="unpainted">Unpainted</option>
+                                <option value="primed">Primed</option>
+                                <option value="wip">Work in Progress</option>
+                                <option value="painted">Painted</option>
+                                <option value="based">Based</option>
+                                <option value="display">Display Quality</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-paint-scheme">Paint Scheme</label>
+                            <input type="text" id="mini-paint-scheme" placeholder="e.g., Ultramarines Blue">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mini-paint-hours">Painting Hours</label>
+                                <input type="number" id="mini-paint-hours" min="0" step="0.5" placeholder="e.g., 8.5">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mini-paint-date">Paint Date</label>
+                                <input type="date" id="mini-paint-date">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Purchase Tab -->
+                    <div id="purchase-tab" class="tab-content" style="display: none;">
+                        <div class="form-group">
+                            <label for="mini-source">Source</label>
+                            <select id="mini-source">
+                                <option value="">Select Source</option>
+                                <option value="games_workshop">Games Workshop</option>
+                                <option value="forge_world">Forge World</option>
+                                <option value="third_party">Third Party</option>
+                                <option value="second_hand">Second Hand</option>
+                                <option value="gift">Gift</option>
+                                <option value="trade">Trade</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mini-cost">Cost ($)</label>
+                                <input type="number" id="mini-cost" min="0" step="0.01" placeholder="e.g., 59.99">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="mini-purchase-date">Purchase Date</label>
+                                <input type="date" id="mini-purchase-date">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-storage">Storage Location</label>
+                            <input type="text" id="mini-storage" placeholder="e.g., Display Case">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-condition">Condition</label>
+                            <select id="mini-condition">
+                                <option value="new">New on Sprue</option>
+                                <option value="built">Built</option>
+                                <option value="primed">Primed</option>
+                                <option value="painted">Painted</option>
+                                <option value="pro_painted">Pro Painted</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Tab -->
+                    <div id="advanced-tab" class="tab-content" style="display: none;">
+                        <div class="form-group">
+                            <label for="mini-description">Description</label>
+                            <textarea id="mini-description" rows="3" placeholder="Optional description..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-tags">Tags (comma separated)</label>
+                            <input type="text" id="mini-tags" placeholder="e.g., troops, primaris, ultramarines">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="mini-favorite">
+                                Mark as Favorite
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mini-notes">Private Notes</label>
+                            <textarea id="mini-notes" rows="2" placeholder="Private notes..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="imperial-btn">Add to Collection</button>
+                        <button type="button" class="imperial-btn-secondary close-modal">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</section>
+    
+    <!-- Edit Miniature Modal -->
+    <div id="edit-mini-modal" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Miniature</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <form id="edit-mini-form">
+                    <!-- Form will be populated by JavaScript -->
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i> Back to Top
+    </button>
+    
+    <!-- JavaScript -->
+    <script src="collection-tracker.js"></script>
+    <script>
+        // Back to top button
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Show/hide back to top button
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+        
+        // Clear collection confirmation
+        document.getElementById('clear-collection')?.addEventListener('click', () => {
+            if (confirm('WARNING: This will delete ALL collection data. This action cannot be undone. Are you absolutely sure?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        });
+        
+        // Initialize form date fields to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            const purchaseDate = document.getElementById('mini-purchase-date');
+            const paintDate = document.getElementById('mini-paint-date');
+            
+            if (purchaseDate) purchaseDate.value = today;
+            if (paintDate) paintDate.value = today;
+        });
+    </script>
+</body>
+</html>
