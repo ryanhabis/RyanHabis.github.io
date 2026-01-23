@@ -1,0 +1,783 @@
+<!--
+    SaaS Business Framework Guide 
+
+    but not finished yet
+-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Build a Successful SaaS Business: 7-Step Framework Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        /* Navigation */
+        .nav-bar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-home {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-home:hover {
+            color: #3730a3;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header Section */
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Attribution Box */
+        .attribution-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid #0ea5e9;
+        }
+        
+        .attribution-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            color: #0369a1;
+        }
+        
+        .attribution-header i {
+            font-size: 1.5rem;
+        }
+        
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: #0ea5e9;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 1rem;
+            border: 1px solid #bae6fd;
+            transition: all 0.3s ease;
+        }
+        
+        .source-link:hover {
+            background: #0ea5e9;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .why-saas-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid #0ea5e9;
+            padding: 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2rem;
+        }
+        
+        .why-saas-box h3 {
+            color: #0369a1;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Step Cards */
+        .step-container {
+            counter-reset: step-counter;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .step-card::before {
+            counter-increment: step-counter;
+            content: "Step " counter(step-counter);
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #4f46e5;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 0 12px 0 12px;
+        }
+        
+        .step-title {
+            font-size: 1.6rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            padding-right: 120px;
+        }
+        
+        .step-content {
+            color: #475569;
+        }
+        
+        .step-content p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Tool Tags */
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .tool-tag {
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+        }
+        
+        /* Tips and Highlights */
+        .pro-tip {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .pro-tip h4 {
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .warning-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box h4 {
+            color: #991b1b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Demand Methods */
+        .demand-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .method-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .method-card h4 {
+            color: #4f46e5;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Sharing Box */
+        .sharing-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .sharing-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .share-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .share-button.twitter { color: #1da1f2; }
+        .share-button.linkedin { color: #0077b5; }
+        .share-button.copy { color: #4f46e5; }
+        
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #4f46e5;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .cta-button.secondary:hover {
+            background: white;
+            color: #4f46e5;
+        }
+        
+        /* Footer */
+        .article-footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .step-card {
+                padding: 1.5rem;
+            }
+            
+            .step-title {
+                padding-right: 0;
+                font-size: 1.4rem;
+            }
+            
+            .step-card::before {
+                position: relative;
+                display: inline-block;
+                margin-bottom: 1rem;
+                border-radius: 20px;
+            }
+            
+            .demand-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons, .sharing-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button, .share-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .nav-bar, .cta-section, .sharing-box {
+                display: none;
+            }
+            
+            .step-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-home">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="nav-actions">
+                <button onclick="window.print()" class="tool-tag" style="cursor: pointer;">
+                    <i class="fas fa-print"></i> Print Guide
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Article Content -->
+    <main class="container">
+        <header class="article-header">
+            <h1 class="article-title">How to Build a Successful SaaS Business from Scratch</h1>
+            <p class="article-subtitle">The Simple 7-Step Framework I Learned & Want to Share</p>
+        </header>
+
+        <!-- Attribution Section -->
+        <div class="attribution-box">
+            <div class="attribution-header">
+                <i class="fas fa-info-circle"></i>
+                <h3>Important: This is Shared Knowledge</h3>
+            </div>
+            <p>I want to be completely transparent: I didn't invent this framework. I learned it from an excellent YouTube video and found the content so valuable that I wanted to organize and share it in a more accessible format.</p>
+            <p>This guide summarizes key insights from experienced SaaS entrepreneurs who have built and sold multiple companies. I'm sharing this because I believe in learning from those who've done it before us.</p>
+            <a href="#original-source" class="source-link">
+                <i class="fas fa-external-link-alt"></i>
+                Jump to Original Source Info
+            </a>
+        </div>
+
+        <section class="content-section">
+            <p>If you've ever dreamed of building a SaaS (Software as a Service) business but felt overwhelmed by where to start, you're not alone. This framework distills years of experience into a straightforward 7-step process to launch your SaaS business, even if you're starting with no network or capital.</p>
+            
+            <div class="why-saas-box">
+                <h3><i class="fas fa-chart-line"></i> Why SaaS?</h3>
+                <p>SaaS is a unique business model loved by many entrepreneurs because of its recurring revenue nature. Customers keep paying monthly as long as they receive value, creating a predictable and scalable income stream. But building a SaaS business without a clear plan can be costly and frustrating. So, here's how to do it right.</p>
+            </div>
+        </section>
+
+        <!-- Step 1 -->
+        <section class="step-container">
+            <div class="step-card">
+                <h2 class="step-title">Start with the Problem</h2>
+                <div class="step-content">
+                    <p>The foundation of any successful software business is solving a real problem. Instead of chasing a flashy idea, begin by consulting or interacting with businesses in industries you're interested in. Through consulting, you'll uncover pain points and gaps in existing software solutions. For example, many successful companies like Shopify and FreshBooks began by creating tools to solve their own or their clients' problems before productizing those solutions.</p>
+                    
+                    <div class="pro-tip">
+                        <h4><i class="fas fa-lightbulb"></i> The Frustration List Hack</h4>
+                        <p>A powerful hack here is to build a "frustration list." Note down everyday annoyances at home or work—even if unrelated to software. This habit sharpens your ability to identify genuine problems worth solving. Look for inefficiencies such as complex spreadsheets or manual data transfers, which often signal ripe opportunities for software automation.</p>
+                    </div>
+                    
+                    <p>Also, consider industries experiencing rapid growth or technological tailwinds like AI, drone tech, or 3D printing. These sectors often have emerging challenges—inventory management, billing, logistics—that a new SaaS product could address profitably.</p>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <h2 class="step-title">Build a Prototype</h2>
+                <div class="step-content">
+                    <p>Before investing heavily in development, create a clickable prototype or wireframe of your solution. This isn't just about functionality but user experience (UX). A prototype helps you visualize how users will interact with your software and prevents costly mistakes like building features nobody wants or designing confusing interfaces.</p>
+                    
+                    <p>Start simple: pen and paper sketches work great, then progress to tools like:</p>
+                    
+                    <div class="tool-tags">
+                        <span class="tool-tag">Pen & Paper</span>
+                        <span class="tool-tag">Balsamiq</span>
+                        <span class="tool-tag">Figma</span>
+                        <span class="tool-tag">InVision</span>
+                        <span class="tool-tag">Sketch</span>
+                    </div>
+                    
+                    <p>The goal is to simulate the user flow and gather feedback before writing a single line of code.</p>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <h2 class="step-title">Validate Your Product</h2>
+                <div class="step-content">
+                    <p>Validation means proving there is demand—and willingness to pay—for your software before building it. Crowdfunding is a prime example of this principle, where entrepreneurs pre-sell their ideas to fund development. Don't fall into the trap of building something nobody wants, only to find out after launch that customers aren't interested.</p>
+                    
+                    <div class="pro-tip">
+                        <h4><i class="fas fa-users"></i> Early Adopter Program</h4>
+                        <p>Create an early adopter program: show your prototype, collect feedback, and ask participants to pay upfront for a discounted annual license. This not only confirms demand but also funds development. Remember, the business truly starts when someone pays for your product.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+                <h2 class="step-title">Build Your Minimum Viable Product (MVP)</h2>
+                <div class="step-content">
+                    <p>With validation in hand, build an MVP that focuses on core features needed to solve the problem. Resist the urge to overbuild or add every requested feature. Set strict constraints—aim to launch within 3 months and within your budget. This discipline prevents you from wasting time and money on unnecessary development.</p>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Developer Hiring Warning</h4>
+                        <p>Hire developers wisely—test their skills with small projects first, provide clear wireframes, and avoid letting developers design your software. User-friendly design is crucial and should be led by product managers or designers, not just coders.</p>
+                    </div>
+                    
+                    <p>Consider no-code tools for faster MVPs:</p>
+                    
+                    <div class="tool-tags">
+                        <span class="tool-tag">Bubble</span>
+                        <span class="tool-tag">Make.com</span>
+                        <span class="tool-tag">Webflow</span>
+                        <span class="tool-tag">Adalo</span>
+                    </div>
+                    
+                    <p>But be aware of platform dependencies that may complicate future scalability or acquisition.</p>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-card">
+                <h2 class="step-title">Collect Customer Feedback</h2>
+                <div class="step-content">
+                    <p>Once your MVP is live, actively engage with customers to gather feedback—not just usage data, but real conversations. Call users regularly, understand their challenges, and identify friction points in their journey from sign-up to realizing value.</p>
+                    
+                    <p>Analyze feedback by grouping common pain points, then prioritize and roll out improvements. Avoid focusing on outliers or non-users; instead, improve the experience for "yellow zone" users who are close to becoming power users. Asking the right questions is an art and crucial to avoid building unwanted features.</p>
+                    
+                    <div class="pro-tip">
+                        <h4><i class="fas fa-chart-pie"></i> Feedback Analysis Strategy</h4>
+                        <p>Group feedback into: 1) Critical bugs, 2) Usability improvements, 3) Feature requests. Focus on items that will have the biggest impact on user retention and satisfaction.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step-card">
+                <h2 class="step-title">Generate Demand</h2>
+                <div class="step-content">
+                    <p>There are four main ways to create demand for your SaaS:</p>
+                    
+                    <div class="demand-methods">
+                        <div class="method-card">
+                            <h4><i class="fas fa-pen-fancy"></i> Content Marketing</h4>
+                            <p>Blogs, SEO, social media builds organic traffic but takes time to show results.</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h4><i class="fas fa-ad"></i> Paid Ads</h4>
+                            <p>Can be effective but requires upfront investment and careful testing.</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h4><i class="fas fa-handshake"></i> Partnerships</h4>
+                            <p>Often the fastest way to access a targeted customer base. Offer affiliates 20-40% commissions.</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <h4><i class="fas fa-bullhorn"></i> Press & Podcasts</h4>
+                            <p>Builds brand awareness and credibility in your industry.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Partnership Warning</h4>
+                        <p>Beware of giving away equity too early to partners; prefer affiliate agreements that pay based on actual sales. Start where you have the most advantage and stay consistent.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="step-card">
+                <h2 class="step-title">Find a Growth Hack</h2>
+                <div class="step-content">
+                    <p>Growth hacks are unique, creative channels or strategies that give you an unfair advantage in customer acquisition. Examples include:</p>
+                    
+                    <ul style="margin: 1rem 0 1rem 2rem; color: #475569;">
+                        <li>Mining competitor data (ethically) to identify their weaknesses</li>
+                        <li>Leveraging existing platforms where your target users congregate</li>
+                        <li>Partnering with event organizers to create promotional offers</li>
+                        <li>Creating integrations with popular tools your customers already use</li>
+                    </ul>
+                    
+                    <p>The key is creativity and understanding who has your ideal customers' attention. Growth hacks are not just marketing tricks—they are innovative ways to efficiently and inexpensively scale your user base.</p>
+                    
+                    <div class="pro-tip">
+                        <h4><i class="fas fa-rocket"></i> Growth Hack Mindset</h4>
+                        <p>Think: "Where do my ideal customers already spend their time and attention?" Then find creative ways to provide value in those spaces before asking for anything in return.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sharing Section -->
+        <div class="sharing-box">
+            <h3><i class="fas fa-share-alt"></i> Found This Helpful?</h3>
+            <p>Share this framework with other entrepreneurs who might benefit from it!</p>
+            <div class="sharing-buttons">
+                <a href="#" class="share-button twitter" onclick="shareOnTwitter()">
+                    <i class="fab fa-twitter"></i> Share on Twitter
+                </a>
+                <a href="#" class="share-button linkedin" onclick="shareOnLinkedIn()">
+                    <i class="fab fa-linkedin"></i> Share on LinkedIn
+                </a>
+                <button class="share-button copy" onclick="copyLinkToClipboard()">
+                    <i class="fas fa-link"></i> Copy Link
+                </button>
+            </div>
+        </div>
+
+        <!-- Final Thoughts -->
+        <section class="content-section">
+            <h2 class="section-title">Final Thoughts</h2>
+            <p>Building a SaaS business is a marathon, not a sprint. By focusing on solving real problems, validating demand early, building a lean MVP, and continuously engaging customers and partners, you significantly increase your chances of success. Remember, many billion-dollar SaaS companies started as small $50/month tools solving a single acute pain point.</p>
+            
+            <p>If you want to dive deeper into building SaaS businesses or learn about the best business opportunities, I recommend checking out the original source and other educational content from experienced SaaS entrepreneurs.</p>
+        </section>
+
+        <!-- Original Source Section -->
+        <section class="content-section" id="original-source">
+            <h2 class="section-title"><i class="fas fa-external-link-alt"></i> Original Source & Further Learning</h2>
+            <div class="attribution-box">
+                <h3>Where This Framework Came From</h3>
+                <p>This 7-step framework was adapted from a YouTube video by experienced SaaS entrepreneurs. While I can't share the exact link here (to avoid any copyright issues), here's how you can find similar content:</p>
+                
+                <div class="tool-tags" style="margin: 1.5rem 0;">
+                    <span class="tool-tag">YouTube Search: "SaaS business framework"</span>
+                    <span class="tool-tag">Channels: Alex Hormozi, SaaS School</span>
+                    <span class="tool-tag">Keywords: "7-step SaaS", "SaaS from scratch"</span>
+                </div>
+                
+                <p><strong>My role:</strong> I watched the video, took comprehensive notes, and organized the information into this clean, easy-to-follow format. I believe in sharing valuable knowledge, and this framework was too good not to pass along.</p>
+                
+                <div class="pro-tip">
+                    <h4><i class="fas fa-graduation-cap"></i> My Learning Approach</h4>
+                    <p>When I find valuable content like this, I practice active learning by:
+                    1) Taking detailed notes, 2) Organizing the information logically, 3) Creating visual summaries, and 4) Sharing with others who might benefit. This helps reinforce my own understanding while helping the community.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2 class="cta-title">Want to Discuss SaaS or Web Development?</h2>
+            <p>While I didn't create this framework, I'm passionate about technology, learning, and sharing knowledge. If you're working on a SaaS idea or want to discuss web development, I'd love to connect!</p>
+            
+            <div class="cta-buttons">
+                <a href="mailto:you@example.com?subject=SaaS%20Framework%20Discussion" class="cta-button">
+                    <i class="fas fa-envelope"></i> Email Me to Discuss
+                </a>
+                <a href="index.html#portfolio" class="cta-button secondary">
+                    <i class="fas fa-code"></i> See My Web Projects
+                </a>
+            </div>
+        </section>
+
+        <footer class="article-footer">
+            <p>© <span id="current-year"></span> Your Name. Knowledge shared from educational sources. Always credit original creators.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">This page is a demonstration of content organization and web development skills.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add step card animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Initialize step cards with fade-in animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const stepCards = document.querySelectorAll('.step-card');
+            stepCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+        
+        // Sharing functions
+        function shareOnTwitter() {
+            const text = "Check out this comprehensive 7-step framework for building a SaaS business from scratch!";
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function shareOnLinkedIn() {
+            const url = window.location.href;
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        }
+        
+        function copyLinkToClipboard() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const button = document.querySelector('.share-button.copy');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = '#10b981';
+                button.style.color = 'white';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                    button.style.background = '';
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+        
+        // Track CTA clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', () => {
+                console.log(`CTA clicked: ${button.textContent}`);
+                // Add analytics tracking here if needed
+            });
+        });
+    </script>
+</body>
+</html>
