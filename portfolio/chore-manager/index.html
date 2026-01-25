@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household Chore Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧹</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-broom"></i> Chore Manager</h1>
+            <p class="subtitle">Fair rotation system for 4 housemates • Data saves automatically</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="stats-card">
+                <h3><i class="fas fa-chart-bar"></i> Weekly Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <span class="stat-value" id="completed-count">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="pending-count">0</span>
+                        <span class="stat-label">Pending</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="rotation-day">7</span>
+                        <span class="stat-label">Days to Rotation</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="total-points">0</span>
+                        <span class="stat-label">Total Points</span>
+                    </div>
+                </div>
+                <div class="last-saved">
+                    <small><i class="fas fa-save"></i> <span id="last-saved">Never saved</span></small>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="add-chore-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Chore
+                </button>
+                <button id="rotate-btn" class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i> Rotate Chores
+                </button>
+                <button id="reset-week-btn" class="btn btn-outline">
+                    <i class="fas fa-redo"></i> Reset Week
+                </button>
+                <button id="export-btn" class="btn btn-outline">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button id="import-btn" class="btn btn-outline">
+                    <i class="fas fa-upload"></i> Import Data
+                </button>
+                <button id="clear-data-btn" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Clear All Data
+                </button>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="chores-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tasks"></i> Weekly Chores</h2>
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="pending">Pending</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+                </div>
+                <div class="chores-container" id="chores-container">
+                    <!-- Chores will be dynamically added here -->
+                </div>
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <i class="fas fa-clipboard-list fa-3x"></i>
+                    <h3>No chores yet!</h3>
+                    <p>Click "Add Chore" to get started.</p>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="housemates-section">
+                    <h2><i class="fas fa-users"></i> Housemates</h2>
+                    <div class="housemates-container" id="housemates-container">
+                        <!-- Housemates will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="calendar-section">
+                    <h3><i class="fas fa-calendar-alt"></i> This Week</h3>
+                    <div class="calendar" id="calendar">
+                        <!-- Calendar will be dynamically generated -->
+                    </div>
+                </div>
+
+                <div class="data-info">
+                    <h3><i class="fas fa-database"></i> Data Status</h3>
+                    <div class="info-item">
+                        <span>Auto-save:</span>
+                        <span class="status active"><i class="fas fa-circle"></i> Active</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Storage:</span>
+                        <span id="storage-status">LocalStorage</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Chores:</span>
+                        <span id="total-chores">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span>Last rotation:</span>
+                        <span id="last-rotation">Never</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Chore Modal -->
+        <div id="add-chore-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3><i class="fas fa-plus-circle"></i> Add New Chore</h3>
+                <form id="chore-form">
+                    <div class="form-group">
+                        <label for="chore-name"><i class="fas fa-pen"></i> Chore Name</label>
+                        <input type="text" id="chore-name" placeholder="e.g., Clean bathroom, Take out trash" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="chore-frequency"><i class="fas fa-calendar"></i> Frequency</label>
+                        <select id="chore-frequency">
+                            <option value="weekly">Weekly</option>
+                            <option value="biweekly">Bi-Weekly</option>
+                            <option value="daily">Daily</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="chore-difficulty"><i class="fas fa-battery-three-quarters"></i> Difficulty</label>
+                        <select id="chore-difficulty">
+                            <option value="easy">Easy (5 points)</option>
+                            <option value="medium" selected>Medium (10 points)</option>
+                            <option value="hard">Hard (15 points)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="chore-category"><i class="fas fa-tag"></i> Category</label>
+                        <select id="chore-category">
+                            <option value="cleaning">Cleaning</option>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="bathroom">Bathroom</option>
+                            <option value="trash">Trash/Recycling</option>
+                            <option value="common">Common Areas</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assign-to"><i class="fas fa-user"></i> Assign To (Optional)</label>
+                        <select id="assign-to">
+                            <option value="auto">Auto-assign (Random)</option>
+                            <option value="1">Alex</option>
+                            <option value="2">Sam</option>
+                            <option value="3">Jordan</option>
+                            <option value="4">Taylor</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline close-modal-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Chore
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Notification Container -->
+        <div id="notification-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
