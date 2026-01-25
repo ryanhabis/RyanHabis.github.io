@@ -4,17 +4,18 @@
 // ============================================
 
 // Constants
-const STORAGE_KEY = 'choreManagerData_v2';
+const APP_VERSION = '1.1'; // CHANGE THIS WHEN YOU UPDATE NAMES/FEATURES
+const STORAGE_KEY = `choreManagerData_v${APP_VERSION}`;
 const ROTATION_INTERVAL_DAYS = 7;
 const POINTS_MAP = { easy: 5, medium: 10, hard: 15 };
 
-// Initial Data Structure
+// Initial Data Structure - CHANGE NAMES HERE
 let state = {
     housemates: [
-        { id: 1, name: "Alex", color: "#667eea", points: 0, completed: 0, lastActive: null },
-        { id: 2, name: "Sam", color: "#f5576c", points: 0, completed: 0, lastActive: null },
-        { id: 3, name: "Jordan", color: "#4cd964", points: 0, completed: 0, lastActive: null },
-        { id: 4, name: "Taylor", color: "#f093fb", points: 0, completed: 0, lastActive: null }
+        { id: 1, name: "Ryan", color: "#667eea", points: 0, completed: 0, lastActive: null },
+        { id: 2, name: "Dylan", color: "#f5576c", points: 0, completed: 0, lastActive: null },
+        { id: 3, name: "Elizabeth", color: "#4cd964", points: 0, completed: 0, lastActive: null },
+        { id: 4, name: "Jack", color: "#f093fb", points: 0, completed: 0, lastActive: null }
     ],
     chores: [],
     nextChoreId: 1,
@@ -22,7 +23,7 @@ let state = {
         autoRotate: true,
         lastRotation: null,
         lastSave: null,
-        version: '2.0'
+        version: APP_VERSION  // Store current version in settings
     },
     defaultChores: [
         { name: "Clean Bathroom", frequency: "weekly", difficulty: "hard", category: "bathroom" },
@@ -92,13 +93,14 @@ function cacheElements() {
 }
 
 // ============================================
-// DATA PERSISTENCE
+// DATA PERSISTENCE WITH VERSIONING
 // ============================================
 
 function saveToStorage() {
     try {
-        // Update last save timestamp
+        // Update last save timestamp and version
         state.settings.lastSave = new Date().toISOString();
+        state.settings.version = APP_VERSION;
         
         // Calculate days until next rotation
         if (state.settings.lastRotation) {
@@ -125,14 +127,45 @@ function loadFromStorage() {
         if (saved) {
             const data = JSON.parse(saved);
             
-            // Merge with current state, preserving defaults for new fields
-            state = {
-                ...state,
-                ...data,
-                housemates: data.housemates || state.housemates,
-                chores: data.chores || state.chores,
-                settings: { ...state.settings, ...(data.settings || {}) }
-            };
+            // Check if version matches
+            if (data.settings && data.settings.version === APP_VERSION) {
+                // Version matches, load everything
+                console.log(`Loading data from version ${data.settings.version || 'unknown'}`);
+                
+                state = {
+                    ...state,
+                    ...data,
+                    // Use saved chores and nextChoreId
+                    chores: data.chores || state.chores,
+                    nextChoreId: data.nextChoreId || state.nextChoreId,
+                    // Merge settings but keep current version
+                    settings: { 
+                        ...state.settings, 
+                        ...(data.settings || {}),
+                        version: APP_VERSION // Ensure current version
+                    }
+                };
+                
+                // Update housemates: merge points/completed from saved data
+                if (data.housemates && data.housemates.length === state.housemates.length) {
+                    data.housemates.forEach(savedHousemate => {
+                        const currentHousemate = state.housemates.find(h => h.id === savedHousemate.id);
+                        if (currentHousemate) {
+                            // Keep current name/color, but update stats
+                            currentHousemate.points = savedHousemate.points || 0;
+                            currentHousemate.completed = savedHousemate.completed || 0;
+                            currentHousemate.lastActive = savedHousemate.lastActive || null;
+                        }
+                    });
+                }
+                
+                showNotification('Data loaded from previous session!', 'success');
+            } else {
+                // Version mismatch - migrate data
+                console.log(`Version mismatch: saved=${data.settings?.version || 'unknown'}, current=${APP_VERSION}`);
+                showNotification('New version detected. Migrating data...', 'warning');
+                migrateData(data);
+            }
             
             // Ensure all chores have required fields
             state.chores.forEach(chore => {
@@ -142,16 +175,70 @@ function loadFromStorage() {
                 if (!chore.category) {
                     chore.category = 'other';
                 }
+                if (!chore.assignedDate) {
+                    chore.assignedDate = new Date().toISOString();
+                }
             });
             
-            showNotification('Data loaded from previous session!', 'success');
-            console.log('Loaded data from:', new Date(state.settings.lastSave).toLocaleString());
+            console.log('Data loaded successfully');
         } else {
             console.log('No saved data found, using defaults');
         }
     } catch (error) {
         console.error('Load failed:', error);
         showNotification('Failed to load saved data.', 'error');
+    }
+}
+
+function migrateData(oldData) {
+    try {
+        console.log('Migrating data from old version:', oldData.settings?.version || 'unknown');
+        
+        // Try to preserve as much data as possible
+        if (oldData.chores && Array.isArray(oldData.chores)) {
+            // Migrate chores
+            state.chores = oldData.chores.map(chore => ({
+                ...chore,
+                // Ensure new required fields exist
+                points: chore.points || POINTS_MAP[chore.difficulty] || 10,
+                category: chore.category || 'other',
+                assignedDate: chore.assignedDate || new Date().toISOString(),
+                completedDate: chore.completedDate || null
+            }));
+            
+            // Update nextChoreId
+            if (oldData.chores.length > 0) {
+                const maxId = Math.max(...oldData.chores.map(c => c.id));
+                state.nextChoreId = maxId + 1;
+            }
+        }
+        
+        // Try to migrate housemate points by matching IDs
+        if (oldData.housemates && Array.isArray(oldData.housemates)) {
+            oldData.housemates.forEach(oldHousemate => {
+                const currentHousemate = state.housemates.find(h => h.id === oldHousemate.id);
+                if (currentHousemate) {
+                    currentHousemate.points = oldHousemate.points || 0;
+                    currentHousemate.completed = oldHousemate.completed || 0;
+                }
+            });
+        }
+        
+        // Migrate settings
+        if (oldData.settings) {
+            state.settings = {
+                ...state.settings,
+                lastRotation: oldData.settings.lastRotation || null,
+                lastSave: oldData.settings.lastSave || null,
+                autoRotate: oldData.settings.autoRotate !== undefined ? oldData.settings.autoRotate : true
+            };
+        }
+        
+        showNotification('Data migrated successfully to new version!', 'success');
+        saveToStorage(); // Save migrated data
+    } catch (error) {
+        console.error('Migration failed:', error);
+        showNotification('Could not migrate old data. Starting fresh.', 'error');
         // Keep default state
     }
 }
@@ -159,15 +246,28 @@ function loadFromStorage() {
 function clearStorage() {
     if (confirm('This will permanently delete ALL saved data. Are you sure?')) {
         localStorage.removeItem(STORAGE_KEY);
+        
+        // Also try to clear any old versions
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith('choreManagerData_v')) {
+                localStorage.removeItem(key);
+            }
+        }
+        
         showNotification('All data cleared!', 'warning');
         
-        // Reset to initial state
-        state = {
-            ...state,
-            chores: [],
-            nextChoreId: 1,
-            housemates: state.housemates.map(h => ({ ...h, points: 0, completed: 0 }))
-        };
+        // Reset to initial state but keep user's name changes
+        state.chores = [];
+        state.nextChoreId = 1;
+        state.housemates = state.housemates.map(h => ({ 
+            ...h, 
+            points: 0, 
+            completed: 0,
+            lastActive: null 
+        }));
+        state.settings.lastRotation = null;
+        state.settings.lastSave = null;
         
         renderAll();
         saveToStorage();
@@ -363,13 +463,15 @@ function updateDataInfo() {
         elements.lastRotation.textContent = 'Never';
     }
     
+    // Show current version
+    elements.storageStatus.textContent = `v${APP_VERSION} LocalStorage ✓`;
+    
     // Check storage availability
     try {
         localStorage.setItem('test', 'test');
         localStorage.removeItem('test');
-        elements.storageStatus.textContent = 'LocalStorage ✓';
     } catch (e) {
-        elements.storageStatus.textContent = 'Limited (Private Browsing)';
+        elements.storageStatus.textContent = `v${APP_VERSION} (Private Browsing)`;
     }
 }
 
@@ -559,7 +661,7 @@ function exportData() {
         const exportData = {
             ...state,
             exportDate: new Date().toISOString(),
-            exportVersion: '2.0',
+            exportVersion: APP_VERSION,
             totalChores: state.chores.length,
             totalPoints: state.housemates.reduce((sum, h) => sum + h.points, 0)
         };
@@ -571,7 +673,7 @@ function exportData() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `chore-manager-backup-${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `chore-manager-v${APP_VERSION}-${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -601,25 +703,25 @@ function importData(event) {
             const importedData = JSON.parse(e.target.result);
             
             // Validate data structure
-            if (!importedData.housemates || !importedData.chores) {
-                throw new Error('Invalid file format');
+            if (!importedData.housemates || !Array.isArray(importedData.housemates)) {
+                throw new Error('Invalid file format: missing housemates');
             }
             
-            // Merge data
-            state = {
-                ...state,
-                ...importedData,
-                settings: { ...state.settings, ...(importedData.settings || {}) }
-            };
+            // Check version compatibility
+            const importedVersion = importedData.settings?.version || 'unknown';
+            if (importedVersion !== APP_VERSION) {
+                if (!confirm(`This data is from version ${importedVersion} (current: ${APP_VERSION}).\n\nAttempt to migrate data?`)) {
+                    event.target.value = '';
+                    return;
+                }
+            }
+            
+            // Use migrateData function for consistency
+            migrateData(importedData);
             
             // Reset file input
             event.target.value = '';
             
-            // Re-render everything
-            renderAll();
-            saveToStorage();
-            
-            showNotification('Data imported successfully!', 'success');
         } catch (error) {
             console.error('Import error:', error);
             showNotification('Failed to import data. File may be corrupted.', 'error');
