@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Detection Analysis | Data Science Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-credit-card"></i> Credit Card Fraud Detection Analysis</h1>
+            <p class="subtitle">A Comprehensive Statistical Analysis of European Credit Card Transactions</p>
+            <div class="project-meta">
+                <span><i class="fas fa-calendar-alt"></i> December 2023</span>
+                <span><i class="fas fa-code"></i> Python | Pandas | NumPy | Matplotlib</span>
+                <span><i class="fas fa-database"></i> 284,807 Transactions</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <section class="project-overview">
+                <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+                <p>This project analyzes a dataset of 284,807 European credit card transactions over 48 hours, focusing on identifying fraudulent activities through statistical analysis, data exploration, and visualization techniques.</p>
+                
+                <div class="key-points">
+                    <div class="point">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Fraud Detection</h3>
+                        <p>Identified 473 fraudulent transactions (0.17% of dataset)</p>
+                    </div>
+                    <div class="point">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Statistical Analysis</h3>
+                        <p>Comprehensive descriptive statistics and outlier detection</p>
+                    </div>
+                    <div class="point">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Data Processing</h3>
+                        <p>Cleaned 1,081 duplicate rows with no missing values</p>
+                    </div>
+                    <div class="point">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>PCA Components</h3>
+                        <p>Analyzed V1-V28 PCA transformed features for GDPR compliance</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dataset-info">
+                <h2><i class="fas fa-table"></i> Dataset Information</h2>
+                
+                <!-- Chart 1: Class Distribution Pie Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Transaction Class Distribution</h3>
+                        <p>Visualizing the extreme class imbalance between normal (99.83%) and fraudulent (0.17%) transactions</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="classDistributionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dataset-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">284,807</div>
+                        <div class="stat-label">Total Transactions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">31</div>
+                        <div class="stat-label">Features</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">473</div>
+                        <div class="stat-label">Fraud Cases</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">48</div>
+                        <div class="stat-label">Hours Coverage</div>
+                    </div>
+                </div>
+
+                <div class="variables">
+                    <h3>Key Variables</h3>
+                    <div class="variable-list">
+                        <div class="variable">
+                            <span class="var-name">Time</span>
+                            <span class="var-desc">Seconds elapsed between each transaction</span>
+                        </div>
+                        <div class="variable">
+                            <span class="var-name">V1-V28</span>
+                            <span class="var-desc">PCA transformed features (anonymized for GDPR)</span>
+                        </div>
+                        <div class="variable">
+                            <span class="var-name">Amount</span>
+                            <span class="var-desc">Transaction amount in Euros</span>
+                        </div>
+                        <div class="variable">
+                            <span class="var-name">Class</span>
+                            <span class="var-desc">Target variable (1 = Fraud, 0 = Normal)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="visualizations">
+                <h2><i class="fas fa-chart-bar"></i> Data Visualizations</h2>
+                
+                <div class="chart-grid">
+                    <!-- Chart 2: Transaction Amount Distribution -->
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <h3>Transaction Amount Distribution</h3>
+                            <p>Comparison of normal vs. fraudulent transaction amounts (up to €500)</p>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="amountDistributionChart"></canvas>
+                        </div>
+                        <div class="chart-insight">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Fraudulent transactions have higher average amounts but more variability</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart 3: Time Distribution of Transactions -->
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <h3>Transactions Over Time</h3>
+                            <p>Distribution of transactions across the 48-hour period</p>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="timeDistributionChart"></canvas>
+                        </div>
+                        <div class="chart-insight">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Transaction frequency peaks during business hours</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart 4: Statistical Comparison Bar Chart -->
+                <div class="chart-container full-width">
+                    <div class="chart-header">
+                        <h3>Statistical Comparison: Normal vs. Fraudulent Transactions</h3>
+                        <p>Mean, median, and standard deviation comparison for transaction amounts</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="statComparisonChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><span class="legend-color normal"></span> Normal Transactions</div>
+                        <div class="legend-item"><span class="legend-color fraud"></span> Fraudulent Transactions</div>
+                    </div>
+                </div>
+                
+                <!-- Chart 5: PCA Component Importance -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>PCA Component Importance (First 10 Components)</h3>
+                        <p>Variance explained by principal components in descending order</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="pcaImportanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="methodology">
+                <h2><i class="fas fa-flask"></i> Methodology & Analysis</h2>
+                
+                <div class="method-step">
+                    <h3><span class="step-number">1</span> Data Exploration & Cleaning</h3>
+                    <ul>
+                        <li>Loaded and inspected dataset structure (284,807 × 31)</li>
+                        <li>Identified and removed 1,081 duplicate rows</li>
+                        <li>Verified no missing values in any column</li>
+                        <li>All columns were float64 type except Class (int64)</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <h3><span class="step-number">2</span> Outlier Detection (IQR Method)</h3>
+                    <ul>
+                        <li>Applied Interquartile Range (IQR) method on transaction amounts</li>
+                        <li>Outliers were identified but not removed (potentially fraudulent transactions)</li>
+                        <li>Visualized distribution using boxplots</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <h3><span class="step-number">3</span> Descriptive Statistics</h3>
+                    <ul>
+                        <li>Calculated measures of central tendency and spread</li>
+                        <li>Compared normal vs. fraudulent transaction statistics</li>
+                        <li>Analyzed correlations between features</li>
+                    </ul>
+                </div>
+
+                <div class="method-step">
+                    <h3><span class="step-number">4</span> PCA Component Analysis</h3>
+                    <p>The dataset features V1-V28 are results of Principal Component Analysis applied to original transaction data for anonymization. These represent the most important patterns in descending order:</p>
+                    <ul>
+                        <li><strong>V1:</strong> Most significant pattern (e.g., regular spending patterns)</li>
+                        <li><strong>V2:</strong> Second most important (e.g., international vs. domestic transactions)</li>
+                        <li><strong>V3-V28:</strong> Progressively less important transaction patterns</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="findings">
+                <h2><i class="fas fa-chart-bar"></i> Key Findings</h2>
+                
+                <div class="finding-cards">
+                    <div class="finding-card">
+                        <div class="finding-icon"><i class="fas fa-percentage"></i></div>
+                        <h3>Extreme Class Imbalance</h3>
+                        <p>Only 0.17% of transactions were fraudulent (473 out of 284,807), presenting significant challenges for predictive modeling.</p>
+                    </div>
+                    
+                    <div class="finding-card">
+                        <div class="finding-icon"><i class="fas fa-euro-sign"></i></div>
+                        <h3>Transaction Amount Analysis</h3>
+                        <p>Fraudulent transactions had higher average amounts (€123.87 vs €88.41) but lower medians (€9.82 vs €22.00), indicating some high-value fraud cases.</p>
+                    </div>
+                    
+                    <div class="finding-card">
+                        <div class="finding-icon"><i class="fas fa-code-branch"></i></div>
+                        <h3>PCA Transformation Success</h3>
+                        <p>The PCA components effectively anonymized sensitive banking data while preserving essential patterns for fraud detection analysis.</p>
+                    </div>
+                </div>
+
+                <!-- Chart 6: Correlation Heatmap (Simulated) -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Feature Correlation Heatmap (Selected Features)</h3>
+                        <p>Correlation matrix showing relationships between key transaction features</p>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="correlationHeatmap"></canvas>
+                    </div>
+                </div>
+
+                <div class="code-snippet">
+                    <h4>Example Analysis Code</h4>
+                    <pre><code># Descriptive statistics comparison
+fraud_count = credit_data['Class'].sum()
+normal_count = len(credit_data) - fraud_count
+
+print(f"Normal transactions: {normal_count:,} ({normal_count/len(credit_data)*100:.2f}%)")
+print(f"Fraud transactions: {fraud_count} ({fraud_count/len(credit_data)*100:.2f}%)")
+
+# Amount comparison
+print(f"Normal transactions - Mean: €{credit_data[credit_data['Class']==0]['Amount'].mean():.2f}")
+print(f"Fraud transactions - Mean: €{credit_data[credit_data['Class']==1]['Amount'].mean():.2f}")</code></pre>
+                </div>
+            </section>
+
+            <section class="skills">
+                <h2><i class="fas fa-tools"></i> Technical Skills Demonstrated</h2>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python Programming</span>
+                    <span class="skill-tag">Pandas Data Manipulation</span>
+                    <span class="skill-tag">NumPy Operations</span>
+                    <span class="skill-tag">Matplotlib Visualization</span>
+                    <span class="skill-tag">Statistical Analysis</span>
+                    <span class="skill-tag">Data Cleaning</span>
+                    <span class="skill-tag">Outlier Detection</span>
+                    <span class="skill-tag">PCA Understanding</span>
+                    <span class="skill-tag">Jupyter Notebooks</span>
+                    <span class="skill-tag">Exploratory Data Analysis</span>
+                    <span class="skill-tag">Chart.js Integration</span>
+                    <span class="skill-tag">Data Visualization</span>
+                </div>
+            </section>
+
+            <section class="conclusion">
+                <h2><i class="fas fa-flag-checkered"></i> Conclusion</h2>
+                <p>This project successfully applied statistical methods to analyze credit card transaction data for fraud detection. The analysis revealed significant class imbalance and distinct patterns in fraudulent transactions, providing valuable insights for developing more effective fraud detection systems. The PCA-transformed features maintained analytical utility while ensuring GDPR compliance through data anonymization.</p>
+                
+                <div class="project-links">
+                    <a href="#" class="btn" id="viewNotebookBtn">
+                        <i class="fas fa-book-open"></i> View Full Notebook
+                    </a>
+                    <a href="#" class="btn secondary" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Project Files
+                    </a>
+                    <a href="#" class="btn" id="toggleChartsBtn">
+                        <i class="fas fa-chart-line"></i> Interactive Charts
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>Credit Card Fraud Detection Analysis &copy; 2023 | Created for Data Science Portfolio</p>
+            <p class="dataset-credit">Dataset: <em>Credit Card Fraud Detection</em> from Kaggle</p>
+            <div class="social-links">
+                <a href="https://github.com/RyanHabis"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ryan-habis/"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:ryan.habis@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <div id="notification" class="notification">
+        <p>This is a demonstration portfolio project. The full Jupyter notebook with interactive graphs is available upon request.</p>
+        <button id="closeNotification"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- Chart Configuration -->
+    <script src="data/chart-data.js"></script>
+    <script src="charts.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
