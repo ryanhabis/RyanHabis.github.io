@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Music Fusion: How I Combined DeepSeek & MusicGPT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Styles - Embedded in the HTML */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --deepseek-color: #10b981;
+            --musicgpt-color: #8b5cf6;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #5a7dff;
+            --secondary-color: #4a1fb8;
+            --accent-color: #ff2d95;
+            --deepseek-color: #10d99e;
+            --musicgpt-color: #9d79ff;
+            --light-color: #121212;
+            --dark-color: #f8f9fa;
+            --gray-color: #adb5bd;
+            --light-gray: #2d2d2d;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--deepseek-color), var(--musicgpt-color));
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--gray-color);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, var(--deepseek-color), var(--musicgpt-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background-color: var(--light-gray);
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        #theme-icon {
+            color: var(--dark-color);
+            font-size: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 90vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .deepseek-text {
+            color: var(--deepseek-color);
+        }
+
+        .musicgpt-text {
+            color: var(--musicgpt-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-color);
+            margin-bottom: 2rem;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-blob {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.7;
+        }
+
+        .deepseek-blob {
+            background-color: var(--deepseek-color);
+            left: 20%;
+            top: 20%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .musicgpt-blob {
+            background-color: var(--musicgpt-color);
+            right: 20%;
+            bottom: 20%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .fusion-center {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--card-shadow);
+            z-index: 10;
+            font-size: 3rem;
+            color: var(--primary-color);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Story Section */
+        .story-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .quote-box {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        .quote-box i.fa-quote-left {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-weight: 600;
+            color: var(--gray-color);
+        }
+
+        .story-image {
+            flex: 1;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            flex: 1;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .deepseek-card {
+            border-top: 4px solid var(--deepseek-color);
+        }
+
+        .musicgpt-card {
+            border-top: 4px solid var(--musicgpt-color);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .deepseek-card .tool-icon {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--deepseek-color);
+        }
+
+        .musicgpt-card .tool-icon {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--musicgpt-color);
+        }
+
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-card > p {
+            color: var(--gray-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-card ul {
+            list-style: none;
+        }
+
+        .tool-card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tool-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--deepseek-color);
+        }
+
+        .musicgpt-card li::before {
+            color: var(--musicgpt-color);
+        }
+
+        /* Music Player Styles */
+        .player-section {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .player-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .song-info {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .album-art {
+            flex-shrink: 0;
+        }
+
+        .album-cover {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .album-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .playing-animation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 3px;
+            height: 30px;
+            align-items: flex-end;
+        }
+
+        .playing-animation .bar {
+            width: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+            animation: equalizer 1.5s ease infinite alternate;
+        }
+
+        .playing-animation .bar:nth-child(2) { animation-delay: 0.2s; }
+        .playing-animation .bar:nth-child(3) { animation-delay: 0.4s; }
+        .playing-animation .bar:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes equalizer {
+            0% { height: 5px; }
+            100% { height: 25px; }
+        }
+
+        .song-details {
+            flex: 1;
+        }
+
+        .song-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .artist-name {
+            color: var(--gray-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .song-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-color);
+        }
+
+        .stat i {
+            color: var(--primary-color);
+        }
+
+        .audio-player {
+            background: var(--light-gray);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .player-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .player-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .player-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 1rem;
+        }
+
+        .volume-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        #volume-slider {
+            width: 100px;
+        }
+
+        .share-btn {
+            margin-left: auto;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(67, 97, 238, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .time {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            min-width: 40px;
+        }
+
+        .lyrics-player {
+            background: var(--light-gray);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .lyrics-player h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .lyrics-display {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .download-section {
+            text-align: center;
+        }
+
+        .btn-download {
+            background: linear-gradient(to right, var(--deepseek-color), var(--musicgpt-color));
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .download-note {
+            margin-top: 1rem;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Workflow Section */
+        .workflow-section {
+            background-color: rgba(67, 97, 238, 0.03);
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .workflow-demo {
+            max-width: 900px;
+            margin: 3rem auto;
+        }
+
+        .workflow-step {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .workflow-step:nth-child(2) {
+            border-left-color: var(--deepseek-color);
+        }
+
+        .workflow-step:nth-child(3) {
+            border-left-color: var(--musicgpt-color);
+        }
+
+        .workflow-step:nth-child(4) {
+            border-left-color: var(--deepseek-color);
+        }
+
+        .workflow-step:nth-child(5) {
+            border-left-color: var(--musicgpt-color);
+        }
+
+        .workflow-step:nth-child(6) {
+            border-left-color: var(--accent-color);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(to right, var(--deepseek-color), var(--musicgpt-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .step-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+        }
+
+        .prompt-box, .response-box, .refinement-box {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-box blockquote {
+            border-left: 4px solid var(--deepseek-color);
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--dark-color);
+        }
+
+        .response-box ul, .refinement-box ol, .prompt-box ul {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .response-box li, .refinement-box li, .prompt-box li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .tool-used {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .tool-tag {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .deepseek-tag {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--deepseek-color);
+        }
+
+        .musicgpt-tag {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--musicgpt-color);
+        }
+
+        .fusion-tag {
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.1), rgba(139, 92, 246, 0.1));
+            color: var(--primary-color);
+        }
+
+        .insight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .insight-box i {
+            color: #FFD700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .takeaway-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .takeaway-box h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .takeaway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .takeaway-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .takeaway-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .takeaway-item h4 {
+            margin-bottom: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .cta-honest {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            margin-top: 3rem;
+        }
+
+        .cta-honest h3 {
+            margin-bottom: 1rem;
+        }
+
+        .cta-honest > p {
+            margin-bottom: 2rem;
+            color: var(--gray-color);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-honest .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            padding: 1rem;
+            background: rgba(0,0,0,0.03);
+            border-radius: 10px;
+        }
+
+        .disclaimer i {
+            color: var(--primary-color);
+            margin-right: 5px;
+        }
+
+        /* Lyric line styling */
+        .lyric-line {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 15px;
+        }
+
+        .lyric-line.active {
+            background: rgba(67, 97, 238, 0.1);
+            transform: translateX(5px);
+        }
+
+        .lyric-time {
+            color: var(--primary-color);
+            font-weight: 600;
+            min-width: 45px;
+        }
+
+        /* Notification styling */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--light-gray);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+        }
+
+        .footer-brand {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .footer-brand h3 {
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--deepseek-color), var(--musicgpt-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-brand p {
+            margin-bottom: 1.5rem;
+            color: var(--gray-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-credits {
+            flex: 100%;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            margin-top: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 80px 20px;
+            }
+            
+            .hero-content {
+                margin-bottom: 4rem;
+            }
+            
+            .story-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .story-image {
+                flex-direction: column;
+            }
+            
+            .player-container {
+                padding: 1.5rem;
+            }
+            
+            .song-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .player-controls {
+                gap: 0.5rem;
+            }
+            
+            .volume-control {
+                margin-left: 0;
+            }
+            
+            .share-btn {
+                margin-left: 0;
+            }
+            
+            .takeaway-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">AI Music Lab</a>
+            <ul class="nav-menu">
+                <li><a href="#story">The Story</a></li>
+                <li><a href="#player">Listen</a></li>
+                <li><a href="#workflow">The Process</a></li>
+                <li><a href="#try">Try It</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">When <span class="deepseek-text">DeepSeek</span> Meets <span class="musicgpt-text">MusicGPT</span></h1>
+            <p class="hero-subtitle">How I Combined Two AI Giants to Create Emotional Music</p>
+            <div class="hero-description">
+                <p>A journey into the fusion of lyrical AI creativity and musical AI composition. Discover how I used DeepSeek's poetic intelligence with MusicGPT's musical generation to create "Where the Lilacs Grow" - a song about loss without mentioning war.</p>
+            </div>
+            <div class="cta-buttons">
+                <a href="#story" class="btn btn-primary">Read the Story</a>
+                <a href="#player" class="btn btn-secondary">Listen Now</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="ai-blob deepseek-blob"></div>
+            <div class="ai-blob musicgpt-blob"></div>
+            <div class="fusion-center">
+                <i class="fas fa-music"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- The Story Section -->
+        <section id="story" class="section story-section">
+            <h2 class="section-title">The Inspiration</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>It began with a simple yet challenging creative goal: to write a song about the tragedy of losing loved ones in conflict, without ever mentioning war directly. I wanted the emotion to speak through metaphor and imagery, much like Tamer's "Beautiful Crime."</p>
+                    
+                    <p>That's when I realized no single AI tool had the complete capability. I needed <strong>DeepSeek</strong> for its nuanced understanding of language, metaphor, and emotional depth. And I needed <strong>MusicGPT</strong> to translate those lyrical ideas into actual musical compositions.</p>
+                    
+                    <div class="quote-box">
+                        <i class="fas fa-quote-left"></i>
+                        <p class="quote">The combination was magical: DeepSeek provided the soul, MusicGPT gave it a voice.</p>
+                        <div class="quote-author">- The Creator</div>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <div class="tool-card deepseek-card">
+                        <div class="tool-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>DeepSeek AI</h3>
+                        <p>Lyrical & Poetic Intelligence</p>
+                        <ul>
+                            <li>Metaphor Creation</li>
+                            <li>Emotional Narrative</li>
+                            <li>Poetic Structure</li>
+                            <li>Thematic Development</li>
+                        </ul>
+                    </div>
+                    <div class="tool-card musicgpt-card">
+                        <div class="tool-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>MusicGPT</h3>
+                        <p>Musical Composition AI</p>
+                        <ul>
+                            <li>Melody Generation</li>
+                            <li>Chord Progression</li>
+                            <li>Song Structure</li>
+                            <li>Instrumentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Player Section -->
+        <section id="player" class="section player-section">
+            <h2 class="section-title">Listen to "Where the Lilacs Grow"</h2>
+            <p class="section-subtitle">Experience the AI-created song with synchronized lyrics</p>
+            
+            <div class="player-container">
+                <div class="song-info">
+                    <div class="album-art">
+                        <div class="album-cover">
+                            <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Album Art">
+                            <div class="playing-animation">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="song-details">
+                        <h3 class="song-title">Where the Lilacs Grow</h3>
+                        <p class="artist-name">AI Fusion (DeepSeek + MusicGPT)</p>
+                        <div class="song-stats">
+                            <div class="stat">
+                                <i class="fas fa-play-circle"></i>
+                                <span id="play-count">0</span> plays
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-download"></i>
+                                <span id="download-count">0</span> downloads
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-clock"></i>
+                                3:42 duration
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="audio-player">
+                    <audio id="audio-player" preload="metadata">
+                        <!-- Using a placeholder music file from Mixkit -->
+                        <source src="docs/Where_the_Lilacs_Grow_FULL_SONG_MusicGPT.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="player-controls">
+                        <button id="play-btn" class="player-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="pause-btn" class="player-btn">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button id="stop-btn" class="player-btn">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        
+                        <div class="volume-control">
+                            <i class="volume-icon fas fa-volume-up"></i>
+                            <input type="range" id="volume-slider" min="0" max="100" value="80">
+                        </div>
+                        
+                        <button id="share-btn" class="player-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <span id="current-time" class="time">0:00</span>
+                        <input type="range" id="progress-bar" class="progress-bar" min="0" max="100" value="0">
+                        <span id="duration" class="time">0:00</span>
+                    </div>
+                </div>
+                
+                <div class="lyrics-player">
+                    <h3><i class="fas fa-quote-left"></i> Live Lyrics</h3>
+                    <div class="lyrics-display" id="lyrics-container">
+                        <!-- Lyrics will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="download-section">
+                    <button id="download-btn" class="btn btn-download">
+                        <i class="fas fa-download"></i> Download Song (MP3)
+                    </button>
+                    <p class="download-note">
+                        <small><i class="fas fa-info-circle"></i> This is a demonstration using placeholder audio. In a real scenario, this would be the actual AI-generated song.</small>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Actual Workflow Section -->
+        <section id="workflow" class="section workflow-section">
+            <h2 class="section-title">See the Actual Workflow</h2>
+            <p class="section-subtitle">Here's exactly how I used these AI tools step-by-step</p>
+            
+            <div class="workflow-demo">
+                <div class="workflow-step">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3><i class="fas fa-comment-dots"></i> My Prompt to DeepSeek</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="prompt-box">
+                            <p><strong>My exact prompt:</strong></p>
+                            <blockquote>
+                                "I want to make a song about tragedy loss of loved ones in war without mentioning war same style as the song beautiful crime by tamer"
+                            </blockquote>
+                        </div>
+                        <div class="tool-used">
+                            <span class="tool-tag deepseek-tag"><i class="fas fa-brain"></i> DeepSeek AI</span>
+                            <p>Used for: <strong>Lyrical concept & emotional depth</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3><i class="fas fa-music"></i> DeepSeek's Response</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="response-box">
+                            <p><strong>DeepSeek generated the complete song structure:</strong></p>
+                            <ul>
+                                <li>Title: "Where the Lilacs Grow"</li>
+                                <li>Full lyrics with verses, chorus, bridge</li>
+                                <li>Metaphor analysis ("crown of snow," "lilacs")</li>
+                                <li>Musical style suggestions</li>
+                            </ul>
+                        </div>
+                        <div class="tool-used">
+                            <span class="tool-tag deepseek-tag"><i class="fas fa-brain"></i> DeepSeek AI</span>
+                            <p>Generated: <strong>Complete lyrical framework</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3><i class="fas fa-cogs"></i> Feeding to MusicGPT</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="prompt-box">
+                            <p><strong>What I gave MusicGPT:</strong></p>
+                            <ul>
+                                <li>The complete lyrics from DeepSeek</li>
+                                <li>Style direction: "melancholic, haunting"</li>
+                                <li>Reference: "similar to Tamer's Beautiful Crime"</li>
+                                <li>Key emotional cues from the lyrics</li>
+                            </ul>
+                        </div>
+                        <div class="tool-used">
+                            <span class="tool-tag musicgpt-tag"><i class="fas fa-music"></i> MusicGPT</span>
+                            <p>Used for: <strong>Musical composition</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3><i class="fas fa-file-audio"></i> MusicGPT's Composition</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="response-box">
+                            <p><strong>MusicGPT generated:</strong></p>
+                            <ul>
+                                <li>Chord progressions in C minor / E♭ major</li>
+                                <li>Melody lines matching lyrical phrasing</li>
+                                <li>Instrumentation: piano, strings, acoustic guitar</li>
+                                <li>Song structure: Verse-Chorus-Verse-Chorus-Bridge-Chorus</li>
+                            </ul>
+                        </div>
+                        <div class="tool-used">
+                            <span class="tool-tag musicgpt-tag"><i class="fas fa-music"></i> MusicGPT</span>
+                            <p>Generated: <strong>Complete musical arrangement</strong></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <h3><i class="fas fa-sync-alt"></i> The Iterative Refinement</h3>
+                    </div>
+                    <div class="step-content">
+                        <div class="refinement-box">
+                            <p><strong>The back-and-forth process:</strong></p>
+                            <ol>
+                                <li>Took MusicGPT's melody back to DeepSeek for lyrical tweaks</li>
+                                <li>Adjusted syllable counts to fit musical phrasing</li>
+                                <li>Refined metaphors based on musical tone</li>
+                                <li>Final polish on emotional crescendos</li>
+                            </ol>
+                            <div class="insight-box">
+                                <i class="fas fa-lightbulb"></i>
+                                <p><strong>Key Insight:</strong> The real magic happened in this iterative loop between the two AIs, with me as the creative director guiding the collaboration.</p>
+                            </div>
+                        </div>
+                        <div class="tool-used">
+                            <span class="tool-tag fusion-tag"><i class="fas fa-blender"></i> AI Fusion</span>
+                            <p>Result: <strong>Seamless lyrical-musical integration</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="takeaway-box">
+                <h3><i class="fas fa-chalkboard-teacher"></i> What This Teaches Us</h3>
+                <div class="takeaway-grid">
+                    <div class="takeaway-item">
+                        <i class="fas fa-chess-queen"></i>
+                        <h4>Humans as Creative Directors</h4>
+                        <p>AI doesn't replace creativity; it amplifies it. You provide the vision and emotional direction.</p>
+                    </div>
+                    <div class="takeaway-item">
+                        <i class="fas fa-tools"></i>
+                        <h4>Right Tool for Each Task</h4>
+                        <p>Different AI tools have different strengths. The future is in knowing which tool to use when.</p>
+                    </div>
+                    <div class="takeaway-item">
+                        <i class="fas fa-infinity"></i>
+                        <h4>Iterative Process Wins</h4>
+                        <p>The best results come from back-and-forth refinement, not one-shot generation.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cta-honest">
+                <h3>Want to Try This Workflow Yourself?</h3>
+                <p>You can follow these exact steps using the actual tools:</p>
+                <div class="cta-buttons">
+                    <a href="https://chat.deepseek.com" target="_blank" class="btn btn-deepseek" style="background-color: var(--deepseek-color); color: white;">
+                        <i class="fas fa-external-link-alt"></i> Try DeepSeek for Lyrics
+                    </a>
+                    <a href="https://musicgpt.com" target="_blank" class="btn btn-musicgpt" style="background-color: var(--musicgpt-color); color: white;">
+                        <i class="fas fa-external-link-alt"></i> Try MusicGPT for Music
+                    </a>
+                    <a href="#story" class="btn btn-secondary">
+                        <i class="fas fa-book"></i> Re-read My Process
+                    </a>
+                </div>
+                <p class="disclaimer"><small><i class="fas fa-info-circle"></i> Note: Both are real AI tools with their own interfaces and learning curves. This blog shows what's possible, not an automated service.</small></p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>AI Music Lab</h3>
+                    <p>Exploring the intersection of artificial intelligence and human creativity.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://chat.deepseek.com" target="_blank">DeepSeek Chat</a></li>
+                        <li><a href="https://musicgpt.com" target="_blank">MusicGPT</a></li>
+                        <li><a href="#">AI Music Tutorials</a></li>
+                        <li><a href="#">Creative Prompts Library</a></li>
+                    </ul>
+                </div>
+                <div class="footer-credits">
+                    <p>This is a demonstration blog about combining AI tools for creative purposes. All concepts and examples are fictional but based on real AI capabilities.</p>
+                    <p class="copyright">© 2026. Created as an educational demonstration.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Complete JavaScript for AI Music Fusion Blog with Music Player
+        // Theme Toggle Functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        // Check for saved theme or prefer-color-scheme
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (savedTheme === 'dark') {
+            enableDarkTheme();
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                disableDarkTheme();
+            } else {
+                enableDarkTheme();
+            }
+        });
+
+        function enableDarkTheme() {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+
+        function disableDarkTheme() {
+            body.removeAttribute('data-theme');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'light');
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Music Player Functionality
+        const audioPlayer = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volume-slider');
+        const downloadBtn = document.getElementById('download-btn');
+        const playCountEl = document.getElementById('play-count');
+        const shareBtn = document.getElementById('share-btn');
+
+        // Initialize play count from localStorage
+        let playCount = parseInt(localStorage.getItem('songPlayCount')) || 0;
+        playCountEl.textContent = playCount;
+
+        // Simulate audio loading
+        audioPlayer.addEventListener('loadedmetadata', function() {
+            durationEl.textContent = formatTime(audioPlayer.duration);
+            progressBar.max = Math.floor(audioPlayer.duration);
+        });
+
+        audioPlayer.addEventListener('timeupdate', function() {
+            const currentTime = Math.floor(audioPlayer.currentTime);
+            progressBar.value = currentTime;
+            currentTimeEl.textContent = formatTime(currentTime);
+            
+            // Highlight current lyric based on time
+            highlightLyricAtTime(currentTime);
+        });
+
+        // Play button
+        playBtn.addEventListener('click', function() {
+            audioPlayer.play();
+            playBtn.classList.add('active');
+            pauseBtn.classList.remove('active');
+            
+            // Increment play count
+            if (audioPlayer.currentTime === 0) {
+                playCount++;
+                playCountEl.textContent = playCount;
+                localStorage.setItem('songPlayCount', playCount);
+            }
+        });
+
+        // Pause button
+        pauseBtn.addEventListener('click', function() {
+            audioPlayer.pause();
+            pauseBtn.classList.add('active');
+            playBtn.classList.remove('active');
+        });
+
+        // Stop button
+        stopBtn.addEventListener('click', function() {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+            pauseBtn.classList.remove('active');
+            playBtn.classList.remove('active');
+            progressBar.value = 0;
+            currentTimeEl.textContent = '0:00';
+        });
+
+        // Progress bar seeking
+        progressBar.addEventListener('input', function() {
+            audioPlayer.currentTime = progressBar.value;
+        });
+
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            audioPlayer.volume = volumeSlider.value / 100;
+            // Update volume icon
+            const volumeIcon = document.querySelector('.volume-icon');
+            if (volumeSlider.value == 0) {
+                volumeIcon.className = 'volume-icon fas fa-volume-mute';
+            } else if (volumeSlider.value < 50) {
+                volumeIcon.className = 'volume-icon fas fa-volume-down';
+            } else {
+                volumeIcon.className = 'volume-icon fas fa-volume-up';
+            }
+        });
+
+        // Download functionality
+        downloadBtn.addEventListener('click', function() {
+            // Get download count from localStorage
+            let downloadCount = parseInt(localStorage.getItem('songDownloadCount')) || 0;
+            downloadCount++;
+            localStorage.setItem('songDownloadCount', downloadCount);
+            
+            // Update UI
+            const downloadCountEl = document.getElementById('download-count');
+            if (downloadCountEl) {
+                downloadCountEl.textContent = downloadCount;
+            }
+            
+            // Create and trigger download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = '../docs/Where_the_Lilacs_Grow_FULL_SONG_MusicGPT.mp3';
+            downloadLink.download = 'Where_The_Lilacs_Grow_AI_Fusion.mp3';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            // Show download confirmation
+            showNotification('Song downloaded successfully! Thank you for listening.');
+        });
+
+        // Share functionality
+        if (shareBtn) {
+            shareBtn.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Where The Lilacs Grow - AI Fusion Song',
+                        text: 'Listen to this song created by combining DeepSeek AI and MusicGPT!',
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    navigator.clipboard.writeText(window.location.href).then(() => {
+                        showNotification('Link copied to clipboard!');
+                    });
+                }
+            });
+        }
+
+        // Format time (seconds to mm:ss)
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Lyric highlighting based on time
+        const lyricTimes = [
+            {time: 0, text: "[Instrumental intro]"},
+            {time: 15, text: "The clockhand froze on a Sunday smile"},
+            {time: 20, text: "Dust now dances in a sunbeam aisle"},
+            {time: 25, text: "Your jacket hangs on its wooden throne"},
+            {time: 30, text: "A silent king in a silent home"},
+            {time: 40, text: "Oh, it was a beautiful crime"},
+            {time: 45, text: "To love a soul born for a different time"},
+            {time: 50, text: "You wore your duty like a crown of snow"},
+            {time: 55, text: "That melted where the lilacs grow"},
+            {time: 70, text: "A beautiful, terrible, glorious fall"},
+            {time: 75, text: "You gave your all... you gave your all"}
+        ];
+
+        function highlightLyricAtTime(currentTime) {
+            const lyricsContainer = document.getElementById('lyrics-container');
+            if (!lyricsContainer) return;
+            
+            // Find the current lyric based on time
+            let currentLyricIndex = 0;
+            for (let i = lyricTimes.length - 1; i >= 0; i--) {
+                if (currentTime >= lyricTimes[i].time) {
+                    currentLyricIndex = i;
+                    break;
+                }
+            }
+            
+            // Update displayed lyrics
+            lyricsContainer.innerHTML = lyricTimes.map((lyric, index) => {
+                const isActive = index === currentLyricIndex;
+                return `<div class="lyric-line ${isActive ? 'active' : ''}">
+                            <span class="lyric-time">${formatTime(lyric.time)}</span>
+                            <span class="lyric-text">${lyric.text}</span>
+                        </div>`;
+            }).join('');
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Load download count
+            const downloadCount = parseInt(localStorage.getItem('songDownloadCount')) || 0;
+            const downloadCountEl = document.getElementById('download-count');
+            if (downloadCountEl) {
+                downloadCountEl.textContent = downloadCount;
+            }
+            
+            // Initialize lyric display
+            highlightLyricAtTime(0);
+            
+            // Add animation to process steps
+            const steps = document.querySelectorAll('.step, .workflow-step');
+            steps.forEach((step, index) => {
+                step.style.animationDelay = `${index * 0.2}s`;
+                step.classList.add('fade-in');
+            });
+        });
+
+        // Add CSS for animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .fade-in {
+                animation: fadeIn 0.8s ease forwards;
+                opacity: 0;
+            }
+            
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+{
+  "project_metadata": {
+    "title": "Temporal Pattern Analysis of Harold Shipman Murders",
+    "author": "Ryan Habis",
+    "date": "2024-12-01",
+    "academic_context": "MSc Data Analytics Capstone Project",
+    "ethical_statement": "This analysis is conducted with respect for all victims and focuses on systemic improvements in healthcare monitoring."
+  },
+  
+  "dataset_summary": {
+    "total_victims": 215,
+    "time_period": {
+      "start": "1975-03-17",
+      "end": "1998-06-24",
+      "duration_years": 23
+    },
+    "data_sources": [
+      "Shipman Inquiry Official Records",
+      "Death Certificate Analysis",
+      "Historical Medical Records"
+    ]
+  },
+  
+  "temporal_patterns": {
+    "hourly_distribution": {
+      "peak_hour": {
+        "hour": 16,
+        "victims": 38,
+        "percentage": 17.7
+      },
+      "morning_victims": {
+        "count": 86,
+        "percentage": 40.0,
+        "time_range": "08:00-11:59"
+      },
+      "afternoon_victims": {
+        "count": 120,
+        "percentage": 55.8,
+        "time_range": "12:00-17:59"
+      },
+      "evening_victims": {
+        "count": 9,
+        "percentage": 4.2,
+        "time_range": "18:00-20:00"
+      }
+    },
+    
+    "daily_patterns": {
+      "weekday_bias": {
+        "percentage": 88.8,
+        "victims": 191
+      },
+      "weekend_victims": {
+        "percentage": 11.2,
+        "victims": 24
+      },
+      "day_distribution": [
+        {"day": "Monday", "victims": 51, "percentage": 23.7},
+        {"day": "Tuesday", "victims": 24, "percentage": 11.2},
+        {"day": "Wednesday", "victims": 39, "percentage": 18.1},
+        {"day": "Thursday", "victims": 42, "percentage": 19.5},
+        {"day": "Friday", "victims": 35, "percentage": 16.3},
+        {"day": "Saturday", "victims": 19, "percentage": 8.8},
+        {"day": "Sunday", "victims": 5, "percentage": 2.3}
+      ]
+    },
+    
+    "seasonal_patterns": {
+      "spring": {"victims": 68, "percentage": 31.6},
+      "summer": {"victims": 63, "percentage": 29.3},
+      "fall": {"victims": 42, "percentage": 19.5},
+      "winter": {"victims": 42, "percentage": 19.5}
+    }
+  },
+  
+  "statistical_analysis": {
+    "anomaly_detection": {
+      "temporal_concentration": {
+        "gini_coefficient": 0.68,
+        "top_4_hours_percentage": 57.2,
+        "peak_vs_average_ratio": 7.6
+      },
+      "day_of_week_chi_square": {
+        "value": 42.7,
+        "p_value": "< 0.001",
+        "conclusion": "Highly significant non-uniform distribution"
+      }
+    },
+    
+    "detection_simulation": {
+      "modern_system_detection": {
+        "estimated_time_months": 3,
+        "victims_at_detection": 15,
+        "prevention_rate": "99.7%"
+      }
+    }
+  },
+  
+  "methodology": {
+    "data_processing": [
+      "Temporal data standardization",
+      "Categorical variable creation",
+      "Missing data imputation",
+      "Anomaly validation"
+    ],
+    "analysis_techniques": [
+      "Descriptive statistics",
+      "Frequency analysis",
+      "Chi-square testing",
+      "Temporal clustering",
+      "Pattern recognition algorithms"
+    ],
+    "visualization_methods": [
+      "Time series analysis",
+      "Heatmaps for pattern visualization",
+      "Comparative bar charts",
+      "Statistical distribution plots"
+    ]
+  },
+  
+  "ethical_framework": {
+    "principles_applied": [
+      "Victim respect and dignity",
+      "Data privacy protection",
+      "Educational focus",
+      "System improvement advocacy"
+    ],
+    "compliance": [
+      "GDPR principles",
+      "Academic ethics guidelines",
+      "Research integrity standards"
+    ]
+  },
+  
+  "skills_demonstrated": {
+    "technical": [
+      "Python programming",
+      "Data visualization",
+      "Statistical analysis",
+      "Pattern recognition"
+    ],
+    "analytical": [
+      "Temporal pattern analysis",
+      "Anomaly detection",
+      "Hypothesis testing",
+      "Forensic reconstruction"
+    ],
+    "professional": [
+      "Ethical decision making",
+      "Academic writing",
+      "Project management",
+      "Stakeholder communication"
+    ]
+  },
+  
+  "contact": {
+    "author": "Ryan Habis",
+    "email": "ryan.habis@example.com",
+    "github": "https://github.com/RyanHabis",
+    "linkedin": "https://linkedin.com/in/ryanhabis",
+    "portfolio": "https://ryanhabis.github.io"
+  }
+}

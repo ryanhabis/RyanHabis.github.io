@@ -3,1302 +3,671 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan Habis - Cloud Computing & Data Analytics Portfolio</title>
-    <!-- Professional Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <title>Ryan Habis | Cloud & Data Analytics Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and Base Styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --gray: #7f8c8d;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            /* Professional Color Palette */
-            --primary-color: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary-color: #475569;
-            --accent-color: #0ea5e9;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-            --light-bg: #f8fafc;
-            --text-light: #f1f5f9;
-            --text-dark: #334155;
-            --border-color: #334155;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            
-            /* Spacing */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 3rem;
-            --spacing-xl: 4rem;
-            
-            /* Border Radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 1rem;
-        }
-
+        
         body {
-            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text-light);
-            background-color: var(--dark-bg);
-            overflow-x: hidden;
+            color: #333;
+            background-color: #f9f9f9;
         }
-
+        
         .container {
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 15px;
         }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            color: var(--text-light);
-        }
-
-        h3 {
-            font-size: 1.75rem;
-            color: var(--text-light);
-        }
-
-        h4 {
-            font-size: 1.25rem;
-            color: var(--text-light);
-        }
-
-        p {
-            margin-bottom: var(--spacing-sm);
-            color: #94a3b8;
-        }
-
-        .lead {
-            font-size: 1.25rem;
-            color: #cbd5e1;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-light);
+            color: white;
             text-decoration: none;
         }
-
+        
         .logo span {
-            color: var(--primary-color);
+            color: var(--secondary);
         }
-
-        .nav-links {
+        
+        nav ul {
             display: flex;
-            gap: 2rem;
-            align-items: center;
+            list-style: none;
         }
-
-        .nav-link {
-            color: #cbd5e1;
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
+            transition: color 0.3s;
         }
-
-        .nav-link:hover {
-            color: var(--primary-color);
+        
+        nav ul li a:hover {
+            color: var(--secondary);
         }
-
-        .nav-link.active {
-            color: var(--primary-color);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--primary-color);
-            border-radius: 1px;
-        }
-
+        
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: var(--text-light);
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
         }
-
+        
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
         }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
-            z-index: -1;
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
         }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
-            align-items: center;
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #ecf0f1;
         }
-
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        .hero-text h1 {
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: var(--spacing-md);
-            font-weight: 500;
-        }
-
-        .hero-description {
-            font-size: 1.125rem;
-            margin-bottom: var(--spacing-lg);
-            max-width: 600px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
+        
+        .highlight {
+            color: var(--secondary);
             font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Credentials Section */
+        .credentials {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0.5rem auto;
+        }
+        
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .credential-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .credential-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .credential-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .credential-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Portfolio & Hobby Projects */
+        .projects {
+            padding: 4rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background-color: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
             color: white;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-light);
-            border-color: var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: var(--spacing-md);
-        }
-
-        .tech-item {
-            background: var(--card-bg);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .tech-item i {
-            color: var(--primary-color);
-            font-size: 1.25rem;
-        }
-
-        /* About Section */
-        .about {
-            padding: var(--spacing-xl) 0;
-            background: var(--card-bg);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .education-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .education-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
-        }
-
-        .education-item {
-            position: relative;
-            padding-bottom: var(--spacing-lg);
-        }
-
-        .education-item:last-child {
-            padding-bottom: 0;
-        }
-
-        .education-item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0;
-            width: 1rem;
-            height: 1rem;
-            background: var(--primary-color);
-            border-radius: 50%;
-            border: 3px solid var(--card-bg);
-        }
-
-        .education-degree {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        .education-institution {
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
-        .education-date {
-            color: #94a3b8;
-            font-size: 0.875rem;
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: var(--spacing-xl) 0;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .skill-category {
-            background: var(--card-bg);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-        }
-
-        .skill-category h3 {
-            margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-category h3 i {
-            color: var(--primary-color);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .skill-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .skill-name {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-name i {
-            color: var(--accent-color);
-        }
-
-        .skill-level {
-            width: 100px;
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .skill-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 3px;
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: var(--spacing-xl) 0;
-            background: var(--card-bg);
-        }
-
+        
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
         }
-
+        
         .project-card {
-            background: var(--dark-bg);
-            border-radius: var(--radius-lg);
+            background-color: white;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
         }
-
+        
         .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
         }
-
-        .project-header {
-            padding: var(--spacing-md);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: var(--spacing-sm);
-        }
-
-        .tech-tag {
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .project-body {
-            padding: var(--spacing-md);
-        }
-
-        .project-body p {
-            color: #94a3b8;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .project-links {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        /* Hobbies Section */
-        .hobbies {
-            padding: var(--spacing-xl) 0;
-        }
-
-        .hobbies-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto var(--spacing-lg);
-        }
-
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .hobby-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hobby-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-color);
-        }
-
-        .hobby-card.warhammer {
-            background: linear-gradient(135deg, rgba(139, 0, 0, 0.1), rgba(212, 175, 55, 0.1));
-            border-color: #8b0000;
-        }
-
-        .hobby-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-md);
-            color: var(--primary-color);
-        }
-
-        .hobby-card.warhammer .hobby-icon {
-            color: #d4af37;
-        }
-
-        .hobby-features {
-            list-style: none;
-            margin-top: var(--spacing-md);
-        }
-
-        .hobby-features li {
+        
+        .project-img {
+            height: 200px;
+            background-color: #ddd;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: #94a3b8;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
         }
-
-        .hobby-features li i {
-            color: var(--success-color);
+        
+        .project-content {
+            padding: 1.5rem;
         }
-
-        .hobby-cta {
-            margin-top: var(--spacing-md);
+        
+        .project-tag {
+            display: inline-block;
+            background-color: #e8f4fc;
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hobby-tag {
+            background-color: #ffeaea;
+            color: var(--accent);
+        }
+        
+        .project-content h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        /* Hobby Button */
+        .hobby-btn-container {
             text-align: center;
+            margin-top: 3rem;
         }
-
-        /* Contact Section */
-        .contact {
-            padding: var(--spacing-xl) 0;
-            background: var(--card-bg);
+        
+        .hobby-btn {
+            background-color: var(--accent);
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
         }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-xl);
+        
+        .hobby-btn:hover {
+            background-color: #c0392b;
         }
-
-        @media (max-width: 768px) {
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-md);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            padding: var(--spacing-md);
-            background: var(--dark-bg);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            border-color: var(--primary-color);
-            transform: translateX(5px);
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            width: 40px;
-        }
-
-        .contact-form {
-            background: var(--dark-bg);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-color);
-        }
-
-        .form-group {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            color: var(--text-light);
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-
+        
         /* Footer */
-        .footer {
-            background: var(--dark-bg);
-            padding: var(--spacing-xl) 0;
-            border-top: 1px solid var(--border-color);
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
         }
-
+        
         .footer-content {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             flex-wrap: wrap;
-            gap: var(--spacing-md);
+            margin-bottom: 2rem;
         }
-
-        .social-links {
-            display: flex;
-            gap: var(--spacing-md);
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
         }
-
-        .social-link {
+        
+        .footer-section h3 {
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .social-links a {
+            display: inline-block;
+            color: white;
+            background-color: var(--primary);
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--card-bg);
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Info Styles */
+        .contact-info {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            text-decoration: none;
-            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
         }
-
-        .social-link:hover {
-            background: var(--primary-color);
-            transform: translateY(-3px);
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary);
+            width: 20px;
         }
-
-        .copyright {
-            color: #94a3b8;
-            font-size: 0.875rem;
-        }
-
+        
         /* Responsive Design */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--card-bg);
+            .header-container {
                 flex-direction: column;
-                padding: var(--spacing-md);
-                gap: var(--spacing-sm);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid var(--border-color);
+                text-align: center;
             }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .cta-buttons {
+            
+            nav ul {
+                margin-top: 1rem;
                 justify-content: center;
             }
-        }
-
-        /* Animation Classes */
-        .fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-
-        .slide-up {
-            animation: slideUp 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
+            
+            nav ul li {
+                margin: 0 0.8rem;
             }
-            to {
-                opacity: 1;
+            
+            .hero h1 {
+                font-size: 2.2rem;
             }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            
+            .hero p {
+                font-size: 1rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
             }
         }
-
-        /* Warhammer Integration Styling */
-        .warhammer-preview {
-            background: linear-gradient(135deg, rgba(139, 0, 0, 0.1), rgba(212, 175, 55, 0.1));
-            border: 2px solid #8b0000;
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-md);
-            margin-top: var(--spacing-lg);
-        }
-
-        .warhammer-preview h4 {
-            color: #d4af37;
-            font-family: 'Cinzel', serif;
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .warhammer-tools {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: var(--spacing-sm);
-        }
-
-        .warhammer-tool {
-            background: rgba(139, 0, 0, 0.2);
-            color: #d4af37;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+        
+        @media (max-width: 576px) {
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--primary);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">Ryan <span>Habis</span></a>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Ryan<span>Habis</span></a>
+            
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="nav-links" id="navLinks">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#hobbies" class="nav-link">Hobbies</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="/hobbies/warhammer/index.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
-                    <i class="fas fa-chess-knight"></i> Warhammer Tools
-                </a>
-            </div>
+            
+            <nav>
+                <ul id="mainNav">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#credentials">Credentials</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#hobby">Hobby Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background"></div>
+    <section class="hero" id="home">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text fade-in">
-                    <h1>Cloud Architect & Data Analyst</h1>
-                    <div class="hero-subtitle">
-                        BSc Computer Science | BSc Hons Cloud Computing | MSc Data Analytics
-                    </div>
-                    <p class="hero-description">
-                        Passionate about building scalable cloud solutions and extracting meaningful insights from data. 
-                        Currently pursuing a Master's in Data Analytics while developing innovative tools that bridge 
-                        technical expertise with creative hobbies.
-                    </p>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-code"></i> View Projects
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i> Contact Me
-                        </a>
-                        <a href="/hobbies/warhammer/index.html" class="btn btn-secondary">
-                            <i class="fas fa-paint-brush"></i> Warhammer Tools
-                        </a>
-                    </div>
-                    <div class="tech-stack slide-up">
-                        <div class="tech-item">
-                            <i class="fab fa-aws"></i>
-                            <span>AWS</span>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-database"></i>
-                            <span>SQL</span>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fab fa-js"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="tech-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Tableau</span>
-                        </div>
-                    </div>
+            <h1>Ryan Habis | Cloud Computing & Data Analytics Specialist</h1>
+            <p>With a <span class="highlight">BSc in Computer Science</span>, <span class="highlight">BSc Hons in Cloud Computing</span>, <span class="highlight">Masters in Data Analytics</span>, and certifications in advanced mobile computing and software development, I bring a comprehensive skill set to every project.</p>
+            <div class="btn-container">
+                <a href="#portfolio" class="btn">View My Portfolio</a>
+                <a href="#hobby" class="btn btn-outline">Explore My Hobby Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section class="credentials" id="credentials">
+        <div class="container">
+            <h2 class="section-title">Academic & Professional Credentials</h2>
+            <div class="credentials-grid">
+                <div class="credential-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>BSc Computer Science</h3>
+                    <p>Solid foundation in algorithms, data structures, and software engineering principles.</p>
                 </div>
-                <div class="hero-visual slide-up">
-                    <!-- You can add a profile image or animated visualization here -->
-                    <div class="warhammer-preview">
-                        <h4>Creative Integration</h4>
-                        <p>Explore how I combine technical skills with creative problem-solving through my Warhammer 40k web applications.</p>
-                        <div class="warhammer-tools">
-                            <span class="warhammer-tool">Army Builder</span>
-                            <span class="warhammer-tool">Collection Tracker</span>
-                            <span class="warhammer-tool">Painting Guide</span>
-                            <span class="warhammer-tool">Rules Reference</span>
-                        </div>
-                    </div>
+                <div class="credential-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>BSc Hons Cloud Computing</h3>
+                    <p>Specialized knowledge in cloud architecture, distributed systems, and scalability.</p>
+                </div>
+                <div class="credential-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Masters in Data Analytics</h3>
+                    <p>Advanced skills in data mining, machine learning, and statistical analysis.</p>
+                </div>
+                <div class="credential-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Diploma in Advanced Mobile Computing</h3>
+                    <p>Expertise in mobile app development, cross-platform solutions, and UI/UX design.</p>
+                </div>
+                <div class="credential-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certificate in Software Development</h3>
+                    <p>Professional training in modern development methodologies and best practices.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Portfolio & Hobby Projects -->
+    <section class="projects" id="portfolio">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div>
-                    <h3>Education & Background</h3>
-                    <p class="lead">
-                        A dedicated technology professional with dual bachelor's degrees in Computer Science and 
-                        Cloud Computing, currently advancing expertise through a Master's in Data Analytics.
-                    </p>
-                    <div class="education-timeline">
-                        <div class="education-item">
-                            <div class="education-degree">MSc Data Analytics</div>
-                            <div class="education-institution">University of Technology</div>
-                            <div class="education-date">2023 - Present</div>
-                        </div>
-                        <div class="education-item">
-                            <div class="education-degree">BSc Hons Cloud Computing</div>
-                            <div class="education-institution">Tech University</div>
-                            <div class="education-date">2020 - 2022</div>
-                        </div>
-                        <div class="education-item">
-                            <div class="education-degree">BSc Computer Science</div>
-                            <div class="education-institution">State University</div>
-                            <div class="education-date">2017 - 2020</div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3>Professional Philosophy</h3>
-                    <p>
-                        I believe in the power of technology to solve complex problems and enhance human experiences. 
-                        My approach combines rigorous academic training with practical implementation, whether I'm 
-                        designing cloud architectures or developing data-driven applications.
-                    </p>
-                    <p>
-                        The Warhammer 40k web tools showcase my ability to apply technical skills to personal interests, 
-                        creating comprehensive systems that serve real user needs while demonstrating full-stack 
-                        development capabilities.
-                    </p>
-                    <div class="cta-buttons" style="margin-top: var(--spacing-lg);">
-                        <a href="/docs/resume.pdf" class="btn btn-primary" download>
-                            <i class="fas fa-download"></i> Download Resume
-                        </a>
-                        <a href="#projects" class="btn btn-secondary">
-                            <i class="fas fa-laptop-code"></i> View Portfolio
-                        </a>
-                    </div>
-                </div>
+            <h2 class="section-title">My Programming Projects</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="portfolio">Portfolio</button>
+                <button class="filter-btn" data-filter="hobby">Hobby Projects</button>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-cloud"></i> Cloud Computing</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-aws"></i>
-                                <span>AWS Services</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-server"></i>
-                                <span>Cloud Architecture</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Security & Compliance</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-chart-bar"></i> Data Analytics</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-python"></i>
-                                <span>Python (Pandas, NumPy)</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-database"></i>
-                                <span>SQL & NoSQL</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Data Visualization</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Web Development</h3>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-js"></i>
-                                <span>JavaScript & Node.js</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fab fa-react"></i>
-                                <span>React.js</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 82%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <i class="fas fa-database"></i>
-                                <span>Database Design</span>
-                            </div>
-                            <div class="skill-level">
-                                <div class="skill-fill" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h4>Warhammer 40k Web Suite</h4>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">HTML/CSS</span>
-                            <span class="tech-tag">Local Storage</span>
-                            <span class="tech-tag">UI/UX Design</span>
-                        </div>
+                <!-- Portfolio Project 1 -->
+                <div class="project-card" data-category="portfolio">
+                    <div class="project-img" style="background-color: #d6eaf8;">
+                        <i class="fas fa-cloud-upload-alt fa-3x" style="color: #3498db;"></i>
                     </div>
-                    <div class="project-body">
-                        <p>A comprehensive web application suite for Warhammer 40k enthusiasts, featuring army building tools, collection tracking, painting guides, and rules references.</p>
-                        <p>This project demonstrates full-stack capabilities and user-centric design principles applied to a complex domain.</p>
-                        <div class="project-links">
-                            <a href="/hobbies/warhammer/index.html" class="btn btn-primary">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/yourusername/warhammer-suite" class="btn btn-secondary">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
+                    <div class="project-content">
+                        <span class="project-tag">Cloud Computing</span>
+                        <h3>Scalable Cloud Infrastructure</h3>
+                        <p>A cloud-native application with auto-scaling capabilities built on AWS with Terraform.</p>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h4>Cloud Cost Optimization Tool</h4>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Lambda</span>
-                            <span class="tech-tag">DynamoDB</span>
-                        </div>
+                
+                <!-- Portfolio Project 2 -->
+                <div class="project-card" data-category="portfolio">
+                    <div class="project-img" style="background-color: #d5f4e6;">
+                        <i class="fas fa-chart-line fa-3x" style="color: #1abc9c;"></i>
                     </div>
-                    <div class="project-body">
-                        <p>Serverless application that analyzes AWS usage patterns and recommends cost-saving measures. Processes terabytes of billing data to identify optimization opportunities.</p>
-                        <p>Implemented automated reporting and alerting system that reduced cloud costs by 35% for test deployments.</p>
-                        <div class="project-links">
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
+                    <div class="project-content">
+                        <span class="project-tag">Data Analytics</span>
+                        <h3>Predictive Sales Analytics</h3>
+                        <p>Machine learning model for sales forecasting with 95% accuracy using Python and TensorFlow.</p>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h4>Real-time Analytics Dashboard</h4>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">D3.js</span>
-                            <span class="tech-tag">FastAPI</span>
-                        </div>
+                
+                <!-- Hobby Project 1 -->
+                <div class="project-card" data-category="hobby">
+                    <div class="project-img" style="background-color: #fdebd0;">
+                        <i class="fas fa-gamepad fa-3x" style="color: #e67e22;"></i>
                     </div>
-                    <div class="project-body">
-                        <p>Interactive dashboard for monitoring real-time data streams with customizable visualizations and alert systems.</p>
-                        <p>Features include live data updates, historical analysis, and predictive modeling integration.</p>
-                        <div class="project-links">
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
+                    <div class="project-content">
+                        <span class="project-tag hobby-tag">Hobby Project</span>
+                        <h3>Retro Game Emulator</h3>
+                        <p>A JavaScript-based emulator for classic 8-bit games, built for fun and nostalgia.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hobbies Section -->
-    <section id="hobbies" class="hobbies">
-        <div class="container">
-            <h2 class="section-title">Creative & Technical Hobbies</h2>
-            <div class="hobbies-intro">
-                <p class="lead">
-                    My hobbies represent the intersection of technical problem-solving and creative expression. 
-                    Each project demonstrates how professional skills can enhance personal interests.
-                </p>
-            </div>
-            <div class="hobbies-grid">
-                <div class="hobby-card warhammer">
-                    <div class="hobby-icon">
-                        <i class="fas fa-chess-knight"></i>
+                
+                <!-- Portfolio Project 3 -->
+                <div class="project-card" data-category="portfolio">
+                    <div class="project-img" style="background-color: #e8daef;">
+                        <i class="fas fa-mobile-alt fa-3x" style="color: #9b59b6;"></i>
                     </div>
-                    <h3>Warhammer 40k Development</h3>
-                    <p>Creating comprehensive web tools for tabletop gaming enthusiasts, combining data management, UI/UX design, and complex business logic.</p>
-                    <ul class="hobby-features">
-                        <li><i class="fas fa-check"></i> Full-stack web applications</li>
-                        <li><i class="fas fa-check"></i> Data visualization and analytics</li>
-                        <li><i class="fas fa-check"></i> Responsive design principles</li>
-                        <li><i class="fas fa-check"></i> Local storage implementations</li>
-                    </ul>
-                    <div class="hobby-cta">
-                        <a href="/hobbies/warhammer/index.html" class="btn btn-primary">
-                            <i class="fas fa-external-link-alt"></i> Explore Tools
-                        </a>
+                    <div class="project-content">
+                        <span class="project-tag">Mobile Computing</span>
+                        <h3>Health & Fitness Tracker App</h3>
+                        <p>Cross-platform mobile application for tracking fitness metrics with React Native.</p>
                     </div>
                 </div>
-
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-robot"></i>
+                
+                <!-- Hobby Project 2 -->
+                <div class="project-card" data-category="hobby">
+                    <div class="project-img" style="background-color: #fadbd8;">
+                        <i class="fas fa-robot fa-3x" style="color: #e74c3c;"></i>
                     </div>
-                    <h3>Machine Learning Projects</h3>
-                    <p>Applying data analytics techniques to personal projects, from predictive modeling to natural language processing experiments.</p>
-                    <ul class="hobby-features">
-                        <li><i class="fas fa-check"></i> Predictive analytics models</li>
-                        <li><i class="fas fa-check"></i> NLP and text analysis</li>
-                        <li><i class="fas fa-check"></i> Data pipeline design</li>
-                        <li><i class="fas fa-check"></i> Model deployment</li>
-                    </ul>
+                    <div class="project-content">
+                        <span class="project-tag hobby-tag">Hobby Project</span>
+                        <h3>Home Automation Bot</h3>
+                        <p>A Raspberry Pi-based home automation system controlled via a custom web interface.</p>
+                    </div>
                 </div>
-
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-gamepad"></i>
+                
+                <!-- Portfolio Project 4 -->
+                <div class="project-card" data-category="portfolio">
+                    <div class="project-img" style="background-color: #d1f2eb;">
+                        <i class="fas fa-database fa-3x" style="color: #16a085;"></i>
                     </div>
-                    <h3>Game Development</h3>
-                    <p>Developing small games and interactive experiences using modern web technologies and game engines.</p>
-                    <ul class="hobby-features">
-                        <li><i class="fas fa-check"></i> WebGL and Three.js</li>
-                        <li><i class="fas fa-check"></i> Game mechanics design</li>
-                        <li><i class="fas fa-check"></i> Physics simulations</li>
-                        <li><i class="fas fa-check"></i> Multiplayer networking</li>
-                    </ul>
+                    <div class="project-content">
+                        <span class="project-tag">Software Development</span>
+                        <h3>Real-time Database Optimizer</h3>
+                        <p>A tool for optimizing database queries and improving performance by up to 70%.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>Ryan.Habis@example.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>San Francisco, CA</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/RyanHabis</p>
-                        </div>
-                    </div>
-                </div>
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
-                </form>
+            
+            <!-- Hobby Projects Button -->
+            <div class="hobby-btn-container" id="hobby">
+                <a href="#hobby" class="btn hobby-btn">
+                    <i class="fas fa-code"></i> Explore More Hobby Projects
+                </a>
+                <p style="margin-top: 1rem; color: var(--gray);">Showcasing my passion for programming beyond professional work</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
-                <div class="logo">Ryan <span>Habis</span></div>
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
-                    </a>
+                <div class="footer-section">
+                    <h3>About This Portfolio</h3>
+                    <p>This site showcases both my professional portfolio and hobby programming projects. I believe that coding outside of work demonstrates genuine passion and continuous learning in the field of technology.</p>
                 </div>
-                <div class="copyright">
-                    &copy; 2024 Ryan Habis. All rights reserved.
+                <div class="footer-section">
+                    <h3>Contact Ryan Habis</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <p>ryan.habis@gmail.com</p>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <p>083 802 2571</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/ryanhabis/" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ryan-habis" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:ryan.habis@gmail.com" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="tel:+27838022571" title="Phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
                 </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Ryan Habis. All rights reserved. | Designed with passion for programming</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">BSc Computer Science | BSc Hons Cloud Computing | Masters Data Analytics</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-
+        const mainNav = document.getElementById('mainNav');
+        
         mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            mainNav.classList.toggle('show');
         });
-
-        // Smooth Scrolling for Navigation Links
+        
+        // Filter projects
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Filter projects
+                const filterValue = button.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
@@ -1306,89 +675,31 @@
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu if open
+                    mainNav.classList.remove('show');
                 }
             });
         });
-
-        // Active Navigation Link on Scroll
-        const sections = document.querySelectorAll('section');
-        const navItems = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href') === `#${current}`) {
-                    item.classList.add('active');
-                }
-            });
-        });
-
-        // Form Submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
+        
+        // Highlight hobby projects when the hobby button is clicked
+        document.querySelector('.hobby-btn').addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
+            // Trigger filter for hobby projects
+            const hobbyFilterBtn = document.querySelector('.filter-btn[data-filter="hobby"]');
+            hobbyFilterBtn.click();
             
-            // In a real application, you would send this to a server
-            console.log('Form submitted:', formData);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
-        });
-
-        // Intersection Observer for Animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
+            // Smooth scroll to projects section
+            const projectsSection = document.getElementById('portfolio');
+            window.scrollTo({
+                top: projectsSection.offsetTop - 80,
+                behavior: 'smooth'
             });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.skill-category, .project-card, .hobby-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Initialize animations for hero elements
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroText = document.querySelector('.hero-text');
-            const heroVisual = document.querySelector('.hero-visual');
-            
-            if (heroText) heroText.classList.add('fade-in');
-            if (heroVisual) heroVisual.classList.add('slide-up');
         });
     </script>
 </body>

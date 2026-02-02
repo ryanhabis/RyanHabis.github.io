@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forensic Temporal Analysis: Harold Shipman Case | Ryan Habis</title>
+    <meta name="description" content="Advanced data analytics case study analyzing temporal patterns in 215 confirmed murders by Harold Shipman">
+    <meta name="keywords" content="data analytics, forensic analysis, temporal patterns, healthcare analytics, serial homicide, data visualization">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://ryanhabis.github.io" class="nav-logo">RH</a>
+            <div class="nav-links">
+                <a href="https://ryanhabis.github.io">Home</a>
+                <a href="https://ryanhabis.github.io/portfolio">Portfolio</a>
+                <a href="https://ryanhabis.github.io/about">About</a>
+                <a href="https://ryanhabis.github.io/contact">Contact</a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="project-category">Forensic Data Analytics</span>
+                <h1 class="hero-title">Temporal Pattern Analysis: Harold Shipman Murders</h1>
+                <p class="hero-subtitle">How data analytics could have detected UK's most prolific serial killer 23 years earlier</p>
+                
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Nov 2024 - Dec 2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-tags"></i>
+                        <span>Data Analysis, Pattern Recognition, Healthcare Analytics</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>215 Victims Analyzed | 23-Year Timeline</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#analysis" class="btn btn-primary">
+                        <i class="fas fa-chart-bar"></i> View Analysis
+                    </a>
+                    <a href="https://github.com/RyanHabis/shipman-temporal-analysis" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                    <a href="notebooks/shipman_temporal_analysis.ipynb" class="btn btn-outline" download>
+                        <i class="fas fa-download"></i> Download Notebook
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Overview -->
+    <section class="section overview" id="overview">
+        <div class="container">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="grid overview-grid">
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Objective</h3>
+                    <p>Apply forensic data analytics to identify temporal patterns in serial homicide data, demonstrating how modern techniques could enable earlier detection of criminal behavior within healthcare systems.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data</h3>
+                    <p>215 confirmed murder cases from the Shipman Inquiry (1975-1998). Temporal data reconstructed from death certificates, witness statements, and medical records.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Tools & Technologies</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">pandas</span>
+                        <span class="tech-tag">matplotlib</span>
+                        <span class="tech-tag">seaborn</span>
+                        <span class="tech-tag">Jupyter</span>
+                        <span class="tech-tag">Chart.js</span>
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Academic Context</h3>
+                    <p>Master's in Data Analytics capstone project demonstrating advanced pattern recognition, statistical analysis, and ethical data handling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="section findings" id="findings">
+        <div class="container">
+            <h2 class="section-title">Key Findings</h2>
+            <div class="findings-container">
+                <div class="finding-card">
+                    <div class="finding-stat">55.8%</div>
+                    <h3>Afternoon Murders</h3>
+                    <p>Over half of all murders occurred between 12 PM and 6 PM, with a distinct peak at 4:00 PM (38 victims).</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-stat">88.8%</div>
+                    <h3>Weekday Bias</h3>
+                    <p>Nearly 90% of murders occurred Monday through Friday, with Monday being the peak day (51 victims).</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-stat">60.9%</div>
+                    <h3>Seasonal Concentration</h3>
+                    <p>Over 60% of murders occurred in Spring and Summer months, suggesting strategic timing.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="finding-stat">4:00 PM</div>
+                    <h3>Peak Hour</h3>
+                    <p>Highest concentration of murders occurred at 4:00 PM, with 38 victims (7.6× average hour).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Visualizations -->
+    <section class="section visualization" id="analysis">
+        <div class="container">
+            <h2 class="section-title">Temporal Pattern Analysis</h2>
+            
+            <!-- Time Distribution Chart -->
+            <div class="chart-container">
+                <h3><i class="fas fa-clock"></i> Time of Day Distribution</h3>
+                <div class="chart-wrapper">
+                    <canvas id="timeDistributionChart"></canvas>
+                </div>
+                <p class="chart-caption">Clear afternoon concentration with distinct peaks at 10 AM, 11 AM, 2 PM, and 4 PM. Note the complete absence of nighttime murders.</p>
+            </div>
+
+            <!-- Day of Week Chart -->
+            <div class="chart-container">
+                <h3><i class="fas fa-calendar-week"></i> Day of Week Pattern Average</h3>
+                <div class="chart-wrapper">
+                    <canvas id="dayOfWeekChart"></canvas>
+                </div>
+                <p class="chart-caption">Strong workweek pattern with Monday peak (51 victims) and dramatic weekend drop (only 24 victims total).</p>
+            </div>
+
+            <!-- Seasonal Analysis -->
+            <div class="chart-container">
+                <h3><i class="fas fa-sun"></i> Seasonal Distribution</h3>
+                <div class="chart-wrapper">
+                    <canvas id="seasonalChart"></canvas>
+                </div>
+                <p class="chart-caption">Spring and Summer account for 61% of all murders, matching patterns of increased patient isolation during warmer months.</p>
+            </div>
+
+            <!-- Heatmap -->
+            <div class="chart-container">
+                <h3><i class="fas fa-th"></i> Time Pattern Heatmap</h3>
+                <div class="chart-wrapper">
+                    <canvas id="heatmapChart"></canvas>
+                </div>
+                <p class="chart-caption">Interaction between day of week and time of day shows consistent patterns across all weekdays.</p>
+            </div>
+        </div>
+    </section>
+        <!-- Video & Podcast Section -->
+<section class="section multimedia" id="multimedia">
+    <div class="container">
+        <h2 class="section-title">Video & Podcast Analysis</h2>
+        
+        <div class="multimedia-grid">
+            <!-- Video Presentation -->
+            <div class="media-card">
+                <div class="media-header">
+                    <div class="media-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Analysis</h3>
+                    <span class="media-badge">Explainer Video</span>
+                </div>
+                <div class="media-content">
+                    <div class="video-container">
+                        <!-- Replace with your actual video embed code -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/KoQ-b33kRrI?si=e_p3iIEA12IPo6y8"
+                            title="Harold Shipman Temporal Pattern Analysis"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="media-description">
+                        <h4>Key Insights from Video:</h4>
+                        <ul>
+                            <li><strong>Professional Schedule Pattern:</strong> How Shipman used standard work hours as camouflage</li>
+                            <li><strong>4:00 PM Peak:</strong> Statistical significance of the most lethal hour</li>
+                            <li><strong>Weekday Bias:</strong> 88.8% of murders occurred Monday-Friday</li>
+                            <li><strong>Systemic Failure:</strong> How paper-based systems enabled prolonged deception</li>
+                        </ul>
+                        <div class="media-stats">
+                            <span><i class="fas fa-clock"></i> Duration: 6:24</span>
+                            <span><i class="fas fa-eye"></i> Views: [Your View Count]</span>
+                            <span><i class="fas fa-calendar"></i> Published: Nov 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Episode -->
+            <div class="media-card">
+                <div class="media-header">
+                    <div class="media-icon">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <h3>Podcast Episode</h3>
+                    <span class="media-badge">Spotify Original</span>
+                </div>
+                <div class="media-content">
+                    <div class="podcast-container">
+                        <!-- Spotify Embed Code -->
+                        <iframe 
+                            src="https://open.spotify.com/embed/episode/YOUR_EPISODE_ID"
+                            width="100%" 
+                            height="152" 
+                            frameborder="0" 
+                            allowtransparency="true" 
+                            allow="encrypted-media">
+                        </iframe>
+                    </div>
+                    <div class="media-description">
+                        <h4>Episode Discussion Points:</h4>
+                        <ul>
+                            <li><strong>Data Ethics:</strong> Balancing sensitivity with analytical necessity</li>
+                            <li><strong>Temporal Clustering:</strong> Psychological implications of ritualistic timing</li>
+                            <li><strong>Modern Prevention:</strong> How current systems would detect anomalies</li>
+                            <li><strong>Interview Segments:</strong> Expert perspectives on healthcare monitoring</li>
+                        </ul>
+                        <div class="media-stats">
+                            <span><i class="fas fa-headphones"></i> Duration: 38:15</span>
+                            <span><i class="fas fa-plays"></i> Plays: [Your Play Count]</span>
+                            <span><i class="fas fa-microphone-alt"></i> Format: Solo + Interviews</span>
+                        </div>
+                        <div class="podcast-platforms">
+                            <p>Also available on:</p>
+                            <div class="platform-icons">
+                                <a href="[Apple Podcasts Link]" target="_blank"><i class="fab fa-apple"></i></a>
+                                <a href="[Google Podcasts Link]" target="_blank"><i class="fab fa-google"></i></a>
+                                <a href="[Amazon Music Link]" target="_blank"><i class="fab fa-amazon"></i></a>
+                                <a href="[RSS Feed]" target="_blank"><i class="fas fa-rss"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transcript & Show Notes -->
+        <div class="transcript-section">
+            <h3><i class="fas fa-file-alt"></i> Video Transcript & Podcast Show Notes</h3>
+            <div class="transcript-content">
+                <blockquote class="executive-summary">
+                    <p>"These sources provide a comprehensive <strong>data-driven analysis</strong> of the prolific crimes committed by the British serial killer <strong>Harold Shipman</strong>. By examining the <strong>temporal patterns</strong> of 215 confirmed murders, the materials reveal that his killings were not random but followed a strict <strong>professional schedule</strong>."</p>
+                </blockquote>
+                
+                <div class="transcript-grid">
+                    <div class="transcript-card">
+                        <h4><i class="fas fa-video"></i> Video Chapters</h4>
+                        <ol>
+                            <li><strong>0:00-1:30:</strong> Introduction - The Trusted Doctor Paradox</li>
+                            <li><strong>1:30-2:45:</strong> Temporal Pattern Revelation</li>
+                            <li><strong>2:45-4:00:</strong> The 4:00 PM Phenomenon</li>
+                            <li><strong>4:00-5:15:</strong> Systemic Vulnerabilities</li>
+                            <li><strong>5:15-6:24:</strong> Modern Solutions & Legacy</li>
+                        </ol>
+                    </div>
+                    <div class="transcript-card">
+                        <h4><i class="fas fa-podcast"></i> Podcast Segments</h4>
+                        <ol>
+                            <li><strong>0:00-8:00:</strong> Case Introduction & Data Sources</li>
+                            <li><strong>8:00-18:00:</strong> Statistical Analysis Deep Dive</li>
+                            <li><strong>18:00-28:00:</strong> Expert Interview - Forensic Psychology</li>
+                            <li><strong>28:00-38:15:</strong> Healthcare System Implications</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="key-quotes">
+                    <h4><i class="fas fa-quote-left"></i> Key Quotes from Analysis</h4>
+                    <div class="quotes-grid">
+                        <div class="quote-card">
+                            <p>"Shipman primarily operated during <strong>standard weekday business hours</strong>, with a significant peak occurring at <strong>4:00 PM on Mondays</strong>."</p>
+                            <span class="quote-source">- Video Analysis</span>
+                        </div>
+                        <div class="quote-card">
+                            <p>"This rigid consistency allowed him to hide his crimes behind the <strong>routine of a medical practice</strong>, exploiting the lack of <strong>centralized oversight</strong> in the era of paper records."</p>
+                            <span class="quote-source">- Podcast Discussion</span>
+                        </div>
+                        <div class="quote-card">
+                            <p>"Ultimately, the materials highlight how <strong>modern digital monitoring</strong> and statistical algorithms now serve as essential tools to prevent such systemic failures in <strong>healthcare safety</strong>."</p>
+                            <span class="quote-source">- Analysis Conclusion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Methodology -->
+    <section class="section methodology">
+        <div class="container">
+            <h2 class="section-title">Methodology</h2>
+            <div class="methodology-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Data Acquisition & Cleaning</h3>
+                        <p>Collected 215 confirmed cases from official inquiry records. Standardized temporal formats, validated consistency, and created categorical variables for analysis.</p>
+                        <code class="code-block">
+# Data cleaning snippet
+df['Hour'] = pd.to_datetime(df['TimeOfDeath']).dt.hour
+df['DayOfWeek'] = pd.to_datetime(df['DateOfDeath']).dt.day_name()
+df['Season'] = df['Month'].apply(get_season)
+                        </code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Statistical Analysis</h3>
+                        <p>Applied descriptive statistics, frequency analysis, and hypothesis testing to identify significant patterns and anomalies.</p>
+                        <code class="code-block">
+# Statistical testing
+chi2, p_value = stats.chisquare(observed_frequencies)
+z_scores = (hourly_counts - hourly_counts.mean()) / hourly_counts.std()
+anomalies = z_scores[abs(z_scores) > 3]
+                        </code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Pattern Recognition</h3>
+                        <p>Used temporal clustering algorithms to identify distinct patterns in murder timing and developed novel metrics for pattern strength.</p>
+                        <code class="code-block">
+# Pattern detection
+temporal_clusters = {
+    'Morning': (8, 11),
+    'Midday': (11, 14),
+    'Afternoon': (14, 17),
+    'Evening': (17, 20)
+}
+                        </code>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Detection Simulation</h3>
+                        <p>Simulated modern healthcare monitoring systems to estimate detection timelines and developed recommendations for prevention.</p>
+                        <code class="code-block">
+# Detection simulation
+def simulate_detection(anomaly_threshold=3):
+    detection_time = find_crossing_point(anomaly_scores, anomaly_threshold)
+    return detection_time
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ethical Considerations -->
+    <section class="section ethics">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-balance-scale"></i> Ethical Considerations</h2>
+            <div class="ethics-grid">
+                <div class="ethics-card">
+                    <div class="ethics-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Victim Respect</h3>
+                    <p>All victims are referenced by name in the original analysis, with identities protected in public presentations. Focus remains on systemic improvements.</p>
+                </div>
+                <div class="ethics-card">
+                    <div class="ethics-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Data Privacy</h3>
+                    <p>Personal identifiers removed from public datasets. Analysis complies with GDPR principles and academic ethical guidelines.</p>
+                </div>
+                <div class="ethics-card">
+                    <div class="ethics-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Educational Purpose</h3>
+                    <p>Project focuses on demonstrating analytical techniques and advocating for healthcare system improvements, not sensationalism.</p>
+                </div>
+                <div class="ethics-card">
+                    <div class="ethics-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Academic Integrity</h3>
+                    <p>Full transparency in methodology, data sources, and limitations. Proper attribution to original inquiry findings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Demonstrated -->
+    <section class="section skills">
+        <div class="container">
+            <h2 class="section-title">Skills Demonstrated</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python Programming</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Pattern Recognition</span>
+                        <span class="skill-tag">Data Cleaning</span>
+                        <span class="skill-tag">Jupyter Notebooks</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Analytical Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Temporal Analysis</span>
+                        <span class="skill-tag">Anomaly Detection</span>
+                        <span class="skill-tag">Hypothesis Testing</span>
+                        <span class="skill-tag">Forensic Reconstruction</span>
+                        <span class="skill-tag">Data Storytelling</span>
+                        <span class="skill-tag">Ethical Analysis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Professional Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Academic Writing</span>
+                        <span class="skill-tag">Stakeholder Communication</span>
+                        <span class="skill-tag">Research Design</span>
+                        <span class="skill-tag">Documentation</span>
+                        <span class="skill-tag">Presentation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download & Resources -->
+    <section class="section resources">
+        <div class="container">
+            <h2 class="section-title">Project Resources</h2>
+            <div class="resources-grid">
+                <a href="notebooks/shipman_temporal_analysis.ipynb" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>Jupyter Notebook</h3>
+                    <p>Complete analysis with code, visualizations, and commentary</p>
+                    <span class="resource-link">Download →</span>
+                </a>
+                <a href="data/shipman_analysis_summary.json" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Analysis Data</h3>
+                    <p>Cleaned dataset and analysis results in JSON format</p>
+                    <span class="resource-link">View Data →</span>
+                </a>
+                <a href="https://github.com/RyanHabis/shipman-temporal-analysis" class="resource-card" target="_blank">
+                    <div class="resource-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub Repository</h3>
+                    <p>Full source code and project documentation</p>
+                    <span class="resource-link">View Repo →</span>
+                </a>
+                <a href="mailto:ryan.habis@example.com?subject=Shipman Analysis Inquiry" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Contact for Details</h3>
+                    <p>Request full technical report or academic paper</p>
+                    <span class="resource-link">Email Me →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="https://ryanhabis.github.io" class="footer-logo">Ryan Habis</a>
+                    <p>MSc Data Analytics Student | Forensic Data Analyst</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://linkedin.com/in/ryanhabis" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/RyanHabis" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:ryan.habis@example.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-disclaimer">
+                <p><strong>Disclaimer:</strong> This project is for educational and analytical purposes only. All data is handled with respect for victims and their families. Analysis focuses on systemic improvements in healthcare monitoring.</p>
+                <p>© 2024 Ryan Habis. Master's Capstone Project in Data Analytics.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/charts.js"></script>
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
+</body>
+</html>
