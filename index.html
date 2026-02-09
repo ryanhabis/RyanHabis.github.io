@@ -1,730 +1,195 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan Habis | Cloud & Data Analytics Specialist</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>🏪 Dundalk Market - Shop Local</title>
     <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #1a252f;
-            --gray: #7f8c8d;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 2rem;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            color: #ecf0f1;
-        }
-        
-        .highlight {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--secondary);
-            margin-left: 1rem;
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--secondary);
-        }
-        
-        /* Credentials Section */
-        .credentials {
-            padding: 4rem 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary);
-            margin: 0.5rem auto;
-        }
-        
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .credential-card {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        
-        .credential-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .credential-card i {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        .credential-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Portfolio & Hobby Projects */
-        .projects {
-            padding: 4rem 0;
-            background-color: #f8f9fa;
-        }
-        
-        .projects-filter {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .filter-btn {
-            padding: 0.6rem 1.5rem;
-            background-color: white;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-img {
-            height: 200px;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-tag {
-            display: inline-block;
-            background-color: #e8f4fc;
-            color: var(--secondary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hobby-tag {
-            background-color: #ffeaea;
-            color: var(--accent);
-        }
-        
-        .project-content h3 {
-            margin-bottom: 0.8rem;
-            color: var(--primary);
-        }
-        
-        /* Hobby Button */
-        .hobby-btn-container {
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
-        .hobby-btn {
-            background-color: var(--accent);
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .hobby-btn:hover {
-            background-color: #c0392b;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0 1.5rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1.2rem;
-            color: var(--secondary);
-        }
-        
-        .social-links a {
-            display: inline-block;
-            color: white;
-            background-color: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            margin-right: 0.5rem;
-            transition: background-color 0.3s;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--secondary);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #bdc3c7;
-            font-size: 0.9rem;
-        }
-        
-        /* Contact Info Styles */
-        .contact-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.8rem;
-        }
-        
-        .contact-info i {
-            margin-right: 10px;
-            color: var(--secondary);
-            width: 20px;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 1rem;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0 0.8rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .btn-container {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                align-items: center;
-            }
-            
-            .btn-outline {
-                margin-left: 0;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .mobile-menu-btn {
-                display: block;
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-            }
-            
-            nav ul {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: var(--primary);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                padding: 1rem 0;
-            }
-            
-            nav ul.show {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                text-align: center;
-                padding: 0.8rem 0;
-            }
-        }
+        body { font-family: 'Segoe UI', sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f8f9fa; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; margin-bottom: 30px; }
+        .store-card { background: white; border-radius: 10px; padding: 20px; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .product { background: #f8f9fa; padding: 10px; margin: 8px 0; border-radius: 5px; border-left: 4px solid #667eea; }
+        button { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #5a67d8; }
+        #output { margin-top: 30px; }
+        .loading { color: #666; font-style: italic; }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="container header-container">
-            <a href="#" class="logo">Ryan<span>Habis</span></a>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <nav>
-                <ul id="mainNav">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#credentials">Credentials</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#hobby">Hobby Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>🏪 Dundalk Market</h1>
+        <p>Digital Main Street • Shop Local Dundalk Businesses Online</p>
+        <p><small>Powered by your local API: <code id="api-status">Testing connection...</code></small></p>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Ryan Habis | Cloud Computing & Data Analytics Specialist</h1>
-            <p>With a <span class="highlight">BSc in Computer Science</span>, <span class="highlight">BSc Hons in Cloud Computing</span>, <span class="highlight">Masters in Data Analytics</span>, and certifications in advanced mobile computing and software development, I bring a comprehensive skill set to every project.</p>
-            <div class="btn-container">
-                <a href="#portfolio" class="btn">View My Portfolio</a>
-                <a href="#hobby" class="btn btn-outline">Explore My Hobby Projects</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Credentials Section -->
-    <section class="credentials" id="credentials">
-        <div class="container">
-            <h2 class="section-title">Academic & Professional Credentials</h2>
-            <div class="credentials-grid">
-                <div class="credential-card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>BSc Computer Science</h3>
-                    <p>Solid foundation in algorithms, data structures, and software engineering principles.</p>
-                </div>
-                <div class="credential-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>BSc Hons Cloud Computing</h3>
-                    <p>Specialized knowledge in cloud architecture, distributed systems, and scalability.</p>
-                </div>
-                <div class="credential-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <h3>Masters in Data Analytics</h3>
-                    <p>Advanced skills in data mining, machine learning, and statistical analysis.</p>
-                </div>
-                <div class="credential-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Diploma in Advanced Mobile Computing</h3>
-                    <p>Expertise in mobile app development, cross-platform solutions, and UI/UX design.</p>
-                </div>
-                <div class="credential-card">
-                    <i class="fas fa-certificate"></i>
-                    <h3>Certificate in Software Development</h3>
-                    <p>Professional training in modern development methodologies and best practices.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio & Hobby Projects -->
-    <section class="projects" id="portfolio">
-        <div class="container">
-            <h2 class="section-title">My Programming Projects</h2>
-            <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="portfolio">Portfolio</button>
-                <button class="filter-btn" data-filter="hobby">Hobby Projects</button>
-            </div>
-            
-             <!-- SHIPMAN ANALYSIS PROJECT -->
-            <div class="project-card" data-category="portfolio analytics">
-                <div class="project-img" style="background-color: #2c3e50; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                    <i class="fas fa-chart-line fa-3x" style="color: #e74c3c; margin-bottom: 15px;"></i>
-                    <h4 style="color: white; text-align: center; padding: 0 10px;">Forensic Data Analysis</h4>
-                </div>
-                <div class="project-content">
-                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                        <span class="project-tag" style="background-color: #e74c3c; color: white;">Data Analytics</span>
-                        <span class="project-tag" style="background-color: #3498db; color: white;">Python</span>
-                        <span class="project-tag" style="background-color: #9b59b6; color: white;">Visualization</span>
-                    </div>
-                    <h3>Forensic Temporal Analysis: Harold Shipman Case</h3>
-                    <p>Advanced data analytics revealing temporal murder patterns. Analysis of 215 victims shows distinct patterns that could have enabled detection 23 years earlier.</p>
-                    <div style="margin-top: 15px; display: flex; gap: 10px;">
-                        <a href="portfolio/shipman-analysis" class="btn" style="padding: 8px 16px; font-size: 14px; background-color: #2c3e50;">View Project</a>
-                        <a href="https://github.com/RyanHabis/shipman-temporal-analysis" target="_blank" class="btn" style="padding: 8px 16px; font-size: 14px; background-color: #3498db;">View Code</a>
-                    </div>
-                    <div style="margin-top: 10px; font-size: 13px; color: #7f8c8d;">
-                        <i class="fas fa-video" style="margin-right: 5px;"></i> Video & <i class="fas fa-podcast" style="margin-left: 10px; margin-right: 5px;"></i> Podcast Available
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects-grid">
-                <!-- Portfolio Project 1 -->
-                <div class="project-card" data-category="portfolio">
-                    <div class="project-img" style="background-color: #d6eaf8;">
-                        <i class="fas fa-cloud-upload-alt fa-3x" style="color: #3498db;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Cloud Computing</span>
-                        <h3>Scalable Cloud Infrastructure</h3>
-                        <p>A cloud-native application with auto-scaling capabilities built on AWS with Terraform.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Project 2 -->
-                <div class="project-card" data-category="portfolio">
-                    <div class="project-img" style="background-color: #d5f4e6;">
-                        <i class="fas fa-chart-line fa-3x" style="color: #1abc9c;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Data Analytics</span>
-                        <h3>Predictive Sales Analytics</h3>
-                        <p>Machine learning model for sales forecasting with 95% accuracy using Python and TensorFlow.</p>
-                    </div>
-                </div>
-                
-                <!-- Hobby Project 1 -->
-                <div class="project-card" data-category="hobby">
-                    <div class="project-img" style="background-color: #fdebd0;">
-                        <i class="fas fa-gamepad fa-3x" style="color: #e67e22;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag hobby-tag">Hobby Project</span>
-                        <h3>Retro Game Emulator</h3>
-                        <p>A JavaScript-based emulator for classic 8-bit games, built for fun and nostalgia.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Project 3 -->
-                <div class="project-card" data-category="portfolio">
-                    <div class="project-img" style="background-color: #e8daef;">
-                        <i class="fas fa-mobile-alt fa-3x" style="color: #9b59b6;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Mobile Computing</span>
-                        <h3>Health & Fitness Tracker App</h3>
-                        <p>Cross-platform mobile application for tracking fitness metrics with React Native.</p>
-                    </div>
-                </div>
-                
-                <!-- Hobby Project 2 -->
-                <div class="project-card" data-category="hobby">
-                    <div class="project-img" style="background-color: #fadbd8;">
-                        <i class="fas fa-robot fa-3x" style="color: #e74c3c;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag hobby-tag">Hobby Project</span>
-                        <h3>Home Automation Bot</h3>
-                        <p>A Raspberry Pi-based home automation system controlled via a custom web interface.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Project 4 -->
-                <div class="project-card" data-category="portfolio">
-                    <div class="project-img" style="background-color: #d1f2eb;">
-                        <i class="fas fa-database fa-3x" style="color: #16a085;"></i>
-                    </div>
-                    <div class="project-content">
-                        <span class="project-tag">Software Development</span>
-                        <h3>Real-time Database Optimizer</h3>
-                        <p>A tool for optimizing database queries and improving performance by up to 70%.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hobby Projects Button -->
-            <div class="hobby-btn-container" id="hobby">
-                <a href="#hobby" class="btn hobby-btn">
-                    <i class="fas fa-code"></i> Explore More Hobby Projects
-                </a>
-                <p style="margin-top: 1rem; color: var(--gray);">Showcasing my passion for programming beyond professional work</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About This Portfolio</h3>
-                    <p>This site showcases both my professional portfolio and hobby programming projects. I believe that coding outside of work demonstrates genuine passion and continuous learning in the field of technology.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Ryan Habis</h3>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <p>ryan.habis@gmail.com</p>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <p>083 802 2571</p>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/ryanhabis/" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ryan-habis" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="mailto:ryan.habis@gmail.com" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="tel:+27838022571" title="Phone">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2023 Ryan Habis. All rights reserved. | Designed with passion for programming</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">BSc Computer Science | BSc Hons Cloud Computing | Masters Data Analytics</p>
-            </div>
-        </div>
-    </footer>
-
+    
+    <div>
+        <h2>Explore Local Businesses</h2>
+        <button onclick="loadAllStores()">Browse All Stores</button>
+        <button onclick="loadAllProducts()">View All Products</button>
+        <button onclick="loadDPL()">DPL Engineering</button>
+        <button onclick="testCheckout()">Simulate Purchase</button>
+    </div>
+    
+    <div id="output">
+        <p class="loading">Click a button above to load data...</p>
+    </div>
+    
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mainNav = document.getElementById('mainNav');
+        const API_URL = 'http://127.0.0.1:8000';
         
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('show');
-        });
+        async function loadAllStores() {
+            showLoading('Loading Dundalk stores...');
+            try {
+                const response = await fetch(API_URL + '/stores');
+                const data = await response.json();
+                displayStores(data.stores);
+                updateAPIStatus('✅ Connected');
+            } catch (error) {
+                showError('Could not load stores. Make sure the API is running.');
+            }
+        }
         
-        // Filter projects
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
+        async function loadAllProducts() {
+            showLoading('Loading all products...');
+            try {
+                const response = await fetch(API_URL + '/products');
+                const data = await response.json();
+                displayProducts(data.products);
+            } catch (error) {
+                showError('Could not load products.');
+            }
+        }
         
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Filter projects
-                const filterValue = button.getAttribute('data-filter');
-                
-                projectCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+        async function loadDPL() {
+            showLoading('Loading DPL Engineering...');
+            try {
+                const response = await fetch(API_URL + '/stores/1');
+                const data = await response.json();
+                displayStoreDetail(data);
+            } catch (error) {
+                showError('Could not load DPL Engineering.');
+            }
+        }
+        
+        function testCheckout() {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <div class="store-card">
+                    <h3>🛒 Simulated Checkout</h3>
+                    <p>Order: <strong>Steel Bolts (Pack of 50)</strong> from DPL Engineering</p>
+                    <p>Price: <strong>€24.99</strong></p>
+                    <p>Pickup: <strong>Dundalk Industrial Estate</strong></p>
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <p>💰 <strong>Payment Flow:</strong></p>
+                        <p>1. Customer pays €24.99 via Stripe</p>
+                        <p>2. Stripe takes 1.4% + €0.25 = €0.60</p>
+                        <p>3. Platform takes 12% commission = €3.00</p>
+                        <p>4. DPL Engineering receives = €21.39</p>
+                    </div>
+                    <button onclick="alert('In real version: Stripe checkout would open here!')">
+                        Proceed to Payment
+                    </button>
+                </div>
+            `;
+        }
+        
+        function displayStores(stores) {
+            const output = document.getElementById('output');
+            output.innerHTML = `<h2>${stores.length} Local Stores</h2>`;
+            
+            stores.forEach(store => {
+                output.innerHTML += `
+                    <div class="store-card">
+                        <h3>${store.name}</h3>
+                        <p>📍 ${store.address}</p>
+                        <p>${store.description}</p>
+                        <p><strong>Products available:</strong> ${store.products.length}</p>
+                        <button onclick="viewStore(${store.id})">View Store</button>
+                    </div>
+                `;
             });
-        });
+        }
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+        function displayProducts(products) {
+            const output = document.getElementById('output');
+            output.innerHTML = `<h2>${products.length} Local Products</h2>`;
+            
+            products.forEach(product => {
+                output.innerHTML += `
+                    <div class="product">
+                        <strong>${product.name}</strong>
+                        <div>Price: €${product.price}</div>
+                        <div>Store: ${product.store_name}</div>
+                        <button onclick="simulateAddToCart(${product.id}, '${product.name}', ${product.price})">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+            });
+        }
+        
+        function displayStoreDetail(store) {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <div class="store-card">
+                    <h2>${store.name}</h2>
+                    <p><strong>Category:</strong> ${store.category}</p>
+                    <p><strong>Address:</strong> ${store.address}</p>
+                    <p>${store.description}</p>
                     
-                    // Close mobile menu if open
-                    mainNav.classList.remove('show');
-                }
-            });
-        });
+                    <h3>Available Products:</h3>
+                    ${store.products.map(product => `
+                        <div class="product">
+                            <strong>${product.name}</strong>
+                            <div>€${product.price} • ${product.category}</div>
+                            <button onclick="simulateAddToCart(${product.id}, '${product.name}', ${product.price})">
+                                Add to Cart (€${product.price})
+                            </button>
+                        </div>
+                    `).join('')}
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>💰 Business Model Preview:</strong></p>
+                        <p>If this store sells €1000 through Dundalk Market:</p>
+                        <p>• Store keeps: <strong>€880</strong></p>
+                        <p>• Platform commission (12%): <strong>€120</strong></p>
+                        <p>• Supporting local economy: <strong>Priceless</strong></p>
+                    </div>
+                </div>
+            `;
+        }
         
-        // Highlight hobby projects when the hobby button is clicked
-        document.querySelector('.hobby-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Trigger filter for hobby projects
-            const hobbyFilterBtn = document.querySelector('.filter-btn[data-filter="hobby"]');
-            hobbyFilterBtn.click();
-            
-            // Smooth scroll to projects section
-            const projectsSection = document.getElementById('portfolio');
-            window.scrollTo({
-                top: projectsSection.offsetTop - 80,
-                behavior: 'smooth'
+        function simulateAddToCart(productId, productName, price) {
+            alert(`Added to cart: ${productName} (€${price})\n\nNext: Integrated Stripe checkout would open`);
+        }
+        
+        function viewStore(storeId) {
+            showLoading(`Loading store #${storeId}...`);
+            fetch(API_URL + '/stores/' + storeId)
+                .then(r => r.json())
+                .then(data => displayStoreDetail(data))
+                .catch(e => showError('Could not load store'));
+        }
+        
+        function showLoading(message) {
+            document.getElementById('output').innerHTML = `<p class="loading">${message}...</p>`;
+        }
+        
+        function showError(message) {
+            document.getElementById('output').innerHTML = `<p style="color: #d32f2f;">❌ ${message}</p>`;
+        }
+        
+        function updateAPIStatus(message) {
+            document.getElementById('api-status').textContent = message;
+        }
+        
+        // Test API connection on page load
+        fetch(API_URL)
+            .then(r => r.json())
+            .then(data => {
+                updateAPIStatus('✅ Connected to: ' + data.message);
+            })
+            .catch(e => {
+                updateAPIStatus('❌ API not connected');
             });
-        });
     </script>
 </body>
 </html>

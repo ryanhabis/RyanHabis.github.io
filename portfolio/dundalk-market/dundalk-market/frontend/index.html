@@ -1,0 +1,1120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏪 Dundalk Market - Shop Local Dundalk Businesses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ====== CSS VARIABLES & RESET ====== */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f94144;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* ====== TYPOGRAPHY ====== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--gray-800);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+        }
+
+        /* ====== LAYOUT ====== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ====== HEADER ====== */
+        header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: var(--gray-100);
+        }
+
+        /* ====== HERO SECTION ====== */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(114, 9, 183, 0.1) 100%);
+            border-radius: 0 0 var(--radius) var(--radius);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+        }
+
+        /* ====== STATS ====== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ====== CONTROLS ====== */
+        .controls {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+            border-color: var(--gray-400);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4cc9f0, #3aa8d4);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f8961e, #d97c0f);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f94144, #d92124);
+            color: white;
+        }
+
+        /* ====== STORE CARDS ====== */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+        }
+
+        .store-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .store-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .store-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .store-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .store-body {
+            padding: 1.5rem;
+        }
+
+        .store-description {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .store-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .store-details div {
+            text-align: center;
+        }
+
+        .store-details i {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .store-details span {
+            display: block;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .store-details strong {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+
+        /* ====== PRODUCT CARDS ====== */
+        .product-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--gray-100);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+        }
+
+        .product-category {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* ====== BUSINESS MODEL ====== */
+        .business-model {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .business-model h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .model-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .model-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .model-item i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ====== MESSAGES ====== */
+        .message {
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .message i {
+            font-size: 1.5rem;
+        }
+
+        .message-loading {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .message-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+        }
+
+        .message-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .message-warning {
+            background: #fff3e0;
+            color: #ef6c00;
+            border-left: 4px solid #ff9800;
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section p {
+            color: var(--gray-400);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--gray-800);
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.125rem;
+            }
+            
+            .stores-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* ====== UTILITY CLASSES ====== */
+        .text-center { text-align: center; }
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mt-3 { margin-top: 3rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-store"></i>
+                    Dundalk Market
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#stores"><i class="fas fa-store-alt"></i> Stores</a></li>
+                    <li><a href="#products"><i class="fas fa-shopping-bag"></i> Products</a></li>
+                    <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover Dundalk's Local Treasures</h1>
+                <p>Shop from authentic Dundalk businesses. Support local economy. Experience the convenience of digital shopping with the warmth of community connection.</p>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="loadAllStores()">
+                        <i class="fas fa-store"></i> Browse Stores
+                    </button>
+                    <button class="btn btn-secondary" onclick="loadAllProducts()">
+                        <i class="fas fa-shopping-basket"></i> View Products
+                    </button>
+                    <button class="btn btn-success" onclick="checkHealth()">
+                        <i class="fas fa-heartbeat"></i> System Status
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- STATS -->
+        <div class="stats" id="stats">
+            <div class="stat-card fade-in">
+                <i class="fas fa-store"></i>
+                <h3 id="store-count">0</h3>
+                <p>Local Businesses</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-box-open"></i>
+                <h3 id="product-count">0</h3>
+                <p>Products Available</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-users"></i>
+                <h3>12%</h3>
+                <p>Commission Rate</p>
+            </div>
+            <div class="stat-card fade-in">
+                <i class="fas fa-euro-sign"></i>
+                <h3>88%</h3>
+                <p>Goes to Businesses</p>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <section class="controls">
+            <h2>Manage Platform</h2>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="loadAllStores()">
+                    <i class="fas fa-sync"></i> Refresh Stores
+                </button>
+                <button class="btn btn-warning" onclick="seedDatabase()">
+                    <i class="fas fa-seedling"></i> Seed Database
+                </button>
+                <button class="btn btn-success" onclick="loadAllProducts()">
+                    <i class="fas fa-boxes"></i> Load Products
+                </button>
+                <button class="btn btn-secondary" onclick="viewDPL()">
+                    <i class="fas fa-industry"></i> DPL Engineering
+                </button>
+                <button class="btn btn-danger" onclick="clearOutput()">
+                    <i class="fas fa-times"></i> Clear Display
+                </button>
+            </div>
+        </section>
+
+        <!-- OUTPUT AREA -->
+        <section id="output">
+            <div class="message message-loading">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Welcome to Dundalk Market</strong>
+                    <p>Use the buttons above to explore local businesses and products.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUSINESS MODEL -->
+        <section class="business-model">
+            <h3><i class="fas fa-chart-line"></i> How It Works</h3>
+            <p>Transparent pricing that benefits both businesses and customers.</p>
+            <div class="model-breakdown">
+                <div class="model-item">
+                    <i class="fas fa-store"></i>
+                    <h4>For Businesses</h4>
+                    <p>Keep 88% of every sale. No upfront costs. Reach new customers.</p>
+                </div>
+                <div class="model-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4>For Customers</h4>
+                    <p>Shop local online. Convenient pickup. Support your community.</p>
+                </div>
+                <div class="model-item">
+                    <i class="fas fa-cogs"></i>
+                    <h4>For The Platform</h4>
+                    <p>12% commission supports development and maintenance.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Dundalk Market</h4>
+                    <p>Connecting local businesses with the community through digital innovation.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Browse Stores</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> View Products</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Add Your Business</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Dundalk, Co. Louth, Ireland</p>
+                    <p><i class="fas fa-envelope"></i> info@dundalkmarket.ie</p>
+                    <p><i class="fas fa-phone"></i> +353 42 123 4567</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Dundalk Market. All rights reserved. | Built with ❤️ for Dundalk</p>
+                <p class="mt-1"><small>API Status: <span id="api-status">Checking...</span></small></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ====== CONFIGURATION ======
+        const API_BASE_URL = 'http://127.0.0.1:8000';
+        
+        // ====== UTILITY FUNCTIONS ======
+        function updateStats(stores, products) {
+            document.getElementById('store-count').textContent = stores;
+            document.getElementById('product-count').textContent = products;
+        }
+        
+        function showMessage(type, title, content) {
+            const icons = {
+                loading: 'fa-sync fa-spin',
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle'
+            };
+            
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <div class="message message-${type} fade-in">
+                    <i class="fas ${icons[type]}"></i>
+                    <div>
+                        <strong>${title}</strong>
+                        <p>${content}</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function updateApiStatus(message, type = 'info') {
+            const statusEl = document.getElementById('api-status');
+            statusEl.textContent = message;
+            statusEl.className = type === 'error' ? 'text-danger' : 'text-success';
+        }
+        
+        // ====== API FUNCTIONS ======
+        async function checkHealth() {
+            showMessage('loading', 'Checking System Health', 'Connecting to API...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const data = await response.json();
+                updateStats(data.stores, data.products);
+                updateApiStatus('✅ Connected', 'success');
+                
+                showMessage('success', 'System Healthy', `
+                    <strong>Status:</strong> ${data.status}<br>
+                    <strong>Database:</strong> ${data.database}<br>
+                    <strong>Stores:</strong> ${data.stores}<br>
+                    <strong>Products:</strong> ${data.products}
+                `);
+            } catch (error) {
+                updateApiStatus('❌ Disconnected', 'error');
+                showMessage('error', 'Connection Failed', `
+                    Could not connect to API at ${API_BASE_URL}.<br>
+                    Make sure the backend is running: <code>python -m uvicorn main:app --reload</code>
+                `);
+            }
+        }
+        
+        async function loadAllStores() {
+            showMessage('loading', 'Loading Stores', 'Fetching local businesses...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/stores`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const stores = await response.json();
+                updateStats(stores.length, document.getElementById('product-count').textContent);
+                
+                if (stores.length === 0) {
+                    showMessage('warning', 'No Stores Found', 'Click "Seed Database" to add sample businesses.');
+                    return;
+                }
+                
+                let html = `
+                    <h2>🏪 Local Stores (${stores.length})</h2>
+                    <div class="stores-grid">
+                `;
+                
+                stores.forEach(store => {
+                    html += `
+                        <div class="store-card fade-in">
+                            <div class="store-header">
+                                <h3>${store.name}</h3>
+                                <span class="store-category">${store.category}</span>
+                            </div>
+                            <div class="store-body">
+                                <p class="store-description">${store.description}</p>
+                                <div class="store-details">
+                                    <div>
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Location</span>
+                                        <strong>${store.address.split(',')[0]}</strong>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-box"></i>
+                                        <span>Products</span>
+                                        <strong>${store.products?.length || 0}</strong>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-phone"></i>
+                                        <span>Contact</span>
+                                        <strong>${store.phone}</strong>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" onclick="viewStore(${store.id})" style="width: 100%;">
+                                    <i class="fas fa-eye"></i> View Store Details
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+                document.getElementById('output').innerHTML = html;
+                updateApiStatus(`✅ Loaded ${stores.length} stores`, 'success');
+                
+            } catch (error) {
+                showMessage('error', 'Failed to Load Stores', error.message);
+                updateApiStatus('❌ Load failed', 'error');
+            }
+        }
+        
+        async function loadAllProducts() {
+            showMessage('loading', 'Loading Products', 'Fetching available products...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/products`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const products = await response.json();
+                updateStats(document.getElementById('store-count').textContent, products.length);
+                
+                if (products.length === 0) {
+                    showMessage('warning', 'No Products Found', 'Seed database or add products to stores.');
+                    return;
+                }
+                
+                let html = `<h2>🛒 All Products (${products.length})</h2>`;
+                
+                products.forEach(product => {
+                    html += `
+                        <div class="product-card fade-in">
+                            <div class="product-header">
+                                <h4>${product.name}</h4>
+                                <span class="product-price">€${product.price}</span>
+                            </div>
+                            <span class="product-category">${product.category}</span>
+                            ${product.description ? `<p class="mt-1">${product.description}</p>` : ''}
+                            <button class="btn btn-primary mt-1" onclick="addToCart('${product.name}', ${product.price})">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('output').innerHTML = html;
+                updateApiStatus(`✅ Loaded ${products.length} products`, 'success');
+                
+            } catch (error) {
+                showMessage('error', 'Failed to Load Products', error.message);
+                updateApiStatus('❌ Load failed', 'error');
+            }
+        }
+        
+        async function seedDatabase() {
+            if (!confirm('This will add sample Dundalk businesses to the database:\n\n• DPL Engineering\n• Dundalk Bookshop\n• The Square Bakery\n\nContinue?')) {
+                return;
+            }
+            
+            showMessage('loading', 'Seeding Database', 'Adding sample businesses and products...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/seed`, {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const result = await response.json();
+                
+                showMessage('success', 'Database Seeded', `
+                    <strong>${result.message}</strong><br>
+                    Stores created: ${result.stores_created}<br>
+                    Products created: ${result.products_created}
+                `);
+                
+                // Update stats
+                setTimeout(checkHealth, 1000);
+                
+            } catch (error) {
+                showMessage('error', 'Seeding Failed', 'Could not seed database. Make sure API is running.');
+            }
+        }
+        
+        async function viewStore(storeId) {
+            showMessage('loading', 'Loading Store', 'Fetching store details...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/stores/${storeId}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const store = await response.json();
+                
+                let html = `
+                    <div class="store-card">
+                        <div class="store-header">
+                            <h3>${store.name}</h3>
+                            <span class="store-category">${store.category}</span>
+                        </div>
+                        <div class="store-body">
+                            <p><strong><i class="fas fa-user"></i> Owner:</strong> ${store.owner_name || 'Not specified'}</p>
+                            <p><strong><i class="fas fa-phone"></i> Phone:</strong> ${store.phone}</p>
+                            <p><strong><i class="fas fa-envelope"></i> Email:</strong> ${store.email}</p>
+                            <p><strong><i class="fas fa-map-marker-alt"></i> Address:</strong> ${store.address}</p>
+                            <p class="store-description">${store.description}</p>
+                            
+                            <h3 class="mt-2">Products (${store.products?.length || 0})</h3>
+                `;
+                
+                if (store.products && store.products.length > 0) {
+                    store.products.forEach(product => {
+                        html += `
+                            <div class="product-card">
+                                <div class="product-header">
+                                    <h4>${product.name}</h4>
+                                    <span class="product-price">€${product.price}</span>
+                                </div>
+                                <span class="product-category">${product.category}</span>
+                                ${product.description ? `<p class="mt-1">${product.description}</p>` : ''}
+                                <button class="btn btn-primary mt-1" onclick="addToCart('${product.name}', ${product.price})">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart (€${product.price})
+                                </button>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += `<p>No products available for this store yet.</p>`;
+                }
+                
+                html += `
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary mt-2" onclick="loadAllStores()">
+                        <i class="fas fa-arrow-left"></i> Back to All Stores
+                    </button>
+                `;
+                
+                document.getElementById('output').innerHTML = html;
+                updateApiStatus(`✅ Loaded ${store.name}`, 'success');
+                
+            } catch (error) {
+                showMessage('error', 'Store Not Found', 'Could not load store details.');
+            }
+        }
+        
+        function viewDPL() {
+            viewStore(1); // DPL Engineering is store ID 1
+        }
+        
+        function addToCart(productName, price) {
+            // Create a nice toast notification
+            const toast = document.createElement('div');
+            toast.className = 'message message-success fade-in';
+            toast.style.position = 'fixed';
+            toast.style.top = '20px';
+            toast.style.right = '20px';
+            toast.style.zIndex = '10000';
+            toast.style.maxWidth = '350px';
+            toast.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>Added to Cart</strong>
+                    <p>${productName}<br><strong>€${price}</strong></p>
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+        
+        function clearOutput() {
+            document.getElementById('output').innerHTML = `
+                <div class="message message-warning">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Display Cleared</strong>
+                        <p>Use the buttons above to load data.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // ====== INITIALIZATION ======
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check API health on load
+            setTimeout(checkHealth, 500);
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

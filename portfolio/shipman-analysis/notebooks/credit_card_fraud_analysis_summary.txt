@@ -1,0 +1,24 @@
+Credit Card Fraud Detection Analysis
+=====================================
+
+Project Summary:
+- Analyzed 284,807 credit card transactions
+- Identified 473 fraudulent transactions (0.17%)
+- Used Python with Pandas, NumPy, and Matplotlib
+- Performed statistical analysis and data visualization
+- Implemented outlier detection using IQR method
+
+Key Findings:
+1. Extreme class imbalance (0.17% fraud rate)
+2. Fraudulent transactions have higher average amounts
+3. PCA components effectively anonymized sensitive data
+
+Technical Skills Demonstrated:
+- Data cleaning and preprocessing
+- Statistical analysis
+- Data visualization
+- Exploratory Data Analysis (EDA)
+- Jupyter Notebook proficiency
+
+For the complete project files including the Jupyter notebook,
+please contact me directly.

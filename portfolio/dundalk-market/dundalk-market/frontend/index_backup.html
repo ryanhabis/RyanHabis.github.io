@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>🏪 Dundalk Market - Shop Local</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f7fa; }
+        header { background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%); color: white; padding: 40px; border-radius: 10px; margin-bottom: 30px; }
+        .store-card { background: white; border-radius: 10px; padding: 25px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .product { background: #f8f9fa; padding: 12px; margin: 10px 0; border-radius: 6px; border-left: 4px solid #4361ee; }
+        button { background: #4361ee; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: 500; margin: 5px; }
+        button:hover { background: #3a56d4; transform: translateY(-1px); }
+        #output { margin-top: 30px; min-height: 200px; }
+        .loading { color: #6c757d; font-style: italic; padding: 20px; }
+        .success { background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin: 10px 0; }
+        .error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin: 10px 0; }
+        .stats { background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏪 Dundalk Market</h1>
+        <p>Digital Main Street • Shop Local Dundalk Businesses Online</p>
+        <div class="stats">
+            <div id="status">Loading API status...</div>
+            <small>Database: SQLite • API: http://127.0.0.1:8000</small>
+        </div>
+    </header>
+    
+    <div>
+        <h2>Explore Local Businesses</h2>
+        <button onclick="loadAllStores()">📊 Browse All Stores</button>
+        <button onclick="loadAllProducts()">🛒 View All Products</button>
+        <button onclick="seedDatabase()">🌱 Seed Sample Data</button>
+        <button onclick="testDPL()">⚙️ View DPL Engineering</button>
+    </div>
+    
+    <div id="output">
+        <p class="loading">Click a button above to load data...</p>
+    </div>
+    
+    <script>
+        const API_URL = 'http://127.0.0.1:8000';
+        
+        async function loadAllStores() {
+            showLoading('Loading Dundalk stores...');
+            try {
+                const response = await fetch(API_URL + '/stores');
+                const stores = await response.json();
+                displayStores(stores);
+                updateStatus(`✅ Loaded ${stores.length} local stores`);
+            } catch (error) {
+                showError('Could not load stores. Is the API running?');
+            }
+        }
+        
+        async function loadAllProducts() {
+            showLoading('Loading all products...');
+            try {
+                const response = await fetch(API_URL + '/products');
+                const products = await response.json();
+                displayProducts(products);
+                updateStatus(`✅ Loaded ${products.length} products`);
+            } catch (error) {
+                showError('Could not load products.');
+            }
+        }
+        
+        async function seedDatabase() {
+            if (!confirm('Add sample Dundalk businesses to database?')) return;
+            
+            showLoading('Adding DPL Engineering, Bookshop, and Bakery...');
+            try {
+                const response = await fetch(API_URL + '/seed', {
+                    method: 'POST'
+                });
+                const result = await response.json();
+                showSuccess(result.message || 'Database seeded!');
+                loadAllStores();
+            } catch (error) {
+                showError('Seed failed. Try manual seed or check API.');
+            }
+        }
+        
+        async function testDPL() {
+            showLoading('Loading DPL Engineering...');
+            try {
+                const response = await fetch(API_URL + '/stores/1');
+                const store = await response.json();
+                displayStoreDetail(store);
+                updateStatus(`✅ Loaded ${store.name}`);
+            } catch (error) {
+                showError('DPL Engineering not found. Seed database first.');
+            }
+        }
+        
+        function displayStores(stores) {
+            const output = document.getElementById('output');
+            output.innerHTML = `<h2>🏪 Local Stores (${stores.length})</h2>`;
+            
+            stores.forEach(store => {
+                output.innerHTML += `
+                    <div class="store-card">
+                        <h3>${store.name}</h3>
+                        <p><strong>Category:</strong> ${store.category}</p>
+                        <p>${store.description}</p>
+                        <p>📍 ${store.address}</p>
+                        <p>📞 ${store.phone}</p>
+                        <p>🛒 <strong>Products available:</strong> ${store.products ? store.products.length : 0}</p>
+                        <button onclick="viewStore(${store.id})">View Store & Products</button>
+                    </div>
+                `;
+            });
+        }
+        
+        function displayProducts(products) {
+            const output = document.getElementById('output');
+            output.innerHTML = `<h2>🛒 All Products (${products.length})</h2>`;
+            
+            products.forEach(product => {
+                output.innerHTML += `
+                    <div class="product">
+                        <h4>${product.name}</h4>
+                        <p>Price: <strong>€${product.price}</strong></p>
+                        <p>Category: ${product.category}</p>
+                        <button onclick="simulatePurchase('${product.name}', ${product.price})">
+                            Add to Cart (€${product.price})
+                        </button>
+                    </div>
+                `;
+            });
+        }
+        
+        function displayStoreDetail(store) {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <div class="store-card">
+                    <h2>${store.name}</h2>
+                    <p><strong>Owner:</strong> ${store.owner_name}</p>
+                    <p><strong>Contact:</strong> ${store.phone} | ${store.email}</p>
+                    <p><strong>Address:</strong> ${store.address}</p>
+                    <p>${store.description}</p>
+                    
+                    <h3>Available Products:</h3>
+                    ${store.products && store.products.length > 0 ? 
+                        store.products.map(p => `
+                            <div class="product">
+                                <strong>${p.name}</strong>
+                                <div>€${p.price} • ${p.category}</div>
+                                <div>${p.description}</div>
+                                <button onclick="simulatePurchase('${p.name}', ${p.price})">
+                                    Purchase (€${p.price})
+                                </button>
+                            </div>
+                        `).join('') : 
+                        '<p>No products listed yet</p>'
+                    }
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: #f0f7ff; border-radius: 6px;">
+                        <p><strong>💰 Business Model Preview:</strong></p>
+                        <p>If a customer buys €100 through this store:</p>
+                        <p>• Store receives: <strong>€88</strong> (after 12% platform fee)</p>
+                        <p>• Platform commission: <strong>€12</strong></p>
+                        <p>• Local economy supported: <strong>Priceless</strong> 💚</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function viewStore(storeId) {
+            showLoading(`Loading store #${storeId}...`);
+            fetch(API_URL + '/stores/' + storeId)
+                .then(r => r.json())
+                .then(store => displayStoreDetail(store))
+                .catch(e => showError('Store not found'));
+        }
+        
+        function simulatePurchase(productName, price) {
+            alert(`🛒 Added to cart: ${productName}\n💰 Price: €${price}\n\n(Next: Integrated Stripe checkout)`);
+        }
+        
+        function showSuccess(message) {
+            document.getElementById('output').innerHTML = 
+                `<div class="success">✅ ${message}</div>`;
+        }
+        
+        function showError(message) {
+            document.getElementById('output').innerHTML = 
+                `<div class="error">❌ ${message}</div>`;
+        }
+        
+        function showLoading(message) {
+            document.getElementById('output').innerHTML = 
+                `<div class="loading">⏳ ${message}</div>`;
+        }
+        
+        function updateStatus(message) {
+            document.getElementById('status').innerHTML = message;
+        }
+        
+        // Check API health on page load
+        fetch(API_URL + '/health')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('status').innerHTML = 
+                    `API: ✅ Connected | Stores: ${data.stores} | Products: ${data.products}`;
+            })
+            .catch(e => {
+                document.getElementById('status').innerHTML = 
+                    'API: ❌ Not connected (run backend server first)';
+            });
+    </script>
+</body>
+</html>
