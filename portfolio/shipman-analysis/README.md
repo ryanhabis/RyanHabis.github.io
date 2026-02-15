@@ -17,23 +17,6 @@ Advanced data analytics case study analyzing temporal patterns in 215 confirmed 
 - **HTML/CSS/JavaScript** for web presentation
 - **Git/GitHub** for version control
 
-## 📁 Project Structure
-
-shipman-analysis/
-├── index.html # Main portfolio page
-├── README.md # This file
-├── assets/
-│ ├── css/
-│ │ └── style.css # Styling
-│ ├── js/
-│ │ └── charts.js # Interactive charts
-│ └── images/ # Visualization screenshots
-├── data/
-│ └── shipman_analysis_summary.json # Analysis results
-└── notebooks/
-└── shipman_temporal_analysis.ipynb # Jupyter notebook
-
-
 
 ## 🚀 Getting Started
 
